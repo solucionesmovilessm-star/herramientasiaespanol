@@ -31,6 +31,17 @@ const listing = {
 };
 
 export const collections = {
+  noticias: defineCollection({
+    loader: glob({ base: './src/content/noticias', pattern: '**/*.md' }),
+    schema: z.object({
+      title: z.string().min(2),
+      date: z.coerce.date(),
+      summary: z.string().min(40),
+      sources: z.array(z.string().url()).min(1),
+      ficha: z.string().optional(),
+      draft: z.boolean().default(false),
+    }),
+  }),
   herramientas: defineCollection({
     loader: glob({ base: './src/content/herramientas', pattern: '**/*.md' }),
     schema: z.object({

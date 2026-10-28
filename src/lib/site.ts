@@ -60,6 +60,7 @@ export const nav: { href: string; key: UiKey }[] = [
   { href: '/skills', key: 'nav.skills' },
   { href: '/mcp', key: 'nav.mcp' },
   { href: '/ranking', key: 'nav.ranking' },
+  { href: '/noticias', key: 'nav.news' },
   { href: '/guias', key: 'nav.guides' },
   { href: '/tutoriales', key: 'nav.tutorials' },
 ];
