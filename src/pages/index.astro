@@ -6,7 +6,8 @@ import Mark from '../components/Mark.astro';
 import SponsorSlot from '../components/SponsorSlot.astro';
 import StaticForm from '../components/StaticForm.astro';
 import rankingFile from '../data/ranking.json';
-import { moneyBadges, loadPublished } from '../lib/content';
+import { moneyBadges, loadNews, loadPublished } from '../lib/content';
+import { formatDate } from '../lib/seo';
 import { formatNumber, itemListLd, websiteLd } from '../lib/seo';
 import { SITE_NAME, categories, pricingLabel } from '../lib/site';
 import Base from '../layouts/Base.astro';
@@ -17,6 +18,7 @@ const skills = await loadPublished('skills');
 const servers = await loadPublished('mcp');
 const guides = await loadPublished('guias');
 const tutorials = await loadPublished('tutoriales');
+const latestNews = (await loadNews()).slice(0, 3);
 const claudeSkills = skills.filter((entry) => entry.data.category === 'claude');
 const featured = tools.filter((entry) => entry.data.destacado && !entry.data.patrocinado);
 const sponsored = tools.filter((entry) => entry.data.patrocinado);
@@ -281,6 +283,30 @@ const jsonLd = [
                 meta={categories[entry.data.category]}
                 badges={moneyBadges({ ...entry.data, pricingLabels: pricingLabel })}
               />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      latestNews.length > 0 && (
+        <section class="section glass panel-pad" data-reveal aria-labelledby="novedades">
+          <div class="section-head">
+            <div>
+              <p class="kicker">Noticias</p>
+              <h2 id="novedades">Novedades</h2>
+            </div>
+            <a href="/noticias">Todas las noticias</a>
+          </div>
+          <div class="stack">
+            {latestNews.map((entry) => (
+              <a class="row-link" href={`/noticias/${entry.id}`}>
+                <span class="row-copy">
+                  <strong>{entry.data.title}</strong>
+                  <span>{formatDate(entry.data.date)}</span>
+                </span>
+              </a>
             ))}
           </div>
         </section>

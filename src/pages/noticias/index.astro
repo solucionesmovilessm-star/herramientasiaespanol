@@ -1,0 +1,40 @@
+---
+import Directory from '../../components/Directory.astro';
+import { loadNews, matchesQuery } from '../../lib/content';
+import { breadcrumbLd, canonicalUrl, formatDate, itemListLd } from '../../lib/seo';
+import { SITE_URL } from '../../lib/site';
+
+const all = await loadNews();
+const q = Astro.url.searchParams.get('q')?.trim() ?? '';
+const filtered = all.filter((entry) => matchesQuery([entry.data.title, entry.data.summary], q));
+const title = 'Noticias';
+const pageUrl = canonicalUrl('/noticias');
+---
+
+<Directory
+  title={title}
+  eyebrow="Novedades"
+  lede="Lo que cambia en el mundo de la IA, explicado en español y con las fuentes oficiales enlazadas en cada noticia."
+  metaDescription="Noticias de inteligencia artificial en español: lanzamientos, precios y novedades explicadas con fuentes oficiales."
+  items={filtered.map((entry) => ({
+    href: `/noticias/${entry.id}`,
+    title: entry.data.title,
+    description: entry.data.summary,
+    meta: formatDate(entry.data.date),
+  }))}
+  countLabel="noticias"
+  query={q}
+  searchAction="/noticias"
+  jsonLd={q
+    ? undefined
+    : [
+        breadcrumbLd([
+          { name: 'Inicio', url: SITE_URL },
+          { name: title, url: pageUrl },
+        ]),
+        itemListLd(
+          title,
+          all.map((entry) => ({ name: entry.data.title, url: `${SITE_URL}/noticias/${entry.id}` })),
+        ),
+      ]}
+/>

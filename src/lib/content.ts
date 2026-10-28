@@ -47,3 +47,22 @@ export function moneyBadges(data: {
   if (data.lang === 'es') badges.push({ label: 'En español', tone: 'lang' });
   return badges;
 }
+
+export type NewsEntry = CollectionEntry<'noticias'>;
+
+export async function loadNews() {
+  const items = await getCollection('noticias', ({ data }) => data.draft !== true);
+  return items.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+}
+
+const fichaSections = ['herramientas', 'agentes', 'skills', 'mcp'] as const;
+
+/** Devuelve la URL de la ficha si existe; si no, undefined (nunca un enlace roto). */
+export async function resolveFicha(slug?: string) {
+  if (!slug) return undefined;
+  for (const section of fichaSections) {
+    const items = await loadPublished(section);
+    if (items.some((entry) => entry.id === slug)) return `/${section}/${slug}`;
+  }
+  return undefined;
+}
