@@ -72,6 +72,8 @@ export const collections = {
     loader: glob({ base: './src/content/skills', pattern: '**/*.md' }),
     schema: z.object({
       ...listing,
+      // Las skills propias se descargan desde el sitio con una ruta relativa (/descargas/...).
+      url: z.union([z.string().url(), z.string().regex(/^\/\S*$/)]),
       category: z.enum(['claude', 'cursor', 'estandar', 'otra']),
     }),
   }),
