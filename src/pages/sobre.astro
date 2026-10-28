@@ -2,7 +2,7 @@
 import ChannelBoard from '../components/ChannelBoard.astro';
 import Base from '../layouts/Base.astro';
 import { breadcrumbLd, canonicalUrl } from '../lib/seo';
-import { SITE_URL, contactHref, contactTodo } from '../lib/site';
+import { SITE_URL, contactEmail, contactHref } from '../lib/site';
 
 const description =
   'Herramientas IA en español lo publica Gonzalo, de TodoSobreTecno, Soluciones para todos y El Buen Globo. Aquí está el contacto y qué hace este sitio.';
@@ -36,7 +36,7 @@ const pageUrl = canonicalUrl('/sobre');
       </p>
       <h2>Contacto</h2>
       <p>
-        <a href={contactHref}>Escribir a Gonzalo</a>. <strong>{contactTodo}</strong>
+        <a href={contactHref}>{contactEmail}</a>
       </p>
       <p>
         Para una ficha patrocinada, un enlace de afiliado o un hueco en la newsletter y en los shorts, usa la página

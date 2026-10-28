@@ -7,6 +7,8 @@
     {
       "id": "todosobretecno",
       "name": "TodoSobreTecno",
+      "handle": "@todo.SOBRETECNO",
+      "url": "https://www.youtube.com/@todo.SOBRETECNO",
       "topic": "Tecnología",
       "summary": "Tecnología, en español.",
       "stats": [
@@ -22,6 +24,8 @@
     {
       "id": "soluciones",
       "name": "Soluciones para todos",
+      "handle": "@soluparatodosok",
+      "url": "https://www.youtube.com/@soluparatodosok",
       "topic": "Finanzas",
       "summary": "Finanzas, canal principal, en español.",
       "stats": [
@@ -33,6 +37,8 @@
     {
       "id": "globo",
       "name": "El Buen Globo",
+      "handle": "@elbuenglobo",
+      "url": "https://www.youtube.com/@elbuenglobo",
       "topic": "Pádel",
       "summary": "Pádel, en español.",
       "stats": [

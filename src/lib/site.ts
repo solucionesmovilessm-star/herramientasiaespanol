@@ -67,11 +67,12 @@ export const nav: { href: string; key: UiKey }[] = [
 export const channels = canales.channels.map((channel) => ({
   name: channel.name,
   topic: channel.topic,
-  href: `/anunciate#${channel.id}`,
+  handle: channel.handle,
+  href: /^https:\/\/\S+$/.test(channel.url) ? channel.url : '',
 }));
 
-export const contactHref = '#TODO-email-contacto';
-export const contactTodo = 'TODO: sustituir por el correo real de contacto';
+export const contactEmail = 'contacto@herramientasiaespanol.com';
+export const contactHref = `mailto:${contactEmail}`;
 
 export function isActive(href: string, path: string) {
   return path === href || path.startsWith(`${href}/`);
