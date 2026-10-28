@@ -2,7 +2,9 @@
 title: Grok
 description: "Asistente de xAI, disponible en grok.com y dentro de X. Tiene acceso gratuito con límites y planes de pago."
 url: https://grok.com
-category: chat
+category: grok
+plataformas:
+  - web
 pricing: freemium
 destacado: false
 patrocinado: false

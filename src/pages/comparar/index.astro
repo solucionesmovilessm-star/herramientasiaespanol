@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import { loadPublished } from '../../lib/content';
+import { breadcrumbLd, canonicalUrl } from '../../lib/seo';
+import { SITE_URL } from '../../lib/site';
+
+const items = await loadPublished('comparativas');
+const title = 'Comparar herramientas';
+const description =
+  'Comparativas cara a cara armadas solo con lo que ya está en las fichas. Una plantilla queda en borrador y no se publica.';
+const pageUrl = canonicalUrl('/comparar');
+---
+
+<Base
+  title={title}
+  description={description}
+  jsonLd={breadcrumbLd([
+    { name: 'Inicio', url: SITE_URL },
+    { name: title, url: pageUrl },
+  ])}
+>
+  <div class="wrap">
+    <header class="page-intro">
+      <p class="eyebrow">Cara a cara</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+    </header>
+    {
+      items.length === 0 ? (
+        <p>Todavía no hay ninguna comparativa publicada.</p>
+      ) : (
+        <div class="grid">
+          {items.map((entry) => (
+            <a class="card" href={`/comparar/${entry.id}`}>
+              <h2>{entry.data.title}</h2>
+              <p>{entry.data.description}</p>
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</Base>

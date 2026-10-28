@@ -1,0 +1,36 @@
+---
+interface Item {
+  href: string;
+  title: string;
+  description: string;
+  meta: string;
+}
+
+interface Props {
+  items: Item[];
+  empty: string;
+}
+
+const { items, empty } = Astro.props;
+---
+
+{
+  items.length === 0 ? (
+    <p>{empty}</p>
+  ) : (
+    <ol class="editorial-list">
+      {items.map((item, index) => (
+        <li>
+          <a href={item.href}>
+            <span class="rank-n">{index + 1}</span>
+            <span>
+              <strong>{item.title}</strong>
+              <span class="meta">{item.meta}</span>
+              <span>{item.description}</span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  )
+}

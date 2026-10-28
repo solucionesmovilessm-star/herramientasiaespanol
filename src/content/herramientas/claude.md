@@ -12,6 +12,15 @@ tags:
   - chat
   - documentos
   - skills
+plataformas:
+  - web
+tutorial: como-anadir-skills-a-claude
+pros:
+  - Resumir o rehacer un documento largo, como un contrato o un informe.
+  - Usar skills ya preparadas o subir las tuyas.
+contras:
+  - Una skill puede pedir que ejecute instrucciones y código.
+noEsPara: No es para activar una skill que no hayas leído o que no publique Anthropic.
 ---
 
 Anthropic publica Claude en [claude.ai](https://claude.ai). Va bien cuando el texto es largo: un contrato, unos apuntes o un informe que quieres rehacer con un tono concreto.

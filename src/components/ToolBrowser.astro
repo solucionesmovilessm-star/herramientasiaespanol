@@ -1,0 +1,125 @@
+---
+import SponsorSlot from './SponsorSlot.astro';
+import Card from './Card.astro';
+import Icon from './Icon.astro';
+import Base from '../layouts/Base.astro';
+import { priceFilters } from '../lib/catalog';
+import type { Badge } from '../lib/content';
+import { categories } from '../lib/site';
+
+interface Item {
+  href: string;
+  title: string;
+  description: string;
+  category: string;
+  pricing: string;
+  credits: boolean;
+  sponsored: boolean;
+  search: string;
+  badges: Badge[];
+  priceNote: string;
+  tutorialHref?: string;
+  tutorialTitle?: string;
+}
+
+interface Props {
+  title: string;
+  lede: string;
+  description: string;
+  items: Item[];
+  jsonLd?: unknown;
+}
+
+const { title, lede, description, items, jsonLd } = Astro.props;
+---
+
+<Base title={title} description={description} jsonLd={jsonLd}>
+  <div class="wrap" data-tool-browser>
+    <header class="page-intro">
+      <p class="eyebrow">Directorio</p>
+      <h1>{title}</h1>
+      <p class="lede">{lede}</p>
+      <form class="cmd-search" data-tool-search role="search">
+        <label class="sr-only" for="directorio-q">Buscar en el directorio</label>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+          <circle cx="11" cy="11" r="6"></circle>
+          <path d="m20 20-3.5-3.5"></path>
+        </svg>
+        <input id="directorio-q" type="search" placeholder="Nombre, tarea o palabra de la ficha" autocomplete="off" />
+        <button class="button" type="submit">Buscar</button>
+      </form>
+      <p class="fine">La búsqueda y los filtros ocurren en esta página. Se pueden combinar. Sin JavaScript se ve el directorio entero.</p>
+    </header>
+
+    <div class="filter-block">
+      <p class="kicker" id="filtro-tarea">Tarea</p>
+      <div class="chips" role="toolbar" aria-labelledby="filtro-tarea">
+        <button class="chip" type="button" data-filter="categoria" data-value="" aria-pressed="true">Todas</button>
+        {
+          Object.entries(categories).map(([id, label]) => (
+            <button class="chip" type="button" data-filter="categoria" data-value={id} aria-pressed="false">
+              <Icon name={id} />
+              {label}
+            </button>
+          ))
+        }
+      </div>
+      <p class="kicker" id="filtro-precio">Precio</p>
+      <div class="chips" role="toolbar" aria-labelledby="filtro-precio">
+        {
+          priceFilters.map((filter, index) => (
+            <button
+              class="chip"
+              type="button"
+              data-filter="precio"
+              data-value={filter.id}
+              aria-pressed={index === 0 ? 'true' : 'false'}
+            >
+              {filter.label}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <p class="count">
+      <span data-visible-count>{items.length}</span> <span data-visible-label>fichas</span>
+    </p>
+    <p class="fine" data-filter-empty hidden>Ninguna ficha coincide. Prueba con otra palabra o quita un filtro.</p>
+
+    <SponsorSlot id="listado" />
+
+    <div class="grid">
+      {
+        items.map((item) => (
+          <div
+            class="tool-item"
+            data-tool
+            data-category={item.category}
+            data-price={item.pricing}
+            data-credits={item.credits ? 'true' : 'false'}
+            data-sponsored={item.sponsored ? 'true' : 'false'}
+            data-search={item.search}
+          >
+            <Card
+              href={item.href}
+              title={item.title}
+              description={item.description}
+              meta={categories[item.category as keyof typeof categories]}
+              badges={item.badges}
+              priceNote={item.priceNote}
+              ad={item.sponsored}
+            />
+            {
+              item.tutorialHref && item.tutorialTitle && (
+                <a class="text-link tool-tutorial" href={item.tutorialHref}>
+                  Tutorial: {item.tutorialTitle}
+                </a>
+              )
+            }
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Base>

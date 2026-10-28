@@ -1,6 +1,6 @@
 ---
 import { useTranslations } from '../i18n/ui';
-import { isActive, nav } from '../lib/site';
+import { isActive, moreNav, nav } from '../lib/site';
 
 interface Props {
   locale: string;
@@ -71,6 +71,13 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
           <a href="/anunciate">{t('nav.advertise')}</a>
           <a href="/sobre">{t('nav.about')}</a>
           <a href="/pro">{t('nav.pro')}</a>
+          {
+            moreNav.map((item) => (
+              <a href={item.href} aria-current={isActive(item.href, path) ? 'page' : undefined}>
+                {t(item.key)}
+              </a>
+            ))
+          }
         </nav>
       </details>
     </div>

@@ -1,0 +1,53 @@
+---
+import AuthorBlock from '../components/AuthorBlock.astro';
+import Base from '../layouts/Base.astro';
+import { breadcrumbLd, canonicalUrl } from '../lib/seo';
+import { SITE_URL } from '../lib/site';
+
+const title = 'Criterio editorial';
+const description =
+  'Cómo se ordenan los listados y qué tendría que cumplirse para publicar una nota. Hoy ninguna ficha tiene puntuación numérica.';
+const pageUrl = canonicalUrl('/criterio');
+---
+
+<Base
+  title={title}
+  description={description}
+  jsonLd={breadcrumbLd([
+    { name: 'Inicio', url: SITE_URL },
+    { name: title, url: pageUrl },
+  ])}
+>
+  <article class="narrow prose">
+    <header class="page-intro">
+      <p class="eyebrow">Público</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+    </header>
+    <h2>Lo que ya ordena un listado</h2>
+    <p>
+      En <a href="/mejores">Mejores</a>, el puesto 1 no es una estrella. Primero van las fichas con
+      <strong>Destacado</strong> (una elección para empezar, no un anuncio). Después, el nombre en orden alfabético.
+      <strong>Patrocinado</strong> no sube en ese orden: si hay un acuerdo, se ve la etiqueta Anuncio en el directorio.
+    </p>
+    <h2>Qué no puntúa</h2>
+    <ul>
+      <li>No hay nota del 1 al 5 ni reseñas de usuarios.</li>
+      <li>No usamos visitas, guardados ni comentarios. Esos números no están en el sitio.</li>
+      <li>«En español» en una ficha significa que el texto de esta web está en español.</li>
+      <li>La interfaz del producto en español solo cuenta si la ficha lleva <code>interfazEspanol: true</code>.</li>
+      <li>«Con créditos gratis» solo cuenta si la ficha lleva <code>creditosGratis: true</code>. Freemium no se convierte solo.</li>
+      <li>El precio en euros, los días de prueba y la fecha «precio verificado el» se muestran únicamente cuando el campo existe.</li>
+    </ul>
+    <h2>Qué haría falta para una nota</h2>
+    <p>Si más adelante una ficha lleva nota, tendrá que decir, por escrito y con fuente:</p>
+    <ol>
+      <li>Si resuelve la tarea que anuncia la ficha.</li>
+      <li>Si se puede usar sin pagar, y con qué límite está escrito.</li>
+      <li>Si la interfaz en español se comprobó, o si ese dato sigue sin constar.</li>
+      <li>La fecha en <code>precioVerificado</code> cuando se mire el precio en la web oficial.</li>
+    </ol>
+    <p>Hasta entonces el sitio no publica estrellas. El criterio está aquí para que se vea antes de usarlo.</p>
+    <AuthorBlock />
+  </article>
+</Base>

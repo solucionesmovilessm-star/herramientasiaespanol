@@ -2,8 +2,11 @@
 import SponsorSlot from '../components/SponsorSlot.astro';
 import StaticForm from '../components/StaticForm.astro';
 import Base from '../layouts/Base.astro';
+import { beehiivEmbedUrl } from '../lib/catalog';
 import { breadcrumbLd, canonicalUrl } from '../lib/seo';
 import { SITE_URL } from '../lib/site';
+
+const beehiiv = beehiivEmbedUrl();
 
 const description =
   'Apúntate a la newsletter de Herramientas IA. El formulario es un hueco: todavía no envía el correo a ningún servicio.';
@@ -27,10 +30,23 @@ const pageUrl = canonicalUrl('/newsletter');
         conectada, así que el formulario no entrega nada.
       </p>
     </header>
-    <StaticForm
-      submitLabel="Dejar el correo para más adelante"
-      message="No se ha enviado ni guardado tu correo. Cuando Gonzalo conecte un servicio gratuito, esta página lo dirá."
-    />
+    {
+      beehiiv ? (
+        <iframe class="beehiiv" src={beehiiv} title="Alta en la newsletter" loading="lazy"></iframe>
+      ) : (
+        <>
+          <StaticForm
+            submitLabel="Dejar el correo para más adelante"
+            message="No se ha enviado ni guardado tu correo. Cuando Gonzalo conecte un servicio gratuito, esta página lo dirá."
+          />
+          <p class="fine">
+            Beehiiv no está conectado. Para el embed, pon una URL https en <code>beehiivEmbed</code> dentro de
+            <code>src/data/newsletter.json</code> o en la variable <code>BEEHIIV_EMBED_URL</code>. Mientras esté vacía, se
+            queda este formulario y no se carga ningún script externo.
+          </p>
+        </>
+      )
+    }
     <div class="section">
       <SponsorSlot id="newsletter" />
     </div>

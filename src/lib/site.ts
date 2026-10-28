@@ -15,6 +15,7 @@ export const categories = {
   audio: 'Audio y música',
   investigacion: 'Investigación',
   local: 'En tu ordenador',
+  grok: 'Grok',
 } as const;
 
 export const pricingLabel = {
@@ -52,6 +53,7 @@ export const appCategoryByTool = {
   audio: 'MultimediaApplication',
   investigacion: 'EducationalApplication',
   local: 'DeveloperApplication',
+  grok: 'BusinessApplication',
 } as const;
 
 export const nav: { href: string; key: UiKey }[] = [
@@ -62,6 +64,14 @@ export const nav: { href: string; key: UiKey }[] = [
   { href: '/ranking', key: 'nav.ranking' },
   { href: '/guias', key: 'nav.guides' },
   { href: '/tutoriales', key: 'nav.tutorials' },
+];
+
+export const moreNav: { href: string; key: UiKey }[] = [
+  { href: '/novedades', key: 'nav.news' },
+  { href: '/comparar', key: 'nav.compare' },
+  { href: '/mejores', key: 'nav.best' },
+  { href: '/grok', key: 'nav.grok' },
+  { href: '/criterio', key: 'nav.criteria' },
 ];
 
 export const channels = canales.channels.map((channel) => ({

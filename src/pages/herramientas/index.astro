@@ -1,72 +1,66 @@
 ---
-import Directory from '../../components/Directory.astro';
-import { loadPublished, matchesQuery, moneyBadges } from '../../lib/content';
+import ToolBrowser from '../../components/ToolBrowser.astro';
+import { loadPublished, moneyBadges } from '../../lib/content';
+import { priceCheckLabel } from '../../lib/catalog';
 import { breadcrumbLd, canonicalUrl, itemListLd } from '../../lib/seo';
 import { categories, pricingLabel, SITE_URL } from '../../lib/site';
 
 const all = await loadPublished('herramientas');
-const q = Astro.url.searchParams.get('q')?.trim() ?? '';
-const categoria = Astro.url.searchParams.get('categoria') ?? '';
-const active = categoria in categories ? categoria : '';
-const filtered = all.filter((entry) => {
-  if (active && entry.data.category !== active) return false;
-  return matchesQuery(
-    [entry.data.title, entry.data.description, entry.data.tags.join(' '), categories[entry.data.category]],
-    q,
-  );
+const tutorials = await loadPublished('tutoriales');
+const tutorialTitle = new Map(tutorials.map((entry) => [entry.id, entry.data.title]));
+const ordered = [...all].sort((a, b) => {
+  const ad = Number(b.data.patrocinado) - Number(a.data.patrocinado);
+  if (ad !== 0) return ad;
+  return a.data.title.localeCompare(b.data.title, 'es');
 });
 
 const title = 'Herramientas de IA por tarea';
 const lede =
-  'Un directorio para elegir por lo que quieres hacer: escribir, dibujar, editar vídeo, programar o traducir. Cada ficha enlaza la web oficial.';
-const filters = [
-  {
-    id: 'todas',
-    label: 'Todas',
-    href: q ? `/herramientas?q=${encodeURIComponent(q)}` : '/herramientas',
-    current: !active,
-  },
-  ...Object.entries(categories).map(([id, label]) => ({
-    id,
-    label,
-    href: `/herramientas?categoria=${id}${q ? `&q=${encodeURIComponent(q)}` : ''}`,
-    current: active === id,
-  })),
-];
-const hasFilter = Boolean(q || active);
+  'Busca por nombre y combina la tarea con el precio. «Con créditos gratis» solo marca fichas donde ese dato está escrito. Hoy no hay ninguna.';
 const pageUrl = canonicalUrl('/herramientas');
-const jsonLd = hasFilter
-  ? undefined
-  : [
-      breadcrumbLd([
-        { name: 'Inicio', url: SITE_URL },
-        { name: title, url: pageUrl },
-      ]),
-      itemListLd(
-        title,
-        all.map((entry) => ({
-          name: entry.data.title,
-          url: `${SITE_URL}/herramientas/${entry.id}`,
-        })),
-      ),
-    ];
+const jsonLd = [
+  breadcrumbLd([
+    { name: 'Inicio', url: SITE_URL },
+    { name: title, url: pageUrl },
+  ]),
+  itemListLd(
+    title,
+    all.map((entry) => ({
+      name: entry.data.title,
+      url: `${SITE_URL}/herramientas/${entry.id}`,
+    })),
+  ),
+];
 ---
 
-<Directory
+<ToolBrowser
   title={title}
-  eyebrow="Directorio"
   lede={lede}
-  metaDescription="Herramientas de IA ordenadas por tarea, con enlace oficial, precio orientativo y la etiqueta Patrocinado cuando hay un acuerdo."
-  items={filtered.map((entry) => ({
-    href: `/herramientas/${entry.id}`,
-    title: entry.data.title,
-    description: entry.data.description,
-    meta: categories[entry.data.category],
-    badges: moneyBadges({ ...entry.data, pricingLabels: pricingLabel }),
-  }))}
-  filters={filters}
-  query={q}
-  searchAction="/herramientas"
-  hiddenFields={active ? [{ name: 'categoria', value: active }] : []}
+  description="Herramientas de IA ordenadas por tarea, con enlace oficial, precio orientativo y la etiqueta Patrocinado o Anuncio cuando hay un acuerdo."
   jsonLd={jsonLd}
+  items={ordered.map((entry) => {
+    const tutorial = entry.data.tutorial;
+    const linked = tutorial && tutorialTitle.has(tutorial) ? tutorial : undefined;
+    return {
+      href: `/herramientas/${entry.id}`,
+      title: entry.data.title,
+      description: entry.data.description,
+      category: entry.data.category,
+      pricing: entry.data.pricing,
+      credits: entry.data.creditosGratis === true,
+      sponsored: entry.data.patrocinado === true,
+      search: [
+        entry.data.title,
+        entry.data.description,
+        entry.data.tags.join(' '),
+        categories[entry.data.category],
+        ...(entry.data.pros ?? []),
+        ...(entry.data.contras ?? []),
+      ].join(' '),
+      badges: moneyBadges({ ...entry.data, pricingLabels: pricingLabel }),
+      priceNote: priceCheckLabel(entry.data.precioVerificado),
+      tutorialHref: linked ? `/tutoriales/${linked}` : undefined,
+      tutorialTitle: linked ? tutorialTitle.get(linked) : undefined,
+    };
+  })}
 />

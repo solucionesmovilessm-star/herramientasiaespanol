@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import AuthorBlock from '../components/AuthorBlock.astro';
+import { loadPublished } from '../lib/content';
+import { relativeLabel } from '../lib/catalog';
+import { breadcrumbLd, canonicalUrl, formatDate, isoDate } from '../lib/seo';
+import { SITE_URL } from '../lib/site';
+
+const [tools, agents, skills, servers, guides, tutorials, comparisons] = await Promise.all([
+  loadPublished('herramientas'),
+  loadPublished('agentes'),
+  loadPublished('skills'),
+  loadPublished('mcp'),
+  loadPublished('guias'),
+  loadPublished('tutoriales'),
+  loadPublished('comparativas'),
+]);
+
+const feed = [
+  ...tools.flatMap((entry) =>
+    entry.data.updated
+      ? [{ href: `/herramientas/${entry.id}`, title: entry.data.title, description: entry.data.description, kind: 'Herramienta', date: entry.data.updated }]
+      : [],
+  ),
+  ...agents.flatMap((entry) =>
+    entry.data.updated
+      ? [{ href: `/agentes/${entry.id}`, title: entry.data.title, description: entry.data.description, kind: 'Agente', date: entry.data.updated }]
+      : [],
+  ),
+  ...skills.flatMap((entry) =>
+    entry.data.updated
+      ? [{ href: `/skills/${entry.id}`, title: entry.data.title, description: entry.data.description, kind: 'Skill', date: entry.data.updated }]
+      : [],
+  ),
+  ...servers.flatMap((entry) =>
+    entry.data.updated
+      ? [{ href: `/mcp/${entry.id}`, title: entry.data.title, description: entry.data.description, kind: 'MCP', date: entry.data.updated }]
+      : [],
+  ),
+  ...guides.flatMap((entry) => [
+    { href: `/guias/${entry.id}`, title: entry.data.title, description: entry.data.description, kind: 'Guía', date: entry.data.updated },
+  ]),
+  ...tutorials.flatMap((entry) => [
+    { href: `/tutoriales/${entry.id}`, title: entry.data.title, description: entry.data.description, kind: 'Tutorial', date: entry.data.updated },
+  ]),
+  ...comparisons.flatMap((entry) => [
+    { href: `/comparar/${entry.id}`, title: entry.data.title, description: entry.data.description, kind: 'Comparativa', date: entry.data.updated },
+  ]),
+].sort((a, b) => b.date.getTime() - a.date.getTime() || a.title.localeCompare(b.title, 'es'));
+
+const title = 'Novedades';
+const description =
+  'Fichas, guías, tutoriales y comparativas por la fecha que llevan en updated. El «hace N días» sale de esa fecha, no de una hora inventada.';
+const pageUrl = canonicalUrl('/novedades');
+---
+
+<Base
+  title={title}
+  description={description}
+  jsonLd={breadcrumbLd([
+    { name: 'Inicio', url: SITE_URL },
+    { name: title, url: pageUrl },
+  ])}
+>
+  <div class="wrap">
+    <header class="page-intro">
+      <p class="eyebrow">Cronológico</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+    </header>
+    <ol class="feed">
+      {
+        feed.map((item) => {
+          const iso = isoDate(item.date) ?? '';
+          return (
+            <li>
+              <a href={item.href}>
+                <span class="kicker">{item.kind}</span>
+                <strong>{item.title}</strong>
+                <span>{item.description}</span>
+              </a>
+              <time datetime={iso} data-relative={iso}>
+                {relativeLabel(item.date)} · {formatDate(item.date)}
+              </time>
+            </li>
+          );
+        })
+      }
+    </ol>
+    <AuthorBlock />
+  </div>
+</Base>

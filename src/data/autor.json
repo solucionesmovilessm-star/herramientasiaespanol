@@ -1,0 +1,21 @@
+{
+  "nombre": "Gonzalo",
+  "bio": "Escribe las fichas de este directorio. Los canales de abajo son suyos. La URL de cada canal se sustituye aquí cuando esté comprobada.",
+  "canales": [
+    {
+      "name": "Soluciones para todos",
+      "topic": "Finanzas",
+      "url": "#TODO-youtube-soluciones-para-todos"
+    },
+    {
+      "name": "TodoSobreTecno",
+      "topic": "Tecnología",
+      "url": "#TODO-youtube-todosobretecno"
+    },
+    {
+      "name": "El Buen Globo",
+      "topic": "Pádel",
+      "url": "#TODO-youtube-buen-globo"
+    }
+  ]
+}

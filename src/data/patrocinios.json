@@ -6,6 +6,13 @@
     "url": "",
     "hasta": ""
   },
+  "listado": {
+    "activo": false,
+    "patrocinador": "",
+    "texto": "",
+    "url": "",
+    "hasta": ""
+  },
   "shorts": {
     "activo": false,
     "patrocinador": "",
