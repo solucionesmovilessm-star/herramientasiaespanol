@@ -115,7 +115,7 @@ export const collections = {
     schema: z.object({
       ...common,
       updated: z.coerce.date(),
-      minutes: z.number().int().min(5).max(90),
+      minutes: z.number().int().min(5).max(90).optional(),
       level: z.enum(['novato']).default('novato'),
     }),
   }),

@@ -255,7 +255,7 @@ const jsonLd = [
             tutorials.map((entry) => (
               <li>
                 <a href={`/tutoriales/${entry.id}`}>{entry.data.title}</a>
-                <span class="meta"> · {entry.data.minutes} min</span>
+                {entry.data.minutes && <span class="meta"> · {entry.data.minutes} min</span>}
               </li>
             ))
           }

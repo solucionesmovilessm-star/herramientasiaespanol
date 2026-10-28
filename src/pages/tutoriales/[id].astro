@@ -32,7 +32,7 @@ const related = (await loadPublished('tutoriales'))
     { label: 'Tutoriales', href: '/tutoriales' },
     { label: entry.data.title },
   ]}
-  meta={`${entry.data.minutes} min · nivel novato`}
+  meta={entry.data.minutes ? `${entry.data.minutes} min · nivel novato` : 'nivel novato'}
   updated={entry.data.updated}
   tutorial
   ogType="article"
