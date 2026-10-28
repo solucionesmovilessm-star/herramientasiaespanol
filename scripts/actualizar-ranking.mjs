@@ -8,7 +8,7 @@
  * - enMovimiento: repos públicos, no forks, con temas de IA, con actividad reciente, ordenados por estrellas
  * - masEstrellados: los mismos temas, ordenados por estrellas, sin filtro de fecha
  */
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, appendFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN || '';
@@ -136,3 +136,18 @@ writeFileSync(OUTPUT, `${JSON.stringify(payload, null, 2)}\n`);
 console.log(
   `Guardado ${OUTPUT} (${enMovimiento.length} en movimiento, ${masEstrellados.length} más estrellados).`,
 );
+
+// Descripciones en español: src/data/ranking-es.json (clave = fullName).
+const traducciones = JSON.parse(readFileSync(resolve('src/data/ranking-es.json'), 'utf8'));
+const pendientes = [...new Map([...enMovimiento, ...masEstrellados]
+  .filter((r) => r.description && !traducciones[r.fullName])
+  .map((r) => [r.fullName, r.description])).entries()];
+if (pendientes.length) {
+  const lista = pendientes.map(([n, d]) => `- ${n}: ${d}`).join('\n');
+  console.warn(`Faltan ${pendientes.length} descripciones en español (añádelas a src/data/ranking-es.json):\n${lista}`);
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### Descripciones sin traducir\n\nAñádelas a \`src/data/ranking-es.json\`:\n\n${lista}\n`);
+  }
+} else {
+  console.log('Todas las descripciones del ranking tienen traducción al español.');
+}
