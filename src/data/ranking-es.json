@@ -1,0 +1,17 @@
+{
+  "_nota": "Descripciones en español de los repos del ranking, por fullName. Si un repo nuevo no está aquí, la web muestra un texto neutro en español y el script lo lista como pendiente.",
+  "morluto/rea": "Ingeniería inversa de cualquier cosa con agentes, desde el comportamiento de una app hasta los binarios nativos.",
+  "affaan-m/ECC": "Sistema para optimizar el rendimiento de los entornos de agentes. Skills, instintos, memoria, seguridad y desarrollo guiado por la investigación para Claude Code, Codex, Opencode, Cursor y más.",
+  "deepseek-ai/deepseek-harness": "DeepSeek Harness: todo es un plugin.",
+  "NousResearch/hermes-agent": "El agente que crece contigo.",
+  "n8n-io/n8n": "Plataforma de automatización de flujos de trabajo con licencia fair-code y funciones de IA integradas. Combina la construcción visual con código propio, en tu servidor o en la nube, con más de 400 integraciones.",
+  "firecrawl/firecrawl": "Potencia tus agentes de IA con datos de la web y de otras fuentes. Construyendo la biblioteca para la superinteligencia. 🔥",
+  "Significant-Gravitas/AutoGPT": "AutoGPT es la visión de una IA accesible para todos, para usarla y para construir sobre ella. Su misión es dar las herramientas para que puedas centrarte en lo importante.",
+  "ollama/ollama": "Pon en marcha Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma y otros modelos.",
+  "DietrichGebert/ponytail": "Hace que tu agente de IA piense como el desarrollador senior más vago de la sala. El mejor código es el que nunca escribiste.",
+  "f/prompts.chat": "Antes llamado Awesome ChatGPT Prompts. Comparte, descubre y colecciona prompts de la comunidad. Gratis y de código abierto; puedes alojarlo para tu organización con total privacidad.",
+  "huggingface/transformers": "🤗 Transformers: el framework de definición de modelos de aprendizaje automático de última generación para texto, visión, audio y modelos multimodales, tanto para inferencia como para entrenamiento.",
+  "langgenius/dify": "Crea flujos de trabajo con agentes y pipelines RAG, con amplio soporte de modelos y herramientas de IA, en un espacio de trabajo colaborativo. Despliégalo en la nube, en una VPC o en tu propio servidor, para pasar del prototipo a producción sin rehacer nada.",
+  "tensorflow/tensorflow": "Un framework de aprendizaje automático de código abierto para todos.",
+  "open-webui/open-webui": "Interfaz de IA fácil de usar (compatible con Ollama, la API de OpenAI y más)."
+}

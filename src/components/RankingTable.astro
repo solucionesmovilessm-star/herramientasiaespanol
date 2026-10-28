@@ -1,5 +1,8 @@
 ---
 import { formatNumber } from '../lib/seo';
+import traducciones from '../data/ranking-es.json';
+
+const es = traducciones as Record<string, string>;
 
 interface Repo {
   rank: number;
@@ -47,7 +50,13 @@ const { repos, caption } = Astro.props;
                 <a href={repo.url} rel="noopener noreferrer">
                   {repo.fullName}
                 </a>
-                <div class="meta">{repo.description ?? 'Sin descripción en GitHub.'}</div>
+                {es[repo.fullName] ? (
+                  <div class="meta">{es[repo.fullName]}</div>
+                ) : repo.description ? (
+                  <div class="meta" lang="en">{repo.description}</div>
+                ) : (
+                  <div class="meta">Sin descripción en GitHub.</div>
+                )}
                 {repo.license && <div class="meta">Licencia: {repo.license}</div>}
               </td>
               <td>{formatNumber(repo.stars)}</td>
