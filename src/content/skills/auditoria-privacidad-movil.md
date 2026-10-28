@@ -1,7 +1,7 @@
 ---
-title: "Auditoría de privacidad del móvil Android (BETA)"
-description: "Skill propia, en BETA y no probada en dispositivo real: un agente revisa por ADB y en solo lectura qué apps de tu Android usan la cámara o tus fotos."
-url: https://herramientasiaespanol.com/descargas/skills/auditoria-privacidad-movil/SKILL.md
+title: "Auditoría de privacidad y malware del móvil (Android)"
+description: "Skill propia para Claude Code que revisa por ADB, en modo solo lectura, un móvil Android conectado por USB y genera un informe de privacidad y seguridad."
+url: /descargas/skills/auditoria-privacidad-movil.zip
 category: otra
 destacado: false
 patrocinado: false
@@ -10,32 +10,46 @@ updated: 2026-10-28
 tags:
   - android
   - privacidad
+  - seguridad
   - adb
-  - beta
 ---
 
-> **BETA: no probada en dispositivo real.** Hemos revisado los comandos con la documentación oficial de Android, pero no los hemos ejecutado en un móvil. La salida puede cambiar según la versión de Android y el fabricante.
+Skill para Claude Code que revisa un móvil Android conectado por USB, en modo solo lectura, y genera un informe de privacidad y seguridad.
 
-Es una skill del estándar Agent Skills (`SKILL.md`) para Claude Code, Cursor u otro agente compatible. Con el móvil conectado por USB y la Depuración USB activada, el agente usa ADB para revisar qué apps tienen permiso de cámara o de fotos, cuáles tienen acceso a todos los archivos y si hay cachés de miniaturas. Al final te da una tabla con recomendaciones.
+## Qué hace
 
-## Qué revisa
-
-- Apps con permiso de cámara concedido.
-- Apps con acceso a fotos: `READ_MEDIA_IMAGES`, la selección parcial de Android 14 y `READ_EXTERNAL_STORAGE` en versiones antiguas.
-- Apps con «acceso a todos los archivos» (`MANAGE_EXTERNAL_STORAGE`).
-- Accesos recientes a la cámara, si tu versión de Android los registra.
-- Miniaturas en `DCIM/.thumbnails`. Son vistas previas, no las fotos originales.
+- **Configuración del sistema:** modelo, versión de Android, parche de seguridad, tipo de build, SELinux, Play Protect, depuración USB, VPN siempre activa y señales de root.
+- **Accesos de alto riesgo:** servicios de accesibilidad activos, apps que leen notificaciones, administradores de dispositivo, apps con superposición sobre otras, apps que pueden instalar otras y acceso a todos los archivos.
+- **Cámara, fotos y miniaturas:** apps con permiso de cámara concedido, uso reciente del servicio de cámara y miniaturas en las carpetas de fotos.
+- **Resumen por app:** tabla con instalador, fecha de instalación y señales. Cada app recibe un puntaje de riesgo alto y medio según SMS, registro de llamadas, micrófono, ubicación, contactos, instalación fuera de tienda, instalación reciente y nombres sospechosos.
+- **Guía de revisión:** qué mirar primero, dónde revisar cada permiso en Ajustes y qué significa cada señal.
 
 ## Qué no hace
 
-- No cambia nada en el móvil: no revoca permisos, no borra, no instala y no copia fotos fuera.
-- No usa root ni intenta leer zonas protegidas como `/data/system`.
-- No da por hecho que una app espía: solo enseña qué permisos tiene cada una.
+- No instala, desinstala, revoca permisos ni cambia ajustes del teléfono.
+- No copia archivos del teléfono ni lee sus fotos.
+- No usa root ni lee `/data/system`.
+- No reemplaza un antivirus: las señales son pistas para revisar, no un veredicto de malware.
 
-## Cómo usarla
+## Requisitos
 
-1. Descarga el `SKILL.md` desde el botón de esta ficha.
-2. Guárdalo en una carpeta `auditoria-privacidad-movil/` dentro de las skills de tu agente, por ejemplo `.claude/skills/` o `.cursor/skills/`.
-3. Instala ADB (Android SDK Platform Tools), activa la Depuración USB en el móvil y pide al agente que revise la privacidad de tu teléfono.
+- Móvil Android con Depuración USB activada y la conexión aceptada en el teléfono.
+- `adb` (platform-tools) y bash. Probada en macOS.
 
-Los permisos se quitan tú mismo desde Ajustes > Gestor de permisos.
+## Limitaciones
+
+- Probada en un solo equipo: Samsung SM-F926B con Android 15. Otros fabricantes pueden mostrar otra salida en `dumpsys`.
+- Los perfiles secundarios (Secure Folder, perfil de trabajo) no son accesibles por ADB y quedan fuera.
+- `appops allow` puede ser el valor por defecto y no un permiso concedido; el informe lo separa.
+
+## Instalación
+
+Descarga el zip con el botón de esta ficha, descomprímelo y copia la carpeta `auditoria-privacidad-movil` en `~/.claude/skills/`. Si solo quieres leerla, aquí tienes el [SKILL.md](/descargas/skills/auditoria-privacidad-movil/SKILL.md) y el [script](/descargas/skills/auditoria-privacidad-movil/scripts/escanear.sh).
+
+## Uso
+
+```bash
+bash ~/.claude/skills/auditoria-privacidad-movil/scripts/escanear.sh ./auditoria-movil
+```
+
+Genera `informe.md` (para leer), `apps.tsv` (una fila por app) y las listas de appops en la carpeta indicada.

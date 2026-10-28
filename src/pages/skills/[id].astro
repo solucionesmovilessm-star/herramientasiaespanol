@@ -49,8 +49,8 @@ const parent =
       '@type': 'SoftwareSourceCode',
       name: entry.data.title,
       description: entry.data.description,
-      url: entry.data.url,
-      codeRepository: entry.data.url,
+      url: new URL(entry.data.url, SITE_URL).href,
+      codeRepository: new URL(entry.data.url, SITE_URL).href,
       inLanguage: 'es',
     },
     breadcrumbLd([
