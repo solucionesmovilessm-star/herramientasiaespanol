@@ -1,15 +1,13 @@
 ---
+import NewsletterForm from '../components/NewsletterForm.astro';
 import SponsorSlot from '../components/SponsorSlot.astro';
-import StaticForm from '../components/StaticForm.astro';
 import Base from '../layouts/Base.astro';
-import { beehiivEmbedUrl } from '../lib/catalog';
+import { newsletterName } from '../lib/catalog';
 import { breadcrumbLd, canonicalUrl } from '../lib/seo';
 import { SITE_URL } from '../lib/site';
 
-const beehiiv = beehiivEmbedUrl();
-
 const description =
-  'Apúntate a la newsletter de Herramientas IA. El formulario es un hueco: todavía no envía el correo a ningún servicio.';
+  `Apúntate a ${newsletterName}. Un correo corto cuando haya una guía nueva o se actualice el ranking.`;
 const pageUrl = canonicalUrl('/newsletter');
 ---
 
@@ -24,29 +22,12 @@ const pageUrl = canonicalUrl('/newsletter');
   <article class="narrow">
     <header class="page-intro">
       <p class="eyebrow">Avisos</p>
-      <h1>Newsletter</h1>
+      <h1>{newsletterName}</h1>
       <p class="lede">
-        La idea es un correo corto cuando haya una guía nueva o se actualice el ranking. Hoy no hay herramienta de envío
-        conectada, así que el formulario no entrega nada.
+        La idea es un correo corto cuando haya una guía nueva o se actualice el ranking.
       </p>
     </header>
-    {
-      beehiiv ? (
-        <iframe class="beehiiv" src={beehiiv} title="Alta en la newsletter" loading="lazy"></iframe>
-      ) : (
-        <>
-          <StaticForm
-            submitLabel="Dejar el correo para más adelante"
-            message="No se ha enviado ni guardado tu correo. Cuando Gonzalo conecte un servicio gratuito, esta página lo dirá."
-          />
-          <p class="fine">
-            Beehiiv no está conectado. Para el embed, pon una URL https en <code>beehiivEmbed</code> dentro de
-            <code>src/data/newsletter.json</code> o en la variable <code>BEEHIIV_EMBED_URL</code>. Mientras esté vacía, se
-            queda este formulario y no se carga ningún script externo.
-          </p>
-        </>
-      )
-    }
+    <NewsletterForm submitLabel="Quiero que me avisen" />
     <div class="section">
       <SponsorSlot id="newsletter" />
     </div>

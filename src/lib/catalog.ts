@@ -24,9 +24,10 @@ export function priceCheckLabel(date?: Date) {
   return `Precio verificado el ${formatDate(date)}`;
 }
 
-export function beehiivEmbedUrl() {
-  const fromEnv = typeof import.meta.env.BEEHIIV_EMBED_URL === 'string' ? import.meta.env.BEEHIIV_EMBED_URL : '';
-  const raw = (fromEnv || newsletterFile.beehiivEmbed || '').trim();
+export const newsletterName = newsletterFile.name;
+
+export function newsletterSubscribeUrl() {
+  const raw = newsletterFile.subscribeUrl.trim();
   return /^https:\/\/\S+$/.test(raw) ? raw : '';
 }
 

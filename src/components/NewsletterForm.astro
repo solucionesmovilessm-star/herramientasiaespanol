@@ -1,0 +1,30 @@
+---
+import { newsletterName, newsletterSubscribeUrl } from '../lib/catalog';
+
+interface Props {
+  submitLabel?: string;
+}
+
+const { submitLabel = 'Quiero que me avisen' } = Astro.props;
+const action = newsletterSubscribeUrl();
+---
+
+{
+  action ? (
+    <form class="stack-form" method="get" action={action}>
+      <label>
+        <span>Correo electrónico</span>
+        <input type="email" name="email" required autocomplete="email" inputmode="email" />
+      </label>
+      <button class="button" type="submit">{submitLabel}</button>
+      <p class="fine">
+        El alta continúa en {newsletterName}. Esta web no guarda el correo: lo recibe la página de suscripción.
+      </p>
+      <p>
+        <a href={action}>{newsletterName}</a>
+      </p>
+    </form>
+  ) : (
+    <p>Falta la dirección de alta en la configuración de la newsletter.</p>
+  )
+}
