@@ -89,9 +89,9 @@ La página **Pro** lee `src/data/pro.json`. El precio orientativo son 5 USD al m
 
 El formulario de la newsletter tampoco envía nada. Es el hueco para conectar más adelante un servicio gratuito.
 
-## Canales y contacto (TODO)
+## Canales y contacto
 
-En `src/lib/site.ts` están los enlaces de YouTube y el contacto, marcados como `TODO` porque no se pudo comprobar la URL exacta. Sustituye `#TODO-youtube-todosobretecno`, `#TODO-youtube-soluciones-para-todos` y `#TODO-email-contacto` por las direcciones reales. Quita la palabra TODO del texto cuando lo hagas.
+Las cifras de TodoSobreTecno, Soluciones para todos y El Buen Globo viven en `src/data/canales.json`. Salen de YouTube Studio (28 oct 2025 – 27 oct 2026) y, en la edad de Soluciones para todos, del PDF de agosto de 2026. No añadas vídeos de otros canales ni una lista de reproducciones: el hueco `video-propio` es para un vídeo de esta web, cuando exista. El correo de contacto sigue en `src/lib/site.ts` como `#TODO-email-contacto` hasta que sea el buzón real.
 
 ## Publicar
 

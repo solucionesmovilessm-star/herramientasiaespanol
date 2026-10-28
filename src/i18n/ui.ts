@@ -26,6 +26,12 @@ export const ui = {
     'footer.english': 'English (próximamente)',
     'search.label': 'Buscar',
     'search.button': 'Buscar',
+    'search.open': 'Buscar en el directorio',
+    'cmdk.placeholder': 'Herramienta, skill, agente o servidor MCP',
+    'cmdk.empty': 'Ninguna ficha coincide.',
+    'cmdk.loading': 'Cargando el directorio…',
+    'cmdk.error': 'No se pudo cargar el índice. Prueba el directorio de herramientas.',
+    'cmdk.idle': 'Escribe o elige una ficha.',
   },
   en: {
     skip: 'Skip to content',
@@ -50,6 +56,12 @@ export const ui = {
     'footer.english': 'English (coming soon)',
     'search.label': 'Search',
     'search.button': 'Search',
+    'search.open': 'Search the directory',
+    'cmdk.placeholder': 'Tool, skill, agent or MCP server',
+    'cmdk.empty': 'No entry matches.',
+    'cmdk.loading': 'Loading the directory…',
+    'cmdk.error': 'The index could not be loaded. Try the tools directory.',
+    'cmdk.idle': 'Type or pick an entry.',
   },
 } as const;
 

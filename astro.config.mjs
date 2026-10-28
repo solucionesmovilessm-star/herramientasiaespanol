@@ -23,7 +23,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/en'),
+      filter: (page) => !page.includes('/en') && !page.endsWith('indice.json'),
     }),
   ],
 });

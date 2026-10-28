@@ -45,16 +45,13 @@ const t = useTranslations(locale);
     <div>
       <h2>Canales</h2>
       <ul>
-        {
-          channels.map((channel) => (
-            <li>
-              <a href={channel.href}>
-                {channel.name}
-                <span class="todo">TODO</span>
-              </a>
-            </li>
-          ))
-        }
+          {
+            channels.map((channel) => (
+              <li>
+                <a href={channel.href}>{channel.name}</a>
+              </li>
+            ))
+          }
         <li>
           <a href={contactHref}>Contacto <span class="todo">TODO</span></a>
         </li>

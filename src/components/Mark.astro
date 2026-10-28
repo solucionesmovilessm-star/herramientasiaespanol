@@ -1,0 +1,13 @@
+---
+import { markOf } from '../lib/mark';
+
+interface Props {
+  name: string;
+  large?: boolean;
+}
+
+const { name, large = false } = Astro.props;
+const { letters, g } = markOf(name);
+---
+
+<span class:list={['logo-mark', `g${g}`, { lg: large }]} aria-hidden="true">{letters}</span>

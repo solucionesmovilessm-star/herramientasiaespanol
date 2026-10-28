@@ -1,0 +1,46 @@
+{
+  "period": "YouTube Studio, del 28 de octubre de 2025 al 27 de octubre de 2026.",
+  "ageNote": "La franja de edad de Soluciones para todos sale del PDF de agosto de 2026. No se publica el reparto por género.",
+  "language": "Los tres canales publican en español.",
+  "approx": "El símbolo ~ indica una cifra aproximada.",
+  "channels": [
+    {
+      "id": "todosobretecno",
+      "name": "TodoSobreTecno",
+      "topic": "Tecnología",
+      "summary": "Tecnología, en español.",
+      "stats": [
+        { "label": "Suscriptores", "value": "~3.900" },
+        { "label": "Visualizaciones en 12 meses", "value": "386.946" },
+        { "label": "Últimos 30 días", "value": "52.528" },
+        { "label": "Vistas medias por short", "value": "~3.900" },
+        { "label": "CTR", "value": "7,7%" }
+      ],
+      "audience": "México 23,8% · España 18% · EE. UU. 10,1%",
+      "age": "81% tiene entre 25 y 44 años"
+    },
+    {
+      "id": "soluciones",
+      "name": "Soluciones para todos",
+      "topic": "Finanzas",
+      "summary": "Finanzas, canal principal, en español.",
+      "stats": [
+        { "label": "Suscriptores", "value": "70.000" }
+      ],
+      "audience": "Argentina 50,4% · España 21,1%",
+      "age": "73% tiene entre 35 y 54 años"
+    },
+    {
+      "id": "globo",
+      "name": "El Buen Globo",
+      "topic": "Pádel",
+      "summary": "Pádel, en español.",
+      "stats": [
+        { "label": "Suscriptores", "value": "~2.800" },
+        { "label": "Visualizaciones en 12 meses", "value": "732.242" }
+      ],
+      "audience": "España 54,2% · Argentina 22,5%",
+      "age": ""
+    }
+  ]
+}

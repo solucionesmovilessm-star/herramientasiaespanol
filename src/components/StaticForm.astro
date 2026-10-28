@@ -16,15 +16,3 @@ const { submitLabel, message, label = 'Correo electrónico' } = Astro.props;
   <button class="button" type="submit">{submitLabel}</button>
   <p class="form-status" role="status" hidden>{message}</p>
 </form>
-
-<script>
-  document.querySelectorAll('[data-static-form]').forEach((form) => {
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const status = form.querySelector('.form-status');
-      if (status instanceof HTMLElement) status.hidden = false;
-      const input = form.querySelector('input');
-      if (input) input.value = '';
-    });
-  });
-</script>

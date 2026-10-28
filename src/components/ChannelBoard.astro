@@ -1,0 +1,40 @@
+---
+import canales from '../data/canales.json';
+import VideoSlot from './VideoSlot.astro';
+---
+
+<section class="channel-board" id="canales" aria-labelledby="canales-titulo">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Cifras verificadas</p>
+      <h2 id="canales-titulo">Canales</h2>
+    </div>
+  </div>
+  <p class="fine">{canales.language} {canales.period} {canales.approx}</p>
+  <div class="channel-grid">
+    {
+      canales.channels.map((channel) => (
+        <article class="glass channel-card" id={channel.id} data-reveal>
+          <p class="kicker">{channel.topic}</p>
+          <h3>{channel.name}</h3>
+          <p class="meta">{channel.summary}</p>
+          <dl class="stat-list">
+            {channel.stats.map((stat) => (
+              <div>
+                <dt>{stat.label}</dt>
+                <dd>{stat.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="audience">
+            <span>Audiencia</span>
+            {channel.audience}
+          </p>
+          {channel.age && <p class="meta">{channel.age}</p>}
+        </article>
+      ))
+    }
+  </div>
+  <p class="fine">{canales.ageNote}</p>
+  <VideoSlot />
+</section>
