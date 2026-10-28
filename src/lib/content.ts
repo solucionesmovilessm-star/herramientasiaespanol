@@ -25,7 +25,7 @@ export type TutorialEntry = CollectionEntry<'tutoriales'>;
 
 export interface Badge {
   label: string;
-  tone: 'paid' | 'feature' | 'muted';
+  tone: 'paid' | 'feature' | 'muted' | 'free' | 'affiliate' | 'lang';
 }
 
 export function moneyBadges(data: {
@@ -33,12 +33,17 @@ export function moneyBadges(data: {
   patrocinado?: boolean;
   pricing?: string;
   pricingLabels?: Record<string, string>;
+  affiliateUrl?: string;
+  lang?: string;
 }): Badge[] {
   const badges: Badge[] = [];
   if (data.patrocinado) badges.push({ label: 'Patrocinado', tone: 'paid' });
   else if (data.destacado) badges.push({ label: 'Destacado', tone: 'feature' });
-  if (data.pricing && data.pricingLabels?.[data.pricing]) {
+  if (data.pricing === 'gratis') badges.push({ label: 'Gratis', tone: 'free' });
+  else if (data.pricing && data.pricingLabels?.[data.pricing]) {
     badges.push({ label: data.pricingLabels[data.pricing], tone: 'muted' });
   }
+  if (data.affiliateUrl) badges.push({ label: 'Afiliado', tone: 'affiliate' });
+  if (data.lang === 'es') badges.push({ label: 'En español', tone: 'lang' });
   return badges;
 }

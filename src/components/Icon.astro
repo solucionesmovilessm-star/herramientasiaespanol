@@ -1,0 +1,38 @@
+---
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+
+const icons: Record<string, string> = {
+  chat: '<path d="M5 6.5h14v8.2H8.2L5 17.5z"/>',
+  imagen: '<rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.3"/><path d="m4 16 4.2-3.6 2.8 2.4L15 11l5 4.2"/>',
+  video: '<rect x="3.5" y="6.5" width="11" height="11" rx="2"/><path d="m14.5 10 6-3v10l-6-3"/>',
+  codigo: '<path d="m8 8-4 4 4 4M16 8l4 4-4 4M13 6.5 11 17.5"/>',
+  escritura: '<path d="M4.5 19.5h3.2L19 8.2a2 2 0 0 0-2.8-2.8L4.8 16.3z"/>',
+  productividad: '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
+  audio: '<path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 10v4"/>',
+  investigacion: '<circle cx="11" cy="11" r="6"/><path d="m20 20-3.6-3.6"/>',
+  local: '<rect x="4" y="5" width="16" height="10" rx="2"/><path d="M8 19h8M12 15v4"/>',
+  programacion: '<path d="m8 8-4 4 4 4M16 8l4 4-4 4"/>',
+  multiagente: '<circle cx="7" cy="8" r="2"/><circle cx="17" cy="8" r="2"/><circle cx="12" cy="16" r="2"/><path d="M9 9.2 10.7 14M15 9.2 13.3 14M9.2 8h5.6"/>',
+  automatizacion: '<circle cx="12" cy="12" r="3"/><path d="M12 3.5v2.5M12 18v2.5M4.8 6.2l1.8 1.8M17.4 16l1.8 1.8M3.5 12H6M18 12h2.5M4.8 17.8l1.8-1.8M17.4 8l1.8-1.8"/>',
+  claude: '<path d="M12 3.5 13.8 9H19l-4.2 3.2L16.4 18 12 14.8 7.6 18l1.6-5.8L5 9h5.2z"/>',
+  cursor: '<path d="m5 3.5 6.2 16 2.2-6.1 6.1-2.2z"/>',
+  estandar: '<path d="M12 4 4.5 8 12 12l7.5-4z"/><path d="M4.5 12 12 16l7.5-4"/><path d="M4.5 16 12 20l7.5-4"/>',
+  otra: '<path d="M6 12h.01M12 12h.01M18 12h.01"/>',
+  servidor: '<rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><path d="M8 7h.01M8 17h.01"/>',
+  registro: '<path d="M8 7h11M8 12h11M8 17h11"/><path d="M5 7h.01M5 12h.01M5 17h.01"/>',
+  referencia: '<path d="M6 5.5h9.5A2.5 2.5 0 0 1 18 8v11H8.2A2.2 2.2 0 0 0 6 21.2z"/><path d="M6 5.5A2.5 2.5 0 0 0 3.5 8V19"/>',
+  todas: '<path d="M5 5h6v6H5zM13 5h6v6h-6zM5 13h6v6H5zM13 13h6v6h-6z"/>',
+};
+
+const body = icons[name];
+---
+
+{
+  body && (
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" set:html={body} />
+  )
+}

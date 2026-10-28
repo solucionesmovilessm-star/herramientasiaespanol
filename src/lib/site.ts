@@ -1,4 +1,5 @@
 import type { UiKey } from '../i18n/ui';
+import canales from '../data/canales.json';
 
 export const SITE_URL = 'https://herramientasiaespanol.com';
 export const SITE_NAME = 'Herramientas IA en español';
@@ -63,20 +64,11 @@ export const nav: { href: string; key: UiKey }[] = [
   { href: '/tutoriales', key: 'nav.tutorials' },
 ];
 
-export const channels = [
-  {
-    name: 'TodoSobreTecno',
-    topic: 'Tecnología',
-    href: '#TODO-youtube-todosobretecno',
-    todo: 'TODO: sustituir por la URL real del canal',
-  },
-  {
-    name: 'Soluciones para todos',
-    topic: 'Finanzas',
-    href: '#TODO-youtube-soluciones-para-todos',
-    todo: 'TODO: sustituir por la URL real del canal',
-  },
-];
+export const channels = canales.channels.map((channel) => ({
+  name: channel.name,
+  topic: channel.topic,
+  href: `/anunciate#${channel.id}`,
+}));
 
 export const contactHref = '#TODO-email-contacto';
 export const contactTodo = 'TODO: sustituir por el correo real de contacto';

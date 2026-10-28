@@ -1,4 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Herramientas IA">
-  <rect width="32" height="32" rx="8" fill="#8f3418"/>
-  <text x="16" y="22" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="700" fill="#fff8f2">hí</text>
+  <defs>
+    <linearGradient id="g" x1="4" y1="2" x2="28" y2="30">
+      <stop stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="#0B0F1A"/>
+  <rect x="2" y="2" width="28" height="28" rx="7" fill="url(#g)"/>
+  <text x="16" y="21" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#FACC15">hí</text>
 </svg>

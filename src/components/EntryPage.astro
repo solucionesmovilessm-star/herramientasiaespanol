@@ -2,6 +2,7 @@
 import type { Badge } from '../lib/content';
 import { formatDate } from '../lib/seo';
 import Breadcrumbs from './Breadcrumbs.astro';
+import Mark from './Mark.astro';
 import Base from '../layouts/Base.astro';
 
 interface Crumb {
@@ -57,11 +58,16 @@ const {
   published={published}
   modified={modified}
 >
-  <article class="narrow">
+  <article class="narrow entry">
     <Breadcrumbs items={crumbs} />
-    <header class="article-head">
-      <p class="eyebrow">{eyebrow}</p>
-      <h1>{title}</h1>
+    <header class="article-head glass">
+      <div class="entry-top">
+        <Mark name={title} large />
+        <div>
+          <p class="eyebrow">{eyebrow}</p>
+          <h1>{title}</h1>
+        </div>
+      </div>
       <p class="lede">{description}</p>
       {
         badges.length > 0 && (

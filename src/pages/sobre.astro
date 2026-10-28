@@ -1,10 +1,11 @@
 ---
+import ChannelBoard from '../components/ChannelBoard.astro';
 import Base from '../layouts/Base.astro';
 import { breadcrumbLd, canonicalUrl } from '../lib/seo';
-import { SITE_URL, channels, contactHref, contactTodo } from '../lib/site';
+import { SITE_URL, contactHref, contactTodo } from '../lib/site';
 
 const description =
-  'Herramientas IA en español lo publica Gonzalo, de los canales TodoSobreTecno y Soluciones para todos. Aquí está el contacto y qué hace este sitio.';
+  'Herramientas IA en español lo publica Gonzalo, de TodoSobreTecno, Soluciones para todos y El Buen Globo. Aquí está el contacto y qué hace este sitio.';
 const pageUrl = canonicalUrl('/sobre');
 ---
 
@@ -16,31 +17,22 @@ const pageUrl = canonicalUrl('/sobre');
     { name: 'Sobre', url: pageUrl },
   ])}
 >
-  <article class="narrow">
-    <header class="page-intro">
+  <div class="wrap">
+    <header class="page-intro narrow">
       <p class="eyebrow">El proyecto</p>
       <h1>Sobre Gonzalo y este sitio</h1>
       <p class="lede">{description}</p>
     </header>
-    <div class="prose">
+    <ChannelBoard />
+    <article class="narrow prose">
       <p>
-        Gonzalo publica en YouTube sobre tecnología y sobre finanzas. Este sitio recoge en español herramientas de IA,
+        Gonzalo publica en YouTube sobre tecnología, finanzas y pádel. Este sitio recoge en español herramientas de IA,
         agentes, skills y servidores MCP, con el enlace oficial y una explicación corta. No vendemos las herramientas:
         la ficha te manda a quien las hace.
       </p>
-      <h2>Canales</h2>
-      <ul>
-        {
-          channels.map((channel) => (
-            <li>
-              <a href={channel.href}>{channel.name}</a> ({channel.topic}). <strong>{channel.todo}</strong>
-            </li>
-          ))
-        }
-      </ul>
       <p>
-        Los enlaces llevan la marca TODO a propósito. No he puesto una URL de YouTube sin comprobar que es el canal
-        correcto.
+        Las cifras de los canales salen de exports de YouTube Studio. Esta web no incrusta ni enlaza vídeos de otros
+        canales: el hueco de vídeo es para una pieza propia, cuando exista.
       </p>
       <h2>Contacto</h2>
       <p>
@@ -56,6 +48,6 @@ const pageUrl = canonicalUrl('/sobre');
         No publicamos número de usuarios, facturación ni “estrellas” que no salgan de la API de GitHub. Si una ficha no
         tiene un dato, es porque no lo hemos comprobado.
       </p>
-    </div>
-  </article>
+    </article>
+  </div>
 </Base>

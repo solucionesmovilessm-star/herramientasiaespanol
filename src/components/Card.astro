@@ -1,5 +1,6 @@
 ---
 import type { Badge } from '../lib/content';
+import Mark from './Mark.astro';
 
 interface Props {
   href: string;
@@ -17,18 +18,22 @@ const Tag = heading;
 
 <a
   class="card"
+  data-reveal
   href={href}
   {...external ? { rel: 'noopener noreferrer', target: '_blank' } : {}}
 >
-  {
-    badges.length > 0 && (
-      <div class="badge-row">
-        {badges.map((badge) => (
-          <span class:list={['badge', badge.tone]}>{badge.label}</span>
-        ))}
-      </div>
-    )
-  }
+  <span class="card-top">
+    <Mark name={title} />
+    {
+      badges.length > 0 && (
+        <span class="badge-row">
+          {badges.map((badge) => (
+            <span class:list={['badge', badge.tone]}>{badge.label}</span>
+          ))}
+        </span>
+      )
+    }
+  </span>
   <Tag>{title}</Tag>
   <p>{description}</p>
   {meta && <p class="meta">{meta}</p>}

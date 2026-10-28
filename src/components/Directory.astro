@@ -1,6 +1,7 @@
 ---
 import type { Badge } from '../lib/content';
 import Card from './Card.astro';
+import Icon from './Icon.astro';
 import Base from '../layouts/Base.astro';
 
 interface Filter {
@@ -58,9 +59,13 @@ const {
       <slot />
       {
         searchAction && (
-          <form class="search" method="get" action={searchAction}>
-            <label for="q">Buscar</label>
-            <input id="q" name="q" type="search" value={query} placeholder="Nombre o tarea" />
+          <form class="cmd-search" method="get" action={searchAction} role="search">
+            <label class="sr-only" for="q">Buscar</label>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+              <circle cx="11" cy="11" r="6"></circle>
+              <path d="m20 20-3.5-3.5"></path>
+            </svg>
+            <input id="q" name="q" type="search" value={query} placeholder="Nombre o tarea" autocomplete="off" />
             {hiddenFields.map((field) => (
               <input type="hidden" name={field.name} value={field.value} />
             ))}
@@ -71,9 +76,10 @@ const {
     </header>
     {
       filters.length > 0 && (
-        <nav class="filters" aria-label="Filtros">
+        <nav class="chips" aria-label="Filtros">
           {filters.map((filter) => (
-            <a href={filter.href} aria-current={filter.current ? 'page' : undefined}>
+            <a class="chip" href={filter.href} aria-current={filter.current ? 'page' : undefined}>
+              {filter.id !== 'todas' && <Icon name={filter.id} />}
               {filter.label}
             </a>
           ))}
@@ -81,7 +87,7 @@ const {
       )
     }
     <p class="count">
-      {items.length} {countLabel}
+      <span data-count={items.length}>{items.length}</span> {countLabel}
     </p>
     {
       items.length === 0 ? (

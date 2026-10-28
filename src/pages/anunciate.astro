@@ -1,4 +1,5 @@
 ---
+import ChannelBoard from '../components/ChannelBoard.astro';
 import StaticForm from '../components/StaticForm.astro';
 import Base from '../layouts/Base.astro';
 import { getAdOptions } from '../lib/sponsors';
@@ -19,16 +20,17 @@ const options = getAdOptions();
     { name: 'Anúnciate', url: pageUrl },
   ])}
 >
-  <article class="narrow">
+  <div class="wrap">
     <header class="page-intro">
       <p class="eyebrow">Colaboraciones</p>
       <h1>Anúnciate o destaca tu herramienta</h1>
       <p class="lede">
         La mayor parte del sitio sigue siendo gratis y editorial. Si hay dinero de por medio, se ve. No hay tienda ni
-        pago con tarjeta en esta versión.
+        pago con tarjeta en esta versión. Las cifras de audiencia salen de YouTube Studio, no de una estimación.
       </p>
     </header>
-    <div class="prose">
+    <ChannelBoard />
+    <article class="narrow prose">
       {
         options.map((option) => (
           <section>
@@ -47,10 +49,10 @@ const options = getAdOptions();
       <p>
         El formulario de abajo no envía el mensaje. Sirve para dejar el hueco visual hasta que haya un buzón conectado.
       </p>
-    </div>
     <StaticForm
       submitLabel="Preparar el aviso"
       message="Este formulario no envía nada. Tu correo no se ha guardado. Cuando el enlace de contacto deje de ser TODO, escribe por ahí."
     />
-  </article>
+    </article>
+  </div>
 </Base>
