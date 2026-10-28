@@ -1,6 +1,6 @@
 ---
 import { useTranslations } from '../i18n/ui';
-import { channels, contactHref, contactTodo } from '../lib/site';
+import { channels, contactEmail, contactHref } from '../lib/site';
 
 interface Props {
   locale: string;
@@ -48,16 +48,26 @@ const t = useTranslations(locale);
           {
             channels.map((channel) => (
               <li>
-                <a href={channel.href}>{channel.name}</a>
+                {
+                  channel.href ? (
+                    <a href={channel.href} rel="noopener noreferrer">
+                      {channel.name} {channel.handle}
+                    </a>
+                  ) : (
+                    <span>
+                      {channel.name}
+                      {channel.handle ? ` ${channel.handle}` : ''}
+                    </span>
+                  )
+                }
               </li>
             ))
           }
         <li>
-          <a href={contactHref}>Contacto <span class="todo">TODO</span></a>
+          <a href={contactHref}>{contactEmail}</a>
         </li>
         <li><a href="/en">{t('footer.english')}</a></li>
       </ul>
-      <p class="fine">{contactTodo}</p>
     </div>
   </div>
 </footer>

@@ -16,8 +16,30 @@ import VideoSlot from './VideoSlot.astro';
       canales.channels.map((channel) => (
         <article class="glass channel-card" id={channel.id} data-reveal>
           <p class="kicker">{channel.topic}</p>
-          <h3>{channel.name}</h3>
-          <p class="meta">{channel.summary}</p>
+          <h3>
+            {
+              channel.url ? (
+                <a href={channel.url} rel="noopener noreferrer">
+                  {channel.name}
+                </a>
+              ) : (
+                channel.name
+              )
+            }
+          </h3>
+          <p class="meta">
+            {
+              channel.url ? (
+                <a href={channel.url} rel="noopener noreferrer">
+                  {channel.handle}
+                </a>
+              ) : (
+                channel.handle
+              )
+            }
+            {' · '}
+            {channel.summary}
+          </p>
           <dl class="stat-list">
             {channel.stats.map((stat) => (
               <div>
