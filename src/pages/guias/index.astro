@@ -1,0 +1,39 @@
+---
+import Directory from '../../components/Directory.astro';
+import { loadPublished, matchesQuery } from '../../lib/content';
+import { breadcrumbLd, canonicalUrl, itemListLd } from '../../lib/seo';
+import { SITE_URL } from '../../lib/site';
+
+const all = await loadPublished('guias');
+const q = Astro.url.searchParams.get('q')?.trim() ?? '';
+const filtered = all.filter((entry) => matchesQuery([entry.data.title, entry.data.description], q));
+const title = 'Guías';
+const pageUrl = canonicalUrl('/guias');
+---
+
+<Directory
+  title={title}
+  eyebrow="Aprender"
+  lede="Artículos para orientarte: herramientas gratuitas, cómo elegir por tarea y qué es un servidor MCP. No hay cifras de usuarios ni de facturación."
+  metaDescription="Guías en español sobre herramientas de IA gratis, cómo elegir una herramienta de inteligencia artificial y qué es un servidor MCP."
+  items={filtered.map((entry) => ({
+    href: `/guias/${entry.id}`,
+    title: entry.data.title,
+    description: entry.data.description,
+  }))}
+  countLabel="guías"
+  query={q}
+  searchAction="/guias"
+  jsonLd={q
+    ? undefined
+    : [
+        breadcrumbLd([
+          { name: 'Inicio', url: SITE_URL },
+          { name: title, url: pageUrl },
+        ]),
+        itemListLd(
+          title,
+          all.map((entry) => ({ name: entry.data.title, url: `${SITE_URL}/guias/${entry.id}` })),
+        ),
+      ]}
+/>

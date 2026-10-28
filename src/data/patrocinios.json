@@ -1,0 +1,16 @@
+{
+  "newsletter": {
+    "activo": false,
+    "patrocinador": "",
+    "texto": "",
+    "url": "",
+    "hasta": ""
+  },
+  "shorts": {
+    "activo": false,
+    "patrocinador": "",
+    "texto": "",
+    "url": "",
+    "hasta": ""
+  }
+}

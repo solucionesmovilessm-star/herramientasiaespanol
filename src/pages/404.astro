@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+
+const description = 'Esa página no está en el directorio. Vuelve al inicio o busca una herramienta.';
+---
+
+<Base title="Página no encontrada" description={description}>
+  <div class="wrap page-intro">
+    <p class="eyebrow">404</p>
+    <h1>No encontramos esa página</h1>
+    <p class="lede">{description}</p>
+    <div class="hero-actions">
+      <a class="button" href="/">Ir al inicio</a>
+      <a class="button secondary" href="/herramientas">Ver herramientas</a>
+    </div>
+  </div>
+</Base>

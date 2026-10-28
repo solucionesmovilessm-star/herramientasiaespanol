@@ -1,0 +1,28 @@
+---
+interface Props {
+  url: string;
+  affiliateUrl?: string;
+  label?: string;
+}
+
+const { url, affiliateUrl, label = 'Abrir la web oficial' } = Astro.props;
+---
+
+{
+  affiliateUrl ? (
+    <a class="button" href={affiliateUrl} rel="sponsored nofollow noopener noreferrer">
+      Enlace de afiliado
+    </a>
+  ) : (
+    <a class="button" href={url} rel="noopener noreferrer">
+      {label}
+    </a>
+  )
+}
+{
+  affiliateUrl && (
+    <a class="button secondary" href={url} rel="noopener noreferrer">
+      Web oficial
+    </a>
+  )
+}

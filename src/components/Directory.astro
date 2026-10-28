@@ -1,0 +1,104 @@
+---
+import type { Badge } from '../lib/content';
+import Card from './Card.astro';
+import Base from '../layouts/Base.astro';
+
+interface Filter {
+  id: string;
+  label: string;
+  href: string;
+  current: boolean;
+}
+
+interface Item {
+  href: string;
+  title: string;
+  description: string;
+  meta?: string;
+  badges?: Badge[];
+}
+
+interface Props {
+  title: string;
+  lede: string;
+  eyebrow?: string;
+  metaDescription?: string;
+  items: Item[];
+  filters?: Filter[];
+  query?: string;
+  searchAction?: string;
+  hiddenFields?: { name: string; value: string }[];
+  countLabel?: string;
+  jsonLd?: unknown;
+  empty?: string;
+}
+
+const {
+  title,
+  lede,
+  eyebrow,
+  metaDescription,
+  items,
+  filters = [],
+  query = '',
+  searchAction,
+  hiddenFields = [],
+  countLabel = 'fichas',
+  jsonLd,
+  empty = 'Ninguna ficha coincide. Prueba con otra palabra o quita el filtro.',
+} = Astro.props;
+---
+
+<Base title={title} description={metaDescription ?? lede} jsonLd={jsonLd}>
+  <div class="wrap">
+    <header class="page-intro">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      <p class="lede">{lede}</p>
+      <slot />
+      {
+        searchAction && (
+          <form class="search" method="get" action={searchAction}>
+            <label for="q">Buscar</label>
+            <input id="q" name="q" type="search" value={query} placeholder="Nombre o tarea" />
+            {hiddenFields.map((field) => (
+              <input type="hidden" name={field.name} value={field.value} />
+            ))}
+            <button class="button" type="submit">Buscar</button>
+          </form>
+        )
+      }
+    </header>
+    {
+      filters.length > 0 && (
+        <nav class="filters" aria-label="Filtros">
+          {filters.map((filter) => (
+            <a href={filter.href} aria-current={filter.current ? 'page' : undefined}>
+              {filter.label}
+            </a>
+          ))}
+        </nav>
+      )
+    }
+    <p class="count">
+      {items.length} {countLabel}
+    </p>
+    {
+      items.length === 0 ? (
+        <p>{empty}</p>
+      ) : (
+        <div class="grid">
+          {items.map((item) => (
+            <Card
+              href={item.href}
+              title={item.title}
+              description={item.description}
+              meta={item.meta}
+              badges={item.badges}
+            />
+          ))}
+        </div>
+      )
+    }
+  </div>
+</Base>

@@ -1,0 +1,87 @@
+---
+import StaticForm from '../components/StaticForm.astro';
+import Base from '../layouts/Base.astro';
+import { getPro } from '../lib/sponsors';
+import { breadcrumbLd, canonicalUrl } from '../lib/seo';
+import { SITE_URL } from '../lib/site';
+
+const pro = getPro();
+const description =
+  'Pro es un extra opcional de unos 5 USD al mes: packs de skills, plantillas y avisos anticipados. El directorio y las guías siguen gratis. Hoy no se puede pagar.';
+const pageUrl = canonicalUrl('/pro');
+---
+
+<Base
+  title="Pro"
+  description={description}
+  jsonLd={breadcrumbLd([
+    { name: 'Inicio', url: SITE_URL },
+    { name: 'Pro', url: pageUrl },
+  ])}
+>
+  <article class="narrow">
+    <header class="page-intro">
+      <p class="eyebrow">Opcional · todavía cerrado</p>
+      <h1>Pro, unos {pro.precioAproxUsd} USD al mes</h1>
+      <p class="lede">{pro.notaPrecio}</p>
+    </header>
+    <div class="prose">
+      <p>
+        El estado de esta oferta es <strong>{pro.estado}</strong>. No hay botón de pago, no se guarda la tarjeta y no se
+        activa nada al dejar el correo.
+      </p>
+      <h2>Qué seguiría gratis</h2>
+      <ul>
+        {pro.sigueGratis.map((item) => <li>{item}</li>)}
+      </ul>
+      <h2>Qué añadiría Pro</h2>
+      <ul>
+        {
+          pro.extras.map((extra) => (
+            <li>
+              <strong>{extra.titulo}.</strong> {extra.detalle}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="table-wrap">
+        <table class="data">
+          <caption class="sr-only">Diferencia entre el sitio gratis y Pro</caption>
+          <thead>
+            <tr>
+              <th scope="col">Contenido</th>
+              <th scope="col">Gratis</th>
+              <th scope="col">Pro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Directorio, guías, tutoriales y ranking</th>
+              <td>Sí</td>
+              <td>Sí</td>
+            </tr>
+            {
+              pro.extras.map((extra) => (
+                <tr>
+                  <th scope="row">{extra.titulo}</th>
+                  <td>No</td>
+                  <td>Previsto</td>
+                </tr>
+              ))
+            }
+            <tr>
+              <th scope="row">Precio</th>
+              <td>0</td>
+              <td>Unos {pro.precioAproxUsd} USD/{pro.periodo}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Cuando Pro se abra, los enlaces de descarga saldrán en esta página. Hoy no hay archivos que descargar.</p>
+    </div>
+    <StaticForm
+      submitLabel="Avísame cuando abra"
+      message="Pro todavía no está abierto. Tu correo no se ha enviado ni se ha guardado. No se te va a cobrar."
+    />
+  </article>
+</Base>

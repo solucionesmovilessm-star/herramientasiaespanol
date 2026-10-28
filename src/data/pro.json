@@ -1,0 +1,30 @@
+{
+  "precioAproxUsd": 5,
+  "moneda": "USD",
+  "periodo": "mes",
+  "estado": "proximamente",
+  "notaPrecio": "Precio orientativo. Puede cambiar antes de abrir la suscripción. Hoy no se cobra nada.",
+  "extras": [
+    {
+      "id": "packs-skills",
+      "titulo": "Packs de skills descargables",
+      "detalle": "Carpetas con un SKILL.md para revisar y adaptar. No sustituyen a las skills oficiales de Anthropic."
+    },
+    {
+      "id": "plantillas",
+      "titulo": "Plantillas",
+      "detalle": "Estructuras para preparar una ficha, una guía o la descripción de una herramienta."
+    },
+    {
+      "id": "avisos",
+      "titulo": "Avisos anticipados",
+      "detalle": "Un aviso antes de publicar en abierto una guía nueva o un cambio grande del ranking."
+    }
+  ],
+  "sigueGratis": [
+    "Directorio de herramientas, agentes, skills y servidores MCP",
+    "Guías y tutoriales para novatos",
+    "Ranking semanal de repositorios",
+    "Fichas con enlace oficial"
+  ]
+}

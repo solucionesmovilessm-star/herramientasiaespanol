@@ -1,0 +1,35 @@
+---
+import type { Badge } from '../lib/content';
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  meta?: string;
+  badges?: Badge[];
+  heading?: 'h2' | 'h3';
+  external?: boolean;
+}
+
+const { href, title, description, meta, badges = [], heading = 'h2', external = false } = Astro.props;
+const Tag = heading;
+---
+
+<a
+  class="card"
+  href={href}
+  {...external ? { rel: 'noopener noreferrer', target: '_blank' } : {}}
+>
+  {
+    badges.length > 0 && (
+      <div class="badge-row">
+        {badges.map((badge) => (
+          <span class:list={['badge', badge.tone]}>{badge.label}</span>
+        ))}
+      </div>
+    )
+  }
+  <Tag>{title}</Tag>
+  <p>{description}</p>
+  {meta && <p class="meta">{meta}</p>}
+</a>

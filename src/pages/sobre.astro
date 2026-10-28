@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import { breadcrumbLd, canonicalUrl } from '../lib/seo';
+import { SITE_URL, channels, contactHref, contactTodo } from '../lib/site';
+
+const description =
+  'Herramientas IA en español lo publica Gonzalo, de los canales TodoSobreTecno y Soluciones para todos. Aquí está el contacto y qué hace este sitio.';
+const pageUrl = canonicalUrl('/sobre');
+---
+
+<Base
+  title="Sobre y contacto"
+  description={description}
+  jsonLd={breadcrumbLd([
+    { name: 'Inicio', url: SITE_URL },
+    { name: 'Sobre', url: pageUrl },
+  ])}
+>
+  <article class="narrow">
+    <header class="page-intro">
+      <p class="eyebrow">El proyecto</p>
+      <h1>Sobre Gonzalo y este sitio</h1>
+      <p class="lede">{description}</p>
+    </header>
+    <div class="prose">
+      <p>
+        Gonzalo publica en YouTube sobre tecnología y sobre finanzas. Este sitio recoge en español herramientas de IA,
+        agentes, skills y servidores MCP, con el enlace oficial y una explicación corta. No vendemos las herramientas:
+        la ficha te manda a quien las hace.
+      </p>
+      <h2>Canales</h2>
+      <ul>
+        {
+          channels.map((channel) => (
+            <li>
+              <a href={channel.href}>{channel.name}</a> ({channel.topic}). <strong>{channel.todo}</strong>
+            </li>
+          ))
+        }
+      </ul>
+      <p>
+        Los enlaces llevan la marca TODO a propósito. No he puesto una URL de YouTube sin comprobar que es el canal
+        correcto.
+      </p>
+      <h2>Contacto</h2>
+      <p>
+        <a href={contactHref}>Escribir a Gonzalo</a>. <strong>{contactTodo}</strong>
+      </p>
+      <p>
+        Para una ficha patrocinada, un enlace de afiliado o un hueco en la newsletter y en los shorts, usa la página
+        <a href="/anunciate">Anúnciate</a>. El plan opcional de unos 5 USD al mes está explicado en <a href="/pro">Pro</a>.
+        Hoy no hay pasarela de pago.
+      </p>
+      <h2>Qué no vas a encontrar</h2>
+      <p>
+        No publicamos número de usuarios, facturación ni “estrellas” que no salgan de la API de GitHub. Si una ficha no
+        tiene un dato, es porque no lo hemos comprobado.
+      </p>
+    </div>
+  </article>
+</Base>

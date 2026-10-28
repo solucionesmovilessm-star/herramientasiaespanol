@@ -1,0 +1,59 @@
+---
+import RankingTable from '../../components/RankingTable.astro';
+import rankingFile from '../../data/ranking.json';
+import Base from '../../layouts/Base.astro';
+import { breadcrumbLd, canonicalUrl, formatDate, itemListLd } from '../../lib/seo';
+import { SITE_URL } from '../../lib/site';
+
+const generated = rankingFile.generatedAt ? new Date(rankingFile.generatedAt) : null;
+const pageUrl = canonicalUrl('/ranking');
+const description =
+  'Ranking semanal de repositorios de IA en GitHub. Dos listas con estrellas reales de la API: actividad reciente y más estrellados. No es el Trending oficial.';
+---
+
+<Base
+  title="Ranking semanal de repos"
+  description={description}
+  jsonLd={[
+    breadcrumbLd([
+      { name: 'Inicio', url: SITE_URL },
+      { name: 'Ranking', url: pageUrl },
+    ]),
+    itemListLd(
+      'Repos de IA en movimiento',
+      rankingFile.enMovimiento.map((repo) => ({ name: repo.fullName, url: repo.url })),
+    ),
+  ]}
+>
+  <div class="wrap">
+    <header class="page-intro">
+      <p class="eyebrow">GitHub</p>
+      <h1>Ranking semanal de repos</h1>
+      <p class="lede">{description}</p>
+      <p class="fine">{rankingFile.note}</p>
+      {
+        generated && (
+          <p class="meta">
+            Datos del <time datetime={generated.toISOString()}>{formatDate(generated)}</time>. Ventana de actividad: desde el{' '}
+            {rankingFile.windowStart}.
+          </p>
+        )
+      }
+    </header>
+
+    <section class="section" aria-labelledby="en-movimiento">
+      <h2 id="en-movimiento">En movimiento</h2>
+      <RankingTable repos={rankingFile.enMovimiento} caption="Repositorios de IA con actividad reciente, ordenados por estrellas" />
+    </section>
+
+    <section class="section" aria-labelledby="mas-estrellados">
+      <h2 id="mas-estrellados">Más estrellados</h2>
+      <RankingTable repos={rankingFile.masEstrellados} caption="Repositorios de IA con más estrellas" />
+    </section>
+
+    <p class="fine">
+      Las descripciones están en el idioma que puso cada repositorio. Este sitio no las traduce para no cambiar el sentido.
+      El archivo vive en <code>src/data/ranking.json</code> y lo reescribe el workflow cada lunes.
+    </p>
+  </div>
+</Base>

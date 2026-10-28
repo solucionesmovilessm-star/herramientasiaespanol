@@ -1,0 +1,297 @@
+---
+import Card from '../components/Card.astro';
+import SponsorSlot from '../components/SponsorSlot.astro';
+import StaticForm from '../components/StaticForm.astro';
+import rankingFile from '../data/ranking.json';
+import { moneyBadges, loadPublished } from '../lib/content';
+import { formatNumber, itemListLd, websiteLd } from '../lib/seo';
+import {
+  SITE_NAME,
+  agentCategories,
+  categories,
+  channels,
+  pricingLabel,
+  skillCategories,
+} from '../lib/site';
+import Base from '../layouts/Base.astro';
+
+const tools = await loadPublished('herramientas');
+const agents = await loadPublished('agentes');
+const skills = await loadPublished('skills');
+const servers = await loadPublished('mcp');
+const guides = await loadPublished('guias');
+const tutorials = await loadPublished('tutoriales');
+const claudeSkills = skills.filter((entry) => entry.data.category === 'claude');
+const featured = tools.filter((entry) => entry.data.destacado && !entry.data.patrocinado);
+const sponsored = tools.filter((entry) => entry.data.patrocinado);
+const spotlightIds = ['chatgpt', 'claude', 'perplexity'];
+const spotlight = spotlightIds
+  .map((id) => tools.find((entry) => entry.id === id))
+  .filter((entry) => entry !== undefined);
+
+const description =
+  'Directorio en español de herramientas de IA, agentes, skills y servidores MCP. Enlaces oficiales, guías y un ranking semanal con datos de GitHub.';
+
+const categoryCounts = Object.entries(categories).map(([id, label]) => ({
+  id,
+  label,
+  count: tools.filter((entry) => entry.data.category === id).length,
+}));
+
+const ranking = rankingFile.enMovimiento.slice(0, 5);
+const jsonLd = [
+  websiteLd(description),
+  itemListLd(
+    'Herramientas de IA',
+    tools.map((entry) => ({
+      name: entry.data.title,
+      url: `https://herramientasiaespanol.com/herramientas/${entry.id}`,
+    })),
+  ),
+];
+---
+
+<Base title={SITE_NAME} description={description} jsonLd={jsonLd}>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Directorio en español</p>
+        <h1>Elige la herramienta de IA según <em>lo que quieres hacer</em>.</h1>
+        <p class="lede">
+          Chats, imagen, vídeo, código, agentes, skills y servidores MCP, con el enlace oficial al lado.
+          Casi todo es gratis de leer. Lo que es un anuncio lleva la etiqueta Patrocinado.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="/herramientas">Ver herramientas</a>
+          <a class="button secondary" href="/tutoriales">Tutoriales para novatos</a>
+        </div>
+        <p class="hero-note">
+          {tools.length} herramientas con ficha · {claudeSkills.length} skills para Claude · {tutorials.length} tutoriales
+          paso a paso
+        </p>
+      </div>
+      <div class="spotlight" aria-label="Tres fichas para empezar">
+        {
+          spotlight.map((entry) => (
+            <a href={`/herramientas/${entry.id}`}>
+              <span>{categories[entry.data.category]}</span>
+              <strong>{entry.data.title}</strong>
+              <span>{entry.data.description}</span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="tareas">
+      <div class="section-head">
+        <h2 id="tareas">Por tarea</h2>
+        <a href="/herramientas">Ver el directorio</a>
+      </div>
+      <div class="grid cats">
+        {
+          categoryCounts.map((category) => (
+            <a class="cat" href={`/herramientas?categoria=${category.id}`}>
+              <h3>{category.label}</h3>
+              <p>
+                {category.count} {category.count === 1 ? 'ficha' : 'fichas'}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    {
+      sponsored.length > 0 && (
+        <section class="section" aria-labelledby="patrocinados">
+          <div class="section-head">
+            <h2 id="patrocinados">Patrocinados</h2>
+            <a href="/anunciate">Anúnciate</a>
+          </div>
+          <div class="grid">
+            {sponsored.map((entry) => (
+              <Card
+                heading="h3"
+                href={`/herramientas/${entry.id}`}
+                title={entry.data.title}
+                description={entry.data.description}
+                meta={categories[entry.data.category]}
+                badges={moneyBadges({ ...entry.data, pricingLabels: pricingLabel })}
+              />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="section" aria-labelledby="destacados">
+      <div class="section-head">
+        <h2 id="destacados">Selección editorial</h2>
+        <a href="/herramientas">Todas las fichas</a>
+      </div>
+      <p class="fine">Destacado significa que lo hemos elegido para empezar. No es un anuncio ni un ranking de laboratorio.</p>
+      <div class="grid">
+        {
+          featured.map((entry) => (
+            <Card
+              heading="h3"
+              href={`/herramientas/${entry.id}`}
+              title={entry.data.title}
+              description={entry.data.description}
+              meta={categories[entry.data.category]}
+              badges={moneyBadges({ ...entry.data, pricingLabels: pricingLabel })}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="aprende">
+      <div class="section-head">
+        <h2 id="aprende">Tutoriales para novatos</h2>
+        <a href="/tutoriales">Ver los tutoriales</a>
+      </div>
+      <div class="grid">
+        {
+          tutorials.map((entry) => (
+            <Card
+              heading="h3"
+              href={`/tutoriales/${entry.id}`}
+              title={entry.data.title}
+              description={entry.data.description}
+              meta={`${entry.data.minutes} min · nivel novato`}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section split" aria-labelledby="skills-claude">
+      <div>
+        <h2 id="skills-claude">Skills para Claude</h2>
+        <p class="lede">
+          El estándar abierto se llama Agent Skills. Anthropic publica ejemplos reales, entre ellos los de PDF, Word,
+          hojas de cálculo y presentaciones. Aquí están enlazados, no recopilados.
+        </p>
+        <p><a class="button" href="/skills/claude">Ver skills para Claude</a></p>
+      </div>
+      <div class="panel">
+        <h3>También en el directorio</h3>
+        <ul class="list-plain">
+          <li>
+            <a href="/agentes">Agentes y bots</a>
+            <span class="meta"> · {agents.length} fichas · {agentCategories.programacion}, {agentCategories.multiagente}</span>
+          </li>
+          <li>
+            <a href="/skills">Todas las skills</a>
+            <span class="meta"> · {skills.length} fichas · {skillCategories.estandar} y {skillCategories.cursor}</span>
+          </li>
+          <li>
+            <a href="/mcp">Servidores MCP</a>
+            <span class="meta"> · {servers.length} fichas</span>
+          </li>
+          <li>
+            <a href="/guias">Guías</a>
+            <span class="meta"> · {guides.length} artículos</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="ranking">
+      <div class="section-head">
+        <h2 id="ranking">Repos en movimiento</h2>
+        <a href="/ranking">Ver el ranking</a>
+      </div>
+      <p class="fine">{rankingFile.note}</p>
+      {
+        ranking.length > 0 ? (
+          <div class="table-wrap">
+            <table class="rank">
+              <caption class="sr-only">Cinco repositorios de IA con actividad reciente y más estrellas</caption>
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Repositorio</th>
+                  <th scope="col">Estrellas</th>
+                  <th scope="col">Lenguaje</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ranking.map((repo) => (
+                  <tr>
+                    <td>{repo.rank}</td>
+                    <td>
+                      <a href={repo.url} rel="noopener noreferrer">
+                        {repo.fullName}
+                      </a>
+                      {repo.description && <div class="meta">{repo.description}</div>}
+                    </td>
+                    <td>{formatNumber(repo.stars)}</td>
+                    <td>{repo.language ?? '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p>El ranking se rellena con la acción semanal de GitHub.</p>
+        )
+      }
+    </section>
+
+    <section class="section" aria-labelledby="guias">
+      <div class="section-head">
+        <h2 id="guias">Guías</h2>
+        <a href="/guias">Todas las guías</a>
+      </div>
+      <div class="grid">
+        {
+          guides.map((entry) => (
+            <Card
+              heading="h3"
+              href={`/guias/${entry.id}`}
+              title={entry.data.title}
+              description={entry.data.description}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section split" aria-labelledby="newsletter">
+      <div>
+        <h2 id="newsletter">Newsletter</h2>
+        <p class="lede">
+          Un aviso cuando haya una guía nueva o cambie el ranking. El formulario todavía no envía el correo a ningún
+          servicio: es el hueco listo para conectarlo sin coste.
+        </p>
+        <StaticForm
+          submitLabel="Quiero que me avisen"
+          message="Todavía no hay un servicio de newsletter conectado. Tu correo no se ha enviado a ningún sitio y no se ha guardado."
+        />
+      </div>
+      <SponsorSlot id="newsletter" />
+    </section>
+
+    <section class="section" aria-labelledby="canales">
+      <h2 id="canales">Canales de Gonzalo</h2>
+      <div class="grid">
+        {
+          channels.map((channel) => (
+            <a class="card" href={channel.href}>
+              <span class="badge paid">TODO</span>
+              <h3>{channel.name}</h3>
+              <p>{channel.topic}</p>
+              <p class="meta">{channel.todo}</p>
+            </a>
+          ))
+        }
+      </div>
+      <div class="section">
+        <SponsorSlot id="shorts" />
+      </div>
+    </section>
+  </div>
+</Base>

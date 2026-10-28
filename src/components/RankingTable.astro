@@ -1,0 +1,65 @@
+---
+import { formatNumber } from '../lib/seo';
+
+interface Repo {
+  rank: number;
+  fullName: string;
+  url: string;
+  description: string | null;
+  stars: number;
+  forks: number;
+  language: string | null;
+  topics: string[];
+  pushedAt: string;
+  license: string | null;
+}
+
+interface Props {
+  repos: Repo[];
+  caption: string;
+}
+
+const { repos, caption } = Astro.props;
+---
+
+{
+  repos.length === 0 ? (
+    <p>Todavía no hay filas. Cuando el workflow semanal consulte GitHub, aparecerán aquí.</p>
+  ) : (
+    <div class="table-wrap">
+      <table class="rank">
+        <caption class="sr-only">{caption}</caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Repositorio</th>
+            <th scope="col">Estrellas</th>
+            <th scope="col">Forks</th>
+            <th scope="col">Lenguaje</th>
+            <th scope="col">Último push</th>
+          </tr>
+        </thead>
+        <tbody>
+          {repos.map((repo) => (
+            <tr>
+              <td>{repo.rank}</td>
+              <td>
+                <a href={repo.url} rel="noopener noreferrer">
+                  {repo.fullName}
+                </a>
+                <div class="meta">{repo.description ?? 'Sin descripción en GitHub.'}</div>
+                {repo.license && <div class="meta">Licencia: {repo.license}</div>}
+              </td>
+              <td>{formatNumber(repo.stars)}</td>
+              <td>{formatNumber(repo.forks)}</td>
+              <td>{repo.language ?? '—'}</td>
+              <td>
+                <time datetime={repo.pushedAt}>{repo.pushedAt.slice(0, 10)}</time>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
