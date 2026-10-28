@@ -1,0 +1,89 @@
+---
+import ChannelBoard from '../components/ChannelBoard.astro';
+import Mark from '../components/Mark.astro';
+import Base from '../layouts/Base.astro';
+import { getAdOptions } from '../lib/sponsors';
+import { breadcrumbLd, canonicalUrl } from '../lib/seo';
+import { SITE_URL, contactEmail, contactHref } from '../lib/site';
+
+const description =
+  'Patrocina Herramientas IA: ficha destacada en el directorio, shorts en TodoSobreTecno o integración en directo en Soluciones para todos. Sin tarifas publicadas.';
+const pageUrl = canonicalUrl('/patrocina');
+const formats = getAdOptions();
+---
+
+<Base
+  title="Patrocina"
+  description={description}
+  jsonLd={breadcrumbLd([
+    { name: 'Inicio', url: SITE_URL },
+    { name: 'Patrocina', url: pageUrl },
+  ])}
+>
+  <div class="wrap">
+    <header class="page-intro">
+      <p class="eyebrow">Colaboraciones</p>
+      <h1>Patrocina</h1>
+      <p class="lede">
+        Tres formatos, todos marcados cuando hay dinero de por medio. El directorio sigue siendo editorial. No hay
+        pasarela de pago ni tarifas en esta página: el precio se acuerda por correo.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href={contactHref}>{contactEmail}</a>
+        <a class="button secondary" href="#ejemplo">Ver el ejemplo</a>
+      </div>
+    </header>
+
+    <section aria-labelledby="formatos">
+      <div class="section-head">
+        <h2 id="formatos">Formatos</h2>
+      </div>
+      <div class="format-grid">
+        {
+          formats.map((format, index) => (
+            <article class="glass format-card" id={format.id}>
+              <p class="format-index">{String(index + 1).padStart(2, '0')}</p>
+              <h2>{format.titulo}</h2>
+              <p>{format.texto}</p>
+              <p class="meta">Precio no publicado. Se acuerda por correo.</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="ejemplo">
+      <div class="section-head">
+        <h2 id="ejemplo">Así se ve una ficha destacada</h2>
+      </div>
+      <p class="fine">
+        Ejemplo visual dentro del listado. No es un patrocinador real y no enlaza a ninguna herramienta.
+      </p>
+      <div class="card example-card">
+        <span class="ad-flag">Anuncio</span>
+        <span class="card-top">
+          <Mark name="Ejemplo" />
+          <span class="badge-row">
+            <span class="badge paid">Patrocinado</span>
+            <span class="badge">Ejemplo</span>
+          </span>
+        </span>
+        <h3>Tu herramienta</h3>
+        <p>La descripción de la ficha, con el enlace oficial al lado y la etiqueta que no se esconde.</p>
+        <p class="meta">Tarea de ejemplo</p>
+        <p class="meta">Precio sin fecha de verificación</p>
+      </div>
+    </section>
+
+    <ChannelBoard />
+
+    <section class="glass contact-band" aria-labelledby="contacto">
+      <div>
+        <p class="kicker">Contacto</p>
+        <h2 id="contacto">Escribe a Gonzalo</h2>
+        <p class="fine">Cuenta la herramienta, la URL oficial y el formato. No adjuntes una tarifa: aquí no hay precios.</p>
+      </div>
+      <a class="button" href={contactHref}>{contactEmail}</a>
+    </section>
+  </div>
+</Base>

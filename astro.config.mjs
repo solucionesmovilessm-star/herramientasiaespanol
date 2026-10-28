@@ -6,6 +6,9 @@ const site = 'https://herramientasiaespanol.com';
 export default defineConfig({
   site,
   trailingSlash: 'never',
+  redirects: {
+    '/anunciate': '/patrocina',
+  },
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],

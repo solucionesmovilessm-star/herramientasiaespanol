@@ -872,6 +872,47 @@ kbd {
   gap: 14px;
 }
 
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 8px 0 28px;
+}
+
+.format-card {
+  padding: 18px;
+}
+
+.format-card h2 {
+  margin: 8px 0;
+  font-size: 1.35rem;
+}
+
+.format-index {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.example-card {
+  max-width: 360px;
+}
+
+.contact-band {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 18px;
+  margin-top: 8px;
+}
+
+.contact-band h2 {
+  margin: 0 0 6px;
+  font-size: 1.5rem;
+}
+
 .card,
 .cat {
   display: flex;
@@ -1688,6 +1729,10 @@ table.rank a {
   .bento-featured,
   .bento-ranking {
     grid-column: auto;
+  }
+
+  .format-grid {
+    grid-template-columns: 1fr;
   }
 
   .footer-grid,
