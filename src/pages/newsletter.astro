@@ -1,0 +1,42 @@
+---
+import SponsorSlot from '../components/SponsorSlot.astro';
+import StaticForm from '../components/StaticForm.astro';
+import Base from '../layouts/Base.astro';
+import { breadcrumbLd, canonicalUrl } from '../lib/seo';
+import { SITE_URL } from '../lib/site';
+
+const description =
+  'Apúntate a la newsletter de Herramientas IA. El formulario es un hueco: todavía no envía el correo a ningún servicio.';
+const pageUrl = canonicalUrl('/newsletter');
+---
+
+<Base
+  title="Newsletter"
+  description={description}
+  jsonLd={breadcrumbLd([
+    { name: 'Inicio', url: SITE_URL },
+    { name: 'Newsletter', url: pageUrl },
+  ])}
+>
+  <article class="narrow">
+    <header class="page-intro">
+      <p class="eyebrow">Avisos</p>
+      <h1>Newsletter</h1>
+      <p class="lede">
+        La idea es un correo corto cuando haya una guía nueva o se actualice el ranking. Hoy no hay herramienta de envío
+        conectada, así que el formulario no entrega nada.
+      </p>
+    </header>
+    <StaticForm
+      submitLabel="Dejar el correo para más adelante"
+      message="No se ha enviado ni guardado tu correo. Cuando Gonzalo conecte un servicio gratuito, esta página lo dirá."
+    />
+    <div class="section">
+      <SponsorSlot id="newsletter" />
+    </div>
+    <p class="fine">
+      Un patrocinador de este hueco se edita en <code>src/data/patrocinios.json</code>. Si <code>activo</code> es false,
+      se ve el espacio vacío, no un anuncio inventado.
+    </p>
+  </article>
+</Base>

@@ -1,0 +1,106 @@
+---
+import type { Badge } from '../lib/content';
+import { formatDate } from '../lib/seo';
+import Breadcrumbs from './Breadcrumbs.astro';
+import Base from '../layouts/Base.astro';
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Related {
+  href: string;
+  title: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+  crumbs: Crumb[];
+  badges?: Badge[];
+  meta?: string;
+  updated?: Date;
+  jsonLd?: unknown;
+  ogType?: 'website' | 'article';
+  published?: string;
+  modified?: string;
+  tutorial?: boolean;
+  related?: Related[];
+  relatedTitle?: string;
+}
+
+const {
+  title,
+  description,
+  eyebrow,
+  crumbs,
+  badges = [],
+  meta,
+  updated,
+  jsonLd,
+  ogType = 'website',
+  published,
+  modified,
+  tutorial = false,
+  related = [],
+  relatedTitle = 'También en esta sección',
+} = Astro.props;
+---
+
+<Base
+  title={title}
+  description={description}
+  jsonLd={jsonLd}
+  ogType={ogType}
+  published={published}
+  modified={modified}
+>
+  <article class="narrow">
+    <Breadcrumbs items={crumbs} />
+    <header class="article-head">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      {
+        badges.length > 0 && (
+          <div class="badge-row">
+            {badges.map((badge) => (
+              <span class:list={['badge', badge.tone]}>{badge.label}</span>
+            ))}
+          </div>
+        )
+      }
+      {meta && <p class="meta">{meta}</p>}
+      {
+        updated && (
+          <p class="meta">
+            Actualizado el <time datetime={updated.toISOString().slice(0, 10)}>{formatDate(updated)}</time>
+          </p>
+        )
+      }
+      <div class="actions">
+        <slot name="actions" />
+      </div>
+      <slot name="notes" />
+    </header>
+    <div class:list={['prose', { tutorial }]}>
+      <slot />
+    </div>
+    {
+      related.length > 0 && (
+        <aside class="related">
+          <h2>{relatedTitle}</h2>
+          <ul>
+            {related.map((item) => (
+              <li>
+                <a href={item.href}>{item.title}</a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )
+    }
+  </article>
+</Base>

@@ -1,0 +1,59 @@
+---
+import { render } from 'astro:content';
+import EntryPage from '../../components/EntryPage.astro';
+import { loadPublished, type TutorialEntry } from '../../lib/content';
+import { articleLd, breadcrumbLd, canonicalUrl, isoDate } from '../../lib/seo';
+import { SITE_URL } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const items = await loadPublished('tutoriales');
+  return items.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+interface Props {
+  entry: TutorialEntry;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const canonical = canonicalUrl(`/tutoriales/${entry.id}`);
+const published = isoDate(entry.data.updated);
+const related = (await loadPublished('tutoriales'))
+  .filter((item) => item.id !== entry.id)
+  .map((item) => ({ href: `/tutoriales/${item.id}`, title: item.data.title }));
+---
+
+<EntryPage
+  title={entry.data.title}
+  description={entry.data.description}
+  eyebrow="Tutorial para novatos"
+  crumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Tutoriales', href: '/tutoriales' },
+    { label: entry.data.title },
+  ]}
+  meta={`${entry.data.minutes} min · nivel novato`}
+  updated={entry.data.updated}
+  tutorial
+  ogType="article"
+  published={published}
+  modified={published}
+  jsonLd={[
+    articleLd({
+      title: entry.data.title,
+      description: entry.data.description,
+      canonical,
+      published,
+      modified: published,
+    }),
+    breadcrumbLd([
+      { name: 'Inicio', url: SITE_URL },
+      { name: 'Tutoriales para novatos', url: `${SITE_URL}/tutoriales` },
+      { name: entry.data.title, url: canonical },
+    ]),
+  ]}
+  related={related}
+  relatedTitle="Otros tutoriales"
+>
+  <Content />
+</EntryPage>

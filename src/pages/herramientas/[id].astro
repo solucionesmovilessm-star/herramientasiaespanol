@@ -1,0 +1,77 @@
+---
+import { render } from 'astro:content';
+import EntryPage from '../../components/EntryPage.astro';
+import MoneyNotes from '../../components/MoneyNotes.astro';
+import OfficialLinks from '../../components/OfficialLinks.astro';
+import { loadPublished, moneyBadges, type ToolEntry } from '../../lib/content';
+import { breadcrumbLd, canonicalUrl, isoDate } from '../../lib/seo';
+import { appCategoryByTool, categories, pricingLabel, SITE_URL } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const items = await loadPublished('herramientas');
+  return items.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+interface Props {
+  entry: ToolEntry;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const canonical = canonicalUrl(`/herramientas/${entry.id}`);
+const related = (await loadPublished('herramientas'))
+  .filter((item) => item.id !== entry.id && item.data.category === entry.data.category)
+  .slice(0, 3);
+const published = isoDate(entry.data.updated);
+const softwareLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: entry.data.title,
+  description: entry.data.description,
+  url: entry.data.url,
+  applicationCategory: appCategoryByTool[entry.data.category],
+  operatingSystem: entry.data.category === 'local' ? 'Windows, macOS, Linux' : 'Web',
+  inLanguage: 'es',
+};
+if (entry.data.pricing === 'gratis' || entry.data.pricing === 'freemium') {
+  softwareLd.offers = {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description:
+      entry.data.pricing === 'gratis'
+        ? 'Se puede usar sin pagar.'
+        : 'Hay una forma de usarla sin pagar. También hay planes de pago; esta ficha no publica tarifas.',
+  };
+}
+const jsonLd = [
+  softwareLd,
+  breadcrumbLd([
+    { name: 'Inicio', url: SITE_URL },
+    { name: 'Herramientas', url: `${SITE_URL}/herramientas` },
+    { name: entry.data.title, url: canonical },
+  ]),
+];
+---
+
+<EntryPage
+  title={entry.data.title}
+  description={entry.data.description}
+  eyebrow={categories[entry.data.category]}
+  crumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Herramientas', href: '/herramientas' },
+    { label: entry.data.title },
+  ]}
+  badges={moneyBadges({ ...entry.data, pricingLabels: pricingLabel })}
+  updated={entry.data.updated}
+  jsonLd={jsonLd}
+  published={published}
+  modified={published}
+  related={related.map((item) => ({ href: `/herramientas/${item.id}`, title: item.data.title }))}
+  relatedTitle="Otras de la misma tarea"
+>
+  <OfficialLinks slot="actions" url={entry.data.url} affiliateUrl={entry.data.affiliateUrl} />
+  <MoneyNotes slot="notes" affiliateUrl={entry.data.affiliateUrl} patrocinado={entry.data.patrocinado} />
+  <Content />
+</EntryPage>

@@ -1,0 +1,66 @@
+---
+import { useTranslations } from '../i18n/ui';
+import { channels, contactHref, contactTodo } from '../lib/site';
+
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="transparency">{t('footer.transparency')}</p>
+  </div>
+  <div class="wrap footer-grid">
+    <div>
+      <h2>Herramientas IA en español</h2>
+      <p class="fine">{t('footer.free')}</p>
+      <p class="fine">{t('footer.rights')}</p>
+    </div>
+    <div>
+      <h2>Directorio</h2>
+      <ul>
+        <li><a href="/herramientas">Herramientas</a></li>
+        <li><a href="/agentes">Agentes y bots</a></li>
+        <li><a href="/skills">Skills</a></li>
+        <li><a href="/skills/claude">Skills para Claude</a></li>
+        <li><a href="/mcp">Servidores MCP</a></li>
+        <li><a href="/ranking">Ranking semanal</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Aprender</h2>
+      <ul>
+        <li><a href="/guias">Guías</a></li>
+        <li><a href="/tutoriales">Tutoriales para novatos</a></li>
+        <li><a href="/newsletter">Newsletter</a></li>
+        <li><a href="/pro">Pro</a></li>
+        <li><a href="/anunciate">Anúnciate</a></li>
+        <li><a href="/sobre">Sobre y contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Canales</h2>
+      <ul>
+        {
+          channels.map((channel) => (
+            <li>
+              <a href={channel.href}>
+                {channel.name}
+                <span class="todo">TODO</span>
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href={contactHref}>Contacto <span class="todo">TODO</span></a>
+        </li>
+        <li><a href="/en">{t('footer.english')}</a></li>
+      </ul>
+      <p class="fine">{contactTodo}</p>
+    </div>
+  </div>
+</footer>

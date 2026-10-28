@@ -1,0 +1,71 @@
+---
+import { render } from 'astro:content';
+import EntryPage from '../../components/EntryPage.astro';
+import MoneyNotes from '../../components/MoneyNotes.astro';
+import OfficialLinks from '../../components/OfficialLinks.astro';
+import { loadPublished, moneyBadges, type AgentEntry } from '../../lib/content';
+import { breadcrumbLd, canonicalUrl, isoDate } from '../../lib/seo';
+import { agentCategories, pricingLabel, SITE_URL } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const items = await loadPublished('agentes');
+  return items.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+interface Props {
+  entry: AgentEntry;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const canonical = canonicalUrl(`/agentes/${entry.id}`);
+const published = isoDate(entry.data.updated);
+const related = (await loadPublished('agentes'))
+  .filter((item) => item.id !== entry.id && item.data.category === entry.data.category)
+  .slice(0, 3);
+const softwareLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: entry.data.title,
+  description: entry.data.description,
+  url: entry.data.url,
+  applicationCategory: 'DeveloperApplication',
+  inLanguage: 'es',
+};
+if (entry.data.pricing === 'gratis' || entry.data.pricing === 'freemium') {
+  softwareLd.offers = {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Hay una forma de probarlo sin pagar el programa. El uso de modelos de pago se cobra aparte.',
+  };
+}
+---
+
+<EntryPage
+  title={entry.data.title}
+  description={entry.data.description}
+  eyebrow={agentCategories[entry.data.category]}
+  crumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Agentes', href: '/agentes' },
+    { label: entry.data.title },
+  ]}
+  badges={moneyBadges({ ...entry.data, pricingLabels: pricingLabel })}
+  updated={entry.data.updated}
+  published={published}
+  modified={published}
+  jsonLd={[
+    softwareLd,
+    breadcrumbLd([
+      { name: 'Inicio', url: SITE_URL },
+      { name: 'Agentes', url: `${SITE_URL}/agentes` },
+      { name: entry.data.title, url: canonical },
+    ]),
+  ]}
+  related={related.map((item) => ({ href: `/agentes/${item.id}`, title: item.data.title }))}
+>
+  <OfficialLinks slot="actions" url={entry.data.url} affiliateUrl={entry.data.affiliateUrl} />
+  <MoneyNotes slot="notes" affiliateUrl={entry.data.affiliateUrl} patrocinado={entry.data.patrocinado} />
+  <Content />
+</EntryPage>

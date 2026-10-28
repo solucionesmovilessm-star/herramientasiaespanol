@@ -1,0 +1,66 @@
+---
+import Directory from '../../components/Directory.astro';
+import { loadPublished, matchesQuery, moneyBadges } from '../../lib/content';
+import { breadcrumbLd, canonicalUrl, itemListLd } from '../../lib/seo';
+import { SITE_URL, mcpTipos } from '../../lib/site';
+
+const all = await loadPublished('mcp');
+const q = Astro.url.searchParams.get('q')?.trim() ?? '';
+const tipo = Astro.url.searchParams.get('tipo') ?? '';
+const active = tipo in mcpTipos ? tipo : '';
+const filtered = all.filter((entry) => {
+  if (active && entry.data.tipo !== active) return false;
+  return matchesQuery([entry.data.title, entry.data.description, mcpTipos[entry.data.tipo]], q);
+});
+const title = 'Servidores MCP';
+const pageUrl = canonicalUrl('/mcp');
+const hasFilter = Boolean(q || active);
+---
+
+<Directory
+  title={title}
+  eyebrow="Directorio"
+  lede="Un servidor MCP conecta un asistente con archivos, una web o un servicio. Estas fichas enlazan servidores de referencia y algunos oficiales. El protocolo se explica en la guía."
+  metaDescription="Servidores MCP explicados en español: filesystem, GitHub, Playwright, Brave Search y el registro oficial del protocolo."
+  items={filtered.map((entry) => ({
+    href: `/mcp/${entry.id}`,
+    title: entry.data.title,
+    description: entry.data.description,
+    meta: mcpTipos[entry.data.tipo],
+    badges: moneyBadges(entry.data),
+  }))}
+  filters={[
+    {
+      id: 'todos',
+      label: 'Todos',
+      href: q ? `/mcp?q=${encodeURIComponent(q)}` : '/mcp',
+      current: !active,
+    },
+    ...Object.entries(mcpTipos).map(([id, label]) => ({
+      id,
+      label,
+      href: `/mcp?tipo=${id}${q ? `&q=${encodeURIComponent(q)}` : ''}`,
+      current: active === id,
+    })),
+  ]}
+  query={q}
+  searchAction="/mcp"
+  hiddenFields={active ? [{ name: 'tipo', value: active }] : []}
+  jsonLd={hasFilter
+    ? undefined
+    : [
+        breadcrumbLd([
+          { name: 'Inicio', url: SITE_URL },
+          { name: title, url: pageUrl },
+        ]),
+        itemListLd(
+          title,
+          all.map((entry) => ({ name: entry.data.title, url: `${SITE_URL}/mcp/${entry.id}` })),
+        ),
+      ]}
+>
+  <p>
+    Empieza por la guía <a href="/guias/que-es-un-servidor-mcp">qué es un servidor MCP</a> o por el tutorial
+    <a href="/tutoriales/como-instalar-un-servidor-mcp">cómo instalar uno</a>.
+  </p>
+</Directory>

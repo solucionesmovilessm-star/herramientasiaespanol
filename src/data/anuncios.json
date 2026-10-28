@@ -1,0 +1,28 @@
+{
+  "opciones": [
+    {
+      "id": "ficha",
+      "titulo": "Ficha patrocinada",
+      "texto": "La herramienta aparece en el directorio con la etiqueta Patrocinado, visible en la ficha y en el listado. El resto del contenido de la web sigue siendo independiente.",
+      "como": "En el Markdown de la ficha, pon patrocinado: true."
+    },
+    {
+      "id": "afiliado",
+      "titulo": "Enlace de afiliado",
+      "texto": "La ficha puede seguir siendo gratuita. El botón principal usa el enlace de afiliado y se marca como tal. La web oficial sigue visible al lado.",
+      "como": "Añade affiliateUrl con la URL https del programa de afiliados."
+    },
+    {
+      "id": "newsletter",
+      "titulo": "Hueco en la newsletter",
+      "texto": "Un bloque con la etiqueta Patrocinado en la página de la newsletter. Cuando haya envíos de correo, el mismo acuerdo puede incluir el mensaje. Hoy el formulario todavía no envía correos.",
+      "como": "Rellena newsletter en src/data/patrocinios.json y pon activo: true."
+    },
+    {
+      "id": "shorts",
+      "titulo": "Mención en shorts",
+      "texto": "Hueco para acordar una mención en shorts de los canales de YouTube. El sitio reserva el espacio y la etiqueta. El vídeo se publica en YouTube, no aquí.",
+      "como": "Rellena shorts en src/data/patrocinios.json y pon activo: true."
+    }
+  ]
+}

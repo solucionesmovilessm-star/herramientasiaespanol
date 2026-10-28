@@ -1,0 +1,60 @@
+---
+import { useTranslations } from '../i18n/ui';
+import { isActive, nav } from '../lib/site';
+
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/">
+      <span class="mark" aria-hidden="true">hí</span>
+      <span>
+        <strong>Herramientas IA</strong>
+        <small>en español</small>
+      </span>
+    </a>
+    <nav class="nav-desktop" aria-label="Secciones">
+      {
+        nav.map((item) => (
+          <a href={item.href} aria-current={isActive(item.href, path) ? 'page' : undefined}>
+            {t(item.key)}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="header-actions">
+      <a class="button small" href="/pro">{t('nav.pro')}</a>
+      <button
+        id="theme-toggle"
+        class="ghost"
+        type="button"
+        aria-pressed="false"
+        data-label-dark={t('theme.toDark')}
+        data-label-light={t('theme.toLight')}
+      >
+        <span aria-hidden="true">◐</span>
+      </button>
+      <details class="nav-mobile">
+        <summary>{t('menu')}</summary>
+        <nav class="nav-panel" aria-label="Secciones">
+          {
+            nav.map((item) => (
+              <a href={item.href} aria-current={isActive(item.href, path) ? 'page' : undefined}>
+                {t(item.key)}
+              </a>
+            ))
+          }
+          <a href="/anunciate">{t('nav.advertise')}</a>
+          <a href="/sobre">{t('nav.about')}</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

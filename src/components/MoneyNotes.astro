@@ -1,0 +1,24 @@
+---
+interface Props {
+  affiliateUrl?: string;
+  patrocinado?: boolean;
+}
+
+const { affiliateUrl, patrocinado = false } = Astro.props;
+---
+
+{
+  affiliateUrl && (
+    <p class="callout">
+      El botón principal es un enlace de afiliado. Si contratas desde ahí, este sitio puede recibir una comisión. El
+      precio no lo decide esta web.
+    </p>
+  )
+}
+{
+  patrocinado && (
+    <p class="callout">
+      Esta ficha está marcada como Patrocinado: hay un acuerdo de visibilidad. La etiqueta no se esconde.
+    </p>
+  )
+}

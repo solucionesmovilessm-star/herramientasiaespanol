@@ -1,0 +1,67 @@
+---
+import Directory from '../../components/Directory.astro';
+import { loadPublished, matchesQuery, moneyBadges } from '../../lib/content';
+import { breadcrumbLd, canonicalUrl, itemListLd } from '../../lib/seo';
+import { SITE_URL, skillCategories } from '../../lib/site';
+
+const all = await loadPublished('skills');
+const q = Astro.url.searchParams.get('q')?.trim() ?? '';
+const categoria = Astro.url.searchParams.get('categoria') ?? '';
+const active = categoria in skillCategories ? categoria : '';
+const filtered = all.filter((entry) => {
+  if (active && entry.data.category !== active) return false;
+  return matchesQuery([entry.data.title, entry.data.description, skillCategories[entry.data.category]], q);
+});
+const title = 'Skills';
+const pageUrl = canonicalUrl('/skills');
+const hasFilter = Boolean(q || active);
+---
+
+<Directory
+  title={title}
+  eyebrow="Directorio"
+  lede="Una skill es una carpeta con instrucciones que un agente carga cuando la tarea encaja. El formato abierto vive en agentskills.io. Claude y Cursor ya lo usan."
+  metaDescription="Skills de agentes de IA: el estándar Agent Skills, skills para Claude publicadas por Anthropic y skills en Cursor."
+  items={filtered.map((entry) => ({
+    href: `/skills/${entry.id}`,
+    title: entry.data.title,
+    description: entry.data.description,
+    meta: skillCategories[entry.data.category],
+    badges: moneyBadges(entry.data),
+  }))}
+  filters={[
+    {
+      id: 'todas',
+      label: 'Todas',
+      href: q ? `/skills?q=${encodeURIComponent(q)}` : '/skills',
+      current: !active,
+    },
+    ...Object.entries(skillCategories)
+      .filter(([id]) => id !== 'otra' || all.some((entry) => entry.data.category === 'otra'))
+      .map(([id, label]) => ({
+        id,
+        label,
+        href: id === 'claude' ? '/skills/claude' : `/skills?categoria=${id}${q ? `&q=${encodeURIComponent(q)}` : ''}`,
+        current: active === id,
+      })),
+  ]}
+  query={q}
+  searchAction="/skills"
+  hiddenFields={active && active !== 'claude' ? [{ name: 'categoria', value: active }] : []}
+  jsonLd={hasFilter
+    ? undefined
+    : [
+        breadcrumbLd([
+          { name: 'Inicio', url: SITE_URL },
+          { name: title, url: pageUrl },
+        ]),
+        itemListLd(
+          title,
+          all.map((entry) => ({ name: entry.data.title, url: `${SITE_URL}/skills/${entry.id}` })),
+        ),
+      ]}
+>
+  <p>
+    <a href="/skills/claude">Skills para Claude</a> tiene página propia, con las carpetas que Anthropic publica en su repositorio.
+  </p>
+</Directory>

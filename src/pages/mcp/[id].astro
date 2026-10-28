@@ -1,0 +1,59 @@
+---
+import { render } from 'astro:content';
+import EntryPage from '../../components/EntryPage.astro';
+import MoneyNotes from '../../components/MoneyNotes.astro';
+import OfficialLinks from '../../components/OfficialLinks.astro';
+import { loadPublished, moneyBadges, type McpEntry } from '../../lib/content';
+import { breadcrumbLd, canonicalUrl, isoDate } from '../../lib/seo';
+import { SITE_URL, mcpTipos } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const items = await loadPublished('mcp');
+  return items.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+interface Props {
+  entry: McpEntry;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const canonical = canonicalUrl(`/mcp/${entry.id}`);
+const published = isoDate(entry.data.updated);
+const related = (await loadPublished('mcp')).filter((item) => item.id !== entry.id).slice(0, 3);
+---
+
+<EntryPage
+  title={entry.data.title}
+  description={entry.data.description}
+  eyebrow={mcpTipos[entry.data.tipo]}
+  crumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Servidores MCP', href: '/mcp' },
+    { label: entry.data.title },
+  ]}
+  badges={moneyBadges(entry.data)}
+  updated={entry.data.updated}
+  published={published}
+  modified={published}
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareSourceCode',
+      name: entry.data.title,
+      description: entry.data.description,
+      url: entry.data.url,
+      codeRepository: entry.data.url,
+    },
+    breadcrumbLd([
+      { name: 'Inicio', url: SITE_URL },
+      { name: 'Servidores MCP', url: `${SITE_URL}/mcp` },
+      { name: entry.data.title, url: canonical },
+    ]),
+  ]}
+  related={related.map((item) => ({ href: `/mcp/${item.id}`, title: item.data.title }))}
+>
+  <OfficialLinks slot="actions" url={entry.data.url} affiliateUrl={entry.data.affiliateUrl} label="Abrir la documentación o el repositorio" />
+  <MoneyNotes slot="notes" affiliateUrl={entry.data.affiliateUrl} patrocinado={entry.data.patrocinado} />
+  <Content />
+</EntryPage>

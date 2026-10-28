@@ -1,0 +1,27 @@
+{
+  "name": "herramientasiaespanol",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Directorio en español de herramientas de IA, agentes, skills y servidores MCP.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/copiar-sitemap.mjs",
+    "preview": "astro preview",
+    "check": "astro check",
+    "ranking": "node scripts/actualizar-ranking.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource-variable/fraunces": "5.3.0",
+    "@fontsource-variable/outfit": "5.3.0",
+    "astro": "7.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "typescript": "5.9.3"
+  }
+}
