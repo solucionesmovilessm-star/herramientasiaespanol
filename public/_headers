@@ -3,3 +3,9 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Los .mp4 se sirven tal cual, sin pasar por una página HTML.
+/videos/*.mp4
+  Content-Type: video/mp4
+  X-Content-Type-Options: nosniff
+  X-Robots-Tag: noindex
