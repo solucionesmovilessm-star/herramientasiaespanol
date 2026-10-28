@@ -1,6 +1,6 @@
 ---
 import { useTranslations } from '../i18n/ui';
-import { channels, contactHref, contactTodo } from '../lib/site';
+import { channels, contactEmail, contactHref } from '../lib/site';
 
 interface Props {
   locale: string;
@@ -29,16 +29,21 @@ const t = useTranslations(locale);
         <li><a href="/skills/claude">Skills para Claude</a></li>
         <li><a href="/mcp">Servidores MCP</a></li>
         <li><a href="/ranking">Ranking semanal</a></li>
+        <li><a href="/mejores">Mejores por tarea</a></li>
+        <li><a href="/comparar">Comparar</a></li>
+        <li><a href="/grok">Grok</a></li>
       </ul>
     </div>
     <div>
       <h2>Aprender</h2>
       <ul>
         <li><a href="/guias">Guías</a></li>
+        <li><a href="/novedades">Novedades</a></li>
+        <li><a href="/criterio">Criterio editorial</a></li>
         <li><a href="/tutoriales">Tutoriales para novatos</a></li>
         <li><a href="/newsletter">Newsletter</a></li>
         <li><a href="/pro">Pro</a></li>
-        <li><a href="/anunciate">Anúnciate</a></li>
+        <li><a href="/patrocina">Patrocina</a></li>
         <li><a href="/sobre">Sobre y contacto</a></li>
       </ul>
     </div>
@@ -53,11 +58,10 @@ const t = useTranslations(locale);
             ))
           }
         <li>
-          <a href={contactHref}>Contacto <span class="todo">TODO</span></a>
+          <a href={contactHref}>{contactEmail}</a>
         </li>
         <li><a href="/en">{t('footer.english')}</a></li>
       </ul>
-      <p class="fine">{contactTodo}</p>
     </div>
   </div>
 </footer>

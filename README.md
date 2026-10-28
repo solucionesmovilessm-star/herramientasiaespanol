@@ -89,9 +89,17 @@ La página **Pro** lee `src/data/pro.json`. El precio orientativo son 5 USD al m
 
 El formulario de la newsletter tampoco envía nada. Es el hueco para conectar más adelante un servicio gratuito.
 
+## Buscador, mejores y Beehiiv
+
+En `/herramientas` la búsqueda y los filtros (tarea y precio, incluido «con créditos gratis») corren en el navegador. Un campo solo se rellena si está comprobado: `creditosGratis`, `interfazEspanol`, `precioDesde`, `pruebaGratisDias`, `precioVerificado`, `pros`, `contras`, `noEsPara`, `plataformas` y `tutorial`. Si falta, la ficha dice «No consta» o «Precio sin fecha de verificación». No hay nota del 1 al 5: el orden de `/mejores` es Destacado y luego el nombre. El criterio está en `/criterio`.
+
+La newsletter se llama **Hub de Tecno IA**. La única dirección de alta está en `src/data/newsletter.json` (`subscribeUrl`). El formulario hace un GET a esa página con `?email=`.
+
+Las URL de YouTube del bloque de autor están en `src/data/autor.json` como `#TODO-…` hasta que sean https reales.
+
 ## Canales y contacto
 
-Las cifras de TodoSobreTecno, Soluciones para todos y El Buen Globo viven en `src/data/canales.json`. Salen de YouTube Studio (28 oct 2025 – 27 oct 2026) y, en la edad de Soluciones para todos, del PDF de agosto de 2026. No añadas vídeos de otros canales ni una lista de reproducciones: el hueco `video-propio` es para un vídeo de esta web, cuando exista. El correo de contacto sigue en `src/lib/site.ts` como `#TODO-email-contacto` hasta que sea el buzón real.
+Las cifras de TodoSobreTecno, Soluciones para todos y El Buen Globo viven en `src/data/canales.json`. Salen de YouTube Studio (28 oct 2025 – 27 oct 2026) y, en la edad de Soluciones para todos, del PDF de agosto de 2026. No añadas vídeos de otros canales ni una lista de reproducciones: el hueco `video-propio` es para un vídeo de esta web, cuando exista. El correo de contacto es `contacto@herramientasiaespanol.com` (`src/lib/site.ts`). La página pública es `/patrocina`. `/anunciate` redirige ahí. Las cifras de los canales se leen de `src/data/canales.json`; no se añaden números nuevos en la página.
 
 ## Publicar
 

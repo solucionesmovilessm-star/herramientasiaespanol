@@ -14,6 +14,20 @@ lang: es
 updated: 2026-10-28
 tags:
   - plantilla
+# Opcional. No rellenes un campo si no lo leíste en la web oficial o en esta ficha.
+# creditosGratis: true
+# interfazEspanol: true
+# precioDesde: "9 EUR/mes"
+# pruebaGratisDias: 7
+# plataformas:
+#   - web
+# precioVerificado: 2026-10-28
+# tutorial: id-del-tutorial
+# pros:
+#   - Una ventaja que ya esté escrita arriba.
+# contras:
+#   - Una limitación comprobada.
+# noEsPara: Para quién no encaja, en una frase.
 ---
 
 Copia este archivo, cambia el nombre y pon `draft: false` cuando la ficha esté lista.

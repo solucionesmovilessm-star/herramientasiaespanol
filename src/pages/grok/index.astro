@@ -1,0 +1,139 @@
+---
+import Card from '../../components/Card.astro';
+import Base from '../../layouts/Base.astro';
+import videos from '../../data/grok-videos.json';
+import { priceCheckLabel } from '../../lib/catalog';
+import { loadPublished, moneyBadges } from '../../lib/content';
+import { breadcrumbLd, canonicalUrl } from '../../lib/seo';
+import { pricingLabel, SITE_URL } from '../../lib/site';
+
+const items = (await loadPublished('herramientas')).filter((entry) => entry.data.category === 'grok');
+const tutorials = (await loadPublished('tutoriales')).filter((entry) => entry.data.tags.includes('grok'));
+const title = 'Grok';
+const description =
+  'Fichas de Grok y Grok Bot, cinco tutoriales para novatos y vídeos de terceros. Precios en USD sin IVA. Los límites exactos de uso no están publicados.';
+const pageUrl = canonicalUrl('/grok');
+---
+
+<Base
+  title={title}
+  description={description}
+  jsonLd={breadcrumbLd([
+    { name: 'Inicio', url: SITE_URL },
+    { name: title, url: pageUrl },
+  ])}
+>
+  <div class="wrap">
+    <header class="page-intro">
+      <p class="eyebrow">Sección</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="fine">
+        Fuentes consultadas el {videos.consultado} (hora de Madrid). Los precios están en USD y sin impuestos (IVA aparte),
+        como en x.ai/pricing.
+      </p>
+    </header>
+
+    <section class="section" aria-labelledby="fichas-grok">
+      <div class="section-head">
+        <h2 id="fichas-grok">Fichas</h2>
+        <a href="/herramientas?categoria=grok">Filtrar en el directorio</a>
+      </div>
+      <div class="grid">
+        {
+          items.map((entry) => (
+            <Card
+              href={`/herramientas/${entry.id}`}
+              title={entry.data.title}
+              description={entry.data.description}
+              meta="Grok"
+              badges={moneyBadges({ ...entry.data, pricingLabels: pricingLabel })}
+              priceNote={priceCheckLabel(entry.data.precioVerificado)}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="tutoriales-grok">
+      <div class="section-head">
+        <h2 id="tutoriales-grok">Tutoriales para novatos</h2>
+      </div>
+      <div class="grid">
+        {
+          tutorials.map((entry) => (
+            <Card
+              heading="h3"
+              href={`/tutoriales/${entry.id}`}
+              title={entry.data.title}
+              description={entry.data.description}
+              meta="nivel novato"
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="videos-grok">
+      <div class="section-head">
+        <h2 id="videos-grok">Vídeos de YouTube</h2>
+      </div>
+      <p class="fine">URL comprobadas el {videos.consultado}. {videos.notaFechas}</p>
+      <h3>En español</h3>
+      <div class="table-wrap">
+        <table class="data">
+          <caption class="sr-only">Vídeos en español sobre Grok, de canales de terceros</caption>
+          <thead>
+            <tr>
+              <th scope="col">Título</th>
+              <th scope="col">Canal</th>
+              <th scope="col">Fecha aprox.</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              videos.es.map((video) => (
+                <tr>
+                  <td>
+                    <a href={video.url} rel="noopener noreferrer">{video.titulo}</a>
+                  </td>
+                  <td>{video.canal}</td>
+                  <td>{video.fecha}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <h3>En inglés</h3>
+      <div class="table-wrap">
+        <table class="data">
+          <caption class="sr-only">Vídeos en inglés sobre Grok, de canales de terceros</caption>
+          <thead>
+            <tr>
+              <th scope="col">Título</th>
+              <th scope="col">Canal</th>
+              <th scope="col">Fecha aprox.</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              videos.en.map((video) => (
+                <tr>
+                  <td>
+                    <a href={video.url} rel="noopener noreferrer">{video.titulo}</a>
+                  </td>
+                  <td>{video.canal}</td>
+                  <td>{video.fecha}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <ul>
+        {videos.salvedades.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+  </div>
+</Base>

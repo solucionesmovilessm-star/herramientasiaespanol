@@ -1,10 +1,12 @@
 ---
 import { render } from 'astro:content';
+import AuthorBlock from '../../components/AuthorBlock.astro';
 import EntryPage from '../../components/EntryPage.astro';
 import MoneyNotes from '../../components/MoneyNotes.astro';
 import OfficialLinks from '../../components/OfficialLinks.astro';
+import { platformLabel } from '../../lib/catalog';
 import { loadPublished, moneyBadges, type ToolEntry } from '../../lib/content';
-import { breadcrumbLd, canonicalUrl, isoDate } from '../../lib/seo';
+import { breadcrumbLd, canonicalUrl, formatDate, isoDate } from '../../lib/seo';
 import { appCategoryByTool, categories, pricingLabel, SITE_URL } from '../../lib/site';
 
 export async function getStaticPaths() {
@@ -19,9 +21,16 @@ interface Props {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const canonical = canonicalUrl(`/herramientas/${entry.id}`);
-const related = (await loadPublished('herramientas'))
+const tools = await loadPublished('herramientas');
+const tutorials = await loadPublished('tutoriales');
+const comparisons = (await loadPublished('comparativas')).filter(
+  (item) => item.data.left === entry.id || item.data.right === entry.id,
+);
+const related = tools
   .filter((item) => item.id !== entry.id && item.data.category === entry.data.category)
   .slice(0, 3);
+const tutorial = tutorials.find((item) => item.id === entry.data.tutorial);
+const verified = entry.data.precioVerificado;
 const published = isoDate(entry.data.updated);
 const softwareLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
@@ -73,5 +82,81 @@ const jsonLd = [
 >
   <OfficialLinks slot="actions" url={entry.data.url} affiliateUrl={entry.data.affiliateUrl} />
   <MoneyNotes slot="notes" affiliateUrl={entry.data.affiliateUrl} patrocinado={entry.data.patrocinado} />
+  <p class="meta">
+    {
+      verified ? (
+        <>
+          Precio verificado el <time datetime={verified.toISOString().slice(0, 10)}>{formatDate(verified)}</time>
+        </>
+      ) : (
+        'Precio sin fecha de verificación'
+      )
+    }
+  </p>
+  <section class="facts">
+    <h2>Datos que constan</h2>
+    <dl class="stat-list">
+      <div>
+        <dt>Precio en la ficha</dt>
+        <dd>{pricingLabel[entry.data.pricing]}</dd>
+      </div>
+      <div>
+        <dt>Precio desde</dt>
+        <dd>{entry.data.precioDesde ?? 'No consta'}</dd>
+      </div>
+      <div>
+        <dt>Prueba gratis</dt>
+        <dd>{entry.data.pruebaGratisDias ? `${entry.data.pruebaGratisDias} días` : 'No consta'}</dd>
+      </div>
+      <div>
+        <dt>Con créditos gratis</dt>
+        <dd>{entry.data.creditosGratis === true ? 'Sí' : 'No consta'}</dd>
+      </div>
+      <div>
+        <dt>Plataformas</dt>
+        <dd>{entry.data.plataformas?.map((id) => platformLabel[id]).join(', ') || 'No consta'}</dd>
+      </div>
+      <div>
+        <dt>Interfaz en español</dt>
+        <dd>{entry.data.interfazEspanol === true ? 'Comprobada' : 'No consta'}</dd>
+      </div>
+    </dl>
+    {
+      entry.data.pros && entry.data.pros.length > 0 && (
+        <>
+          <h3>Ventajas</h3>
+          <ul>{entry.data.pros.map((item) => <li>{item}</li>)}</ul>
+        </>
+      )
+    }
+    {
+      entry.data.contras && entry.data.contras.length > 0 && (
+        <>
+          <h3>Límites</h3>
+          <ul>{entry.data.contras.map((item) => <li>{item}</li>)}</ul>
+        </>
+      )
+    }
+    {entry.data.noEsPara && <p><strong>Para quién no es.</strong> {entry.data.noEsPara}</p>}
+    {
+      tutorial && (
+        <p>
+          <a href={`/tutoriales/${tutorial.id}`}>Tutorial: {tutorial.data.title}</a>
+        </p>
+      )
+    }
+    {
+      comparisons.length > 0 && (
+        <ul>
+          {comparisons.map((item) => (
+            <li>
+              <a href={`/comparar/${item.id}`}>{item.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
   <Content />
+  <AuthorBlock />
 </EntryPage>

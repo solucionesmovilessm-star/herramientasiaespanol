@@ -304,12 +304,123 @@ function bootTyped() {
   });
 }
 
+function normText(value: string) {
+  return value.toLocaleLowerCase('es').normalize('NFD').replace(/\p{M}/gu, '');
+}
+
+function bootBrowser() {
+  const root = document.querySelector<HTMLElement>('[data-tool-browser]');
+  if (!root || root.dataset.bound === '1') return;
+  root.dataset.bound = '1';
+  const items = Array.from(root.querySelectorAll<HTMLElement>('[data-tool]'));
+  const input = root.querySelector<HTMLInputElement>('#directorio-q');
+  const count = root.querySelector<HTMLElement>('[data-visible-count]');
+  const label = root.querySelector<HTMLElement>('[data-visible-label]');
+  const empty = root.querySelector<HTMLElement>('[data-filter-empty]');
+  const params = new URLSearchParams(window.location.search);
+  let category = params.get('categoria') || '';
+  let price = params.get('precio') || '';
+  let text = params.get('q') || '';
+  if (input) input.value = text;
+
+  const paintChips = () => {
+    root.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((button) => {
+      const kind = button.dataset.filter;
+      const value = button.dataset.value || '';
+      const on = kind === 'categoria' ? value === category : value === price;
+      button.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  };
+
+  const apply = () => {
+    const needle = normText(text.trim());
+    let visible = 0;
+    items.forEach((item) => {
+      const credits = item.dataset.credits === 'true';
+      const itemPrice = item.dataset.price || '';
+      const priceOk =
+        !price ||
+        (price === 'creditos' ? credits : itemPrice === price);
+      const categoryOk = !category || item.dataset.category === category;
+      const textOk = !needle || normText(item.dataset.search || '').includes(needle);
+      const show = priceOk && categoryOk && textOk;
+      item.hidden = !show;
+      if (show) visible += 1;
+    });
+    if (count) count.textContent = String(visible);
+    if (label) label.textContent = visible === 1 ? 'ficha' : 'fichas';
+    if (empty) empty.hidden = visible !== 0;
+    paintChips();
+    const url = new URL(window.location.href);
+    const set = (key: string, value: string) => {
+      if (value) url.searchParams.set(key, value);
+      else url.searchParams.delete(key);
+    };
+    set('q', text.trim());
+    set('categoria', category);
+    set('precio', price);
+    const next = `${url.pathname}${url.search}`;
+    if (`${window.location.pathname}${window.location.search}` !== next) {
+      window.history.replaceState(null, '', next);
+    }
+  };
+
+  root.addEventListener('click', (event) => {
+    const button = (event.target as Element | null)?.closest<HTMLButtonElement>('[data-filter]');
+    if (!button || !root.contains(button)) return;
+    const kind = button.dataset.filter;
+    const value = button.dataset.value || '';
+    if (kind === 'categoria') category = category === value ? '' : value;
+    if (kind === 'precio') price = price === value ? '' : value;
+    apply();
+  });
+  root.querySelector('[data-tool-search]')?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    text = input?.value || '';
+    apply();
+  });
+  input?.addEventListener('input', () => {
+    text = input.value;
+    apply();
+  });
+  apply();
+}
+
+function bootRelative() {
+  const now = new Date();
+  document.querySelectorAll<HTMLTimeElement>('time[data-relative]').forEach((node) => {
+    const iso = node.dataset.relative || node.dateTime;
+    if (!iso) return;
+    const then = new Date(`${iso}T00:00:00Z`);
+    if (Number.isNaN(then.getTime())) return;
+    const days = Math.round(
+      (Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) -
+        Date.UTC(then.getUTCFullYear(), then.getUTCMonth(), then.getUTCDate())) /
+        86400000,
+    );
+    let label = 'hoy';
+    if (days === 1) label = 'ayer';
+    else if (days > 1 && days < 30) label = `hace ${days} días`;
+    else if (days >= 30 && days < 365) {
+      const months = Math.floor(days / 30);
+      label = months === 1 ? 'hace 1 mes' : `hace ${months} meses`;
+    } else if (days >= 365) {
+      const years = Math.floor(days / 365);
+      label = years === 1 ? 'hace 1 año' : `hace ${years} años`;
+    }
+    const absolute = node.textContent?.split('·').pop()?.trim();
+    node.textContent = absolute ? `${label} · ${absolute}` : label;
+  });
+}
+
 function boot() {
   applyStoredTheme();
   paintTheme();
   bootReveal();
   bootCounts();
   bootTyped();
+  bootBrowser();
+  bootRelative();
   closePalette();
 }
 

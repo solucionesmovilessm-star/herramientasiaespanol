@@ -53,7 +53,7 @@ export const GET: APIRoute = async () => {
       title: entry.data.title,
       href: `/tutoriales/${entry.id}`,
       kind: 'Tutorial',
-      hint: `${entry.data.minutes} min`,
+      hint: entry.data.minutes ? `${entry.data.minutes} min` : 'Tutorial',
       ...markOf(entry.data.title),
     })),
   ];

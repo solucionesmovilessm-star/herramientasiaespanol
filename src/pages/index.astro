@@ -4,8 +4,9 @@ import ChannelBoard from '../components/ChannelBoard.astro';
 import Icon from '../components/Icon.astro';
 import Mark from '../components/Mark.astro';
 import SponsorSlot from '../components/SponsorSlot.astro';
-import StaticForm from '../components/StaticForm.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
 import rankingFile from '../data/ranking.json';
+import { newsletterName } from '../lib/catalog';
 import { moneyBadges, loadPublished } from '../lib/content';
 import { formatNumber, itemListLd, websiteLd } from '../lib/seo';
 import { SITE_NAME, categories, pricingLabel } from '../lib/site';
@@ -255,7 +256,7 @@ const jsonLd = [
             tutorials.map((entry) => (
               <li>
                 <a href={`/tutoriales/${entry.id}`}>{entry.data.title}</a>
-                <span class="meta"> · {entry.data.minutes} min</span>
+                {entry.data.minutes && <span class="meta"> · {entry.data.minutes} min</span>}
               </li>
             ))
           }
@@ -269,7 +270,7 @@ const jsonLd = [
         <section class="section" aria-labelledby="patrocinados">
           <div class="section-head">
             <h2 id="patrocinados">Patrocinados</h2>
-            <a href="/anunciate">Anúnciate</a>
+            <a href="/patrocina">Patrocina</a>
           </div>
           <div class="grid">
             {sponsored.map((entry) => (
@@ -308,15 +309,11 @@ const jsonLd = [
 
     <section class="section split" aria-labelledby="newsletter">
       <div class="glass panel-pad">
-        <h2 id="newsletter">Newsletter</h2>
+        <h2 id="newsletter">{newsletterName}</h2>
         <p class="lede">
-          Un aviso cuando haya una guía nueva o cambie el ranking. El formulario todavía no envía el correo a ningún
-          servicio: es el hueco listo para conectarlo sin coste.
+          Un aviso cuando haya una guía nueva o cambie el ranking.
         </p>
-        <StaticForm
-          submitLabel="Quiero que me avisen"
-          message="Todavía no hay un servicio de newsletter conectado. Tu correo no se ha enviado a ningún sitio y no se ha guardado."
-        />
+        <NewsletterForm submitLabel="Quiero que me avisen" />
       </div>
       <SponsorSlot id="newsletter" />
     </section>

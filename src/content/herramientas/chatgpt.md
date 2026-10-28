@@ -12,6 +12,15 @@ tags:
   - chat
   - redaccion
   - imagenes
+plataformas:
+  - web
+pros:
+  - Redactar un correo, un guion o un esquema y pedir otra versión.
+  - Resumir un texto pegado conservando los puntos que pidas.
+  - Generar una imagen dentro del chat, según el plan.
+contras:
+  - Puede equivocarse en nombres, cifras y citas.
+noEsPara: No es para pegar contraseñas, datos bancarios ni textos que no se puedan compartir.
 ---
 
 OpenAI publica ChatGPT como un chat en la web. Sirve para preguntar, pedir un borrador, resumir un texto que pegas o adjuntas y, según el plan, crear imágenes en la misma conversación.

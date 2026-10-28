@@ -10,7 +10,7 @@ export interface SponsorSlot {
   hasta: string;
 }
 
-export type SponsorId = 'newsletter' | 'shorts';
+export type SponsorId = 'newsletter' | 'shorts' | 'listado';
 
 const slots = patrocinios as Record<SponsorId, SponsorSlot>;
 
@@ -33,4 +33,5 @@ export function getAdOptions() {
 export const sponsorLabels: Record<SponsorId, string> = {
   newsletter: 'la newsletter',
   shorts: 'los shorts',
+  listado: 'este listado',
 };

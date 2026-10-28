@@ -10,9 +10,11 @@ interface Props {
   badges?: Badge[];
   heading?: 'h2' | 'h3';
   external?: boolean;
+  priceNote?: string;
+  ad?: boolean;
 }
 
-const { href, title, description, meta, badges = [], heading = 'h2', external = false } = Astro.props;
+const { href, title, description, meta, badges = [], heading = 'h2', external = false, priceNote, ad = false } = Astro.props;
 const Tag = heading;
 ---
 
@@ -22,6 +24,9 @@ const Tag = heading;
   href={href}
   {...external ? { rel: 'noopener noreferrer', target: '_blank' } : {}}
 >
+  {
+    ad && <span class="ad-flag">Anuncio</span>
+  }
   <span class="card-top">
     <Mark name={title} />
     {
@@ -37,4 +42,5 @@ const Tag = heading;
   <Tag>{title}</Tag>
   <p>{description}</p>
   {meta && <p class="meta">{meta}</p>}
+  {priceNote && <p class="meta">{priceNote}</p>}
 </a>

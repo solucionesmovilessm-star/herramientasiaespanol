@@ -14,13 +14,13 @@ const pageUrl = canonicalUrl('/tutoriales');
 <Directory
   title={title}
   eyebrow="Paso a paso"
-  lede="Guías cortas para quien empieza: añadir una skill a Claude, instalar un servidor MCP y moverse por un repositorio de GitHub. Cada paso dice qué hacer y qué no tocar."
+  lede="Guías cortas para quien empieza. Si una ficha no dice los minutos, es porque esa duración no está anotada."
   metaDescription="Tutoriales para novatos: cómo añadir skills a Claude, cómo instalar un servidor MCP y cómo usar un repositorio de GitHub."
   items={filtered.map((entry) => ({
     href: `/tutoriales/${entry.id}`,
     title: entry.data.title,
     description: entry.data.description,
-    meta: `${entry.data.minutes} min · nivel novato`,
+    meta: entry.data.minutes ? `${entry.data.minutes} min · nivel novato` : 'nivel novato',
   }))}
   countLabel="tutoriales"
   query={q}

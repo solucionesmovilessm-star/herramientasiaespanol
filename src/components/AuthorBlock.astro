@@ -1,0 +1,37 @@
+---
+import autor from '../data/autor.json';
+
+const channels = autor.canales.map((channel) => ({
+  ...channel,
+  live: /^https:\/\/\S+$/.test(channel.url),
+}));
+---
+
+<aside class="author glass">
+  <p class="kicker">Quién escribe</p>
+  <h2>{autor.nombre}</h2>
+  <p>{autor.bio}</p>
+  <ul class="author-channels">
+    {
+      channels.map((channel) => (
+        <li>
+          {channel.live ? (
+            <a href={channel.url} rel="noopener noreferrer">
+              {channel.name}
+            </a>
+          ) : (
+            <span>{channel.name}</span>
+          )}
+          <span class="meta"> · {channel.topic}</span>
+          {
+            !channel.live && (
+              <span class="todo" title="Sustituye este marcador en src/data/autor.json cuando la URL esté comprobada">
+                {channel.url}
+              </span>
+            )
+          }
+        </li>
+      ))
+    }
+  </ul>
+</aside>

@@ -1,0 +1,142 @@
+---
+import { loadPublished, type CompareEntry } from '../../lib/content';
+import AuthorBlock from '../../components/AuthorBlock.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Base from '../../layouts/Base.astro';
+import { platformLabel, priceCheckLabel } from '../../lib/catalog';
+import { breadcrumbLd, canonicalUrl, formatDate } from '../../lib/seo';
+import { categories, pricingLabel, SITE_URL } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const items = await loadPublished('comparativas');
+  const tools = await loadPublished('herramientas');
+  return items
+    .filter((entry) => tools.some((tool) => tool.id === entry.data.left) && tools.some((tool) => tool.id === entry.data.right))
+    .map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+interface Props {
+  entry: CompareEntry;
+}
+
+const { entry } = Astro.props;
+const tools = await loadPublished('herramientas');
+const tutorials = await loadPublished('tutoriales');
+const left = tools.find((tool) => tool.id === entry.data.left);
+const right = tools.find((tool) => tool.id === entry.data.right);
+if (!left || !right) {
+  throw new Error(`Comparativa ${entry.id} sin las dos fichas.`);
+}
+const tutorialTitle = new Map(tutorials.map((item) => [item.id, item.data.title]));
+
+function cells(tool: typeof left) {
+  const data = tool.data;
+  const tutorial = data.tutorial && tutorialTitle.has(data.tutorial) ? data.tutorial : undefined;
+  return {
+    tarea: categories[data.category],
+    precio: pricingLabel[data.pricing],
+    url: data.url,
+    plataformas: data.plataformas?.map((id) => platformLabel[id]).join(', ') || 'No consta',
+    prueba: data.pruebaGratisDias ? `${data.pruebaGratisDias} días` : 'No consta',
+    desde: data.precioDesde || 'No consta',
+    verificado: priceCheckLabel(data.precioVerificado),
+    creditos: data.creditosGratis === true ? 'Sí, en la ficha' : 'No consta',
+    espanol: data.interfazEspanol === true ? 'Sí, comprobado' : 'No consta',
+    tutorial,
+    tutorialLabel: tutorial ? tutorialTitle.get(tutorial) : undefined,
+    pros: data.pros ?? [],
+    contras: data.contras ?? [],
+    noEsPara: data.noEsPara || 'No consta',
+  };
+}
+
+const a = cells(left);
+const b = cells(right);
+const title = entry.data.title;
+const pageUrl = canonicalUrl(`/comparar/${entry.id}`);
+const rows: { label: string; left: string; right: string; hrefLeft?: string; hrefRight?: string }[] = [
+  { label: 'Tarea', left: a.tarea, right: b.tarea },
+  { label: 'Precio en la ficha', left: a.precio, right: b.precio },
+  { label: 'Precio desde', left: a.desde, right: b.desde },
+  { label: 'Prueba gratis', left: a.prueba, right: b.prueba },
+  { label: 'Créditos gratis', left: a.creditos, right: b.creditos },
+  { label: 'Interfaz en español', left: a.espanol, right: b.espanol },
+  { label: 'Plataformas', left: a.plataformas, right: b.plataformas },
+  { label: 'Verificación del precio', left: a.verificado, right: b.verificado },
+  { label: 'Para quién no es', left: a.noEsPara, right: b.noEsPara },
+];
+---
+
+<Base
+  title={title}
+  description={entry.data.description}
+  jsonLd={breadcrumbLd([
+    { name: 'Inicio', url: SITE_URL },
+    { name: 'Comparar', url: `${SITE_URL}/comparar` },
+    { name: title, url: pageUrl },
+  ])}
+>
+  <article class="wrap compare">
+    <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Comparar', href: '/comparar' }, { label: title }]} />
+    <header class="page-intro">
+      <p class="eyebrow">Cara a cara</p>
+      <h1>{title}</h1>
+      <p class="lede">{entry.data.description}</p>
+      <p class="meta">
+        Actualizado el <time datetime={entry.data.updated.toISOString().slice(0, 10)}>{formatDate(entry.data.updated)}</time>
+      </p>
+    </header>
+    <div class="table-wrap">
+      <table class="data compare-table">
+        <caption class="sr-only">Datos publicados en las fichas de {left.data.title} y {right.data.title}</caption>
+        <thead>
+          <tr>
+            <th scope="col">Dato</th>
+            <th scope="col"><a href={`/herramientas/${left.id}`}>{left.data.title}</a></th>
+            <th scope="col"><a href={`/herramientas/${right.id}`}>{right.data.title}</a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Web oficial</th>
+            <td><a href={a.url} rel="noopener noreferrer">{a.url.replace(/^https:\/\//, '')}</a></td>
+            <td><a href={b.url} rel="noopener noreferrer">{b.url.replace(/^https:\/\//, '')}</a></td>
+          </tr>
+          {
+            rows.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td>{row.left}</td>
+                <td>{row.right}</td>
+              </tr>
+            ))
+          }
+          <tr>
+            <th scope="row">Ventajas escritas en la ficha</th>
+            <td>{a.pros.length ? <ul>{a.pros.map((item) => <li>{item}</li>)}</ul> : 'No consta'}</td>
+            <td>{b.pros.length ? <ul>{b.pros.map((item) => <li>{item}</li>)}</ul> : 'No consta'}</td>
+          </tr>
+          <tr>
+            <th scope="row">Límites escritos en la ficha</th>
+            <td>{a.contras.length ? <ul>{a.contras.map((item) => <li>{item}</li>)}</ul> : 'No consta'}</td>
+            <td>{b.contras.length ? <ul>{b.contras.map((item) => <li>{item}</li>)}</ul> : 'No consta'}</td>
+          </tr>
+          <tr>
+            <th scope="row">Tutorial enlazado</th>
+            <td>
+              {a.tutorial ? <a href={`/tutoriales/${a.tutorial}`}>{a.tutorialLabel}</a> : 'No consta'}
+            </td>
+            <td>
+              {b.tutorial ? <a href={`/tutoriales/${b.tutorial}`}>{b.tutorialLabel}</a> : 'No consta'}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <section class="verdict glass">
+      <h2>Veredicto</h2>
+      <p>{entry.data.veredicto}</p>
+    </section>
+    <AuthorBlock />
+  </article>
+</Base>

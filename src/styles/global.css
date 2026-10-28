@@ -220,6 +220,7 @@ a {
   display: block;
   font-size: 0.98rem;
   letter-spacing: -0.03em;
+  white-space: nowrap;
 }
 
 .logo small {
@@ -752,6 +753,8 @@ kbd {
   padding: 8px 12px;
   background: var(--glass);
   color: var(--ink);
+  font: inherit;
+  cursor: pointer;
 }
 
 .chip-count {
@@ -760,7 +763,8 @@ kbd {
   font-size: 0.85rem;
 }
 
-.chip[aria-current="page"] {
+.chip[aria-current="page"],
+.chip[aria-pressed="true"] {
   background: var(--ink);
   color: var(--bg);
   border-color: transparent;
@@ -866,6 +870,47 @@ kbd {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
+}
+
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 8px 0 28px;
+}
+
+.format-card {
+  padding: 18px;
+}
+
+.format-card h2 {
+  margin: 8px 0;
+  font-size: 1.35rem;
+}
+
+.format-index {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.example-card {
+  max-width: 360px;
+}
+
+.contact-band {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 18px;
+  margin-top: 8px;
+}
+
+.contact-band h2 {
+  margin: 0 0 6px;
+  font-size: 1.5rem;
 }
 
 .card,
@@ -1359,6 +1404,136 @@ table.rank a {
   color: var(--muted);
 }
 
+.tool-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-item > .card {
+  flex: 1;
+}
+
+.tool-item[hidden] {
+  display: none;
+}
+
+.tool-tutorial {
+  font-size: 0.92rem;
+}
+
+.ad-flag {
+  align-self: flex-start;
+  margin-bottom: 8px;
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: var(--paid-bg);
+  color: var(--paid);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.filter-block .kicker {
+  margin-top: 14px;
+}
+
+.facts h2,
+.facts h3 {
+  margin: 1.2rem 0 0.4rem;
+}
+
+.author {
+  margin-top: 22px;
+  padding: 16px 18px;
+}
+
+.author h2 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+}
+
+.author-channels {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+.author-channels li + li {
+  margin-top: 8px;
+}
+
+.feed {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.feed li {
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+.feed a {
+  display: grid;
+  gap: 4px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.feed a span:last-child,
+.feed time {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.editorial-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.editorial-list a {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+}
+
+.editorial-list span span {
+  display: block;
+  color: var(--muted);
+}
+
+.compare-table ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.verdict {
+  margin-top: 18px;
+  padding: 16px 18px;
+}
+
+.verdict h2 {
+  margin: 0 0 8px;
+}
+
+.beehiiv {
+  width: min(100%, 480px);
+  min-height: 320px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg-elev);
+}
+
 .site-footer {
   margin-top: 48px;
   border-top: 1px solid var(--line);
@@ -1554,6 +1729,10 @@ table.rank a {
   .bento-featured,
   .bento-ranking {
     grid-column: auto;
+  }
+
+  .format-grid {
+    grid-template-columns: 1fr;
   }
 
   .footer-grid,

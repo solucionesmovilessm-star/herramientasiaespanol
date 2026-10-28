@@ -15,6 +15,7 @@ export const categories = {
   audio: 'Audio y música',
   investigacion: 'Investigación',
   local: 'En tu ordenador',
+  grok: 'Grok',
 } as const;
 
 export const pricingLabel = {
@@ -52,6 +53,7 @@ export const appCategoryByTool = {
   audio: 'MultimediaApplication',
   investigacion: 'EducationalApplication',
   local: 'DeveloperApplication',
+  grok: 'BusinessApplication',
 } as const;
 
 export const nav: { href: string; key: UiKey }[] = [
@@ -64,14 +66,22 @@ export const nav: { href: string; key: UiKey }[] = [
   { href: '/tutoriales', key: 'nav.tutorials' },
 ];
 
+export const moreNav: { href: string; key: UiKey }[] = [
+  { href: '/novedades', key: 'nav.news' },
+  { href: '/comparar', key: 'nav.compare' },
+  { href: '/mejores', key: 'nav.best' },
+  { href: '/grok', key: 'nav.grok' },
+  { href: '/criterio', key: 'nav.criteria' },
+];
+
 export const channels = canales.channels.map((channel) => ({
   name: channel.name,
   topic: channel.topic,
-  href: `/anunciate#${channel.id}`,
+  href: `/patrocina#${channel.id}`,
 }));
 
-export const contactHref = '#TODO-email-contacto';
-export const contactTodo = 'TODO: sustituir por el correo real de contacto';
+export const contactEmail = 'contacto@herramientasiaespanol.com';
+export const contactHref = `mailto:${contactEmail}`;
 
 export function isActive(href: string, path: string) {
   return path === href || path.startsWith(`${href}/`);

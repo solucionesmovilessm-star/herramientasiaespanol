@@ -1,6 +1,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 
-export type CollectionName = 'herramientas' | 'agentes' | 'skills' | 'mcp' | 'guias' | 'tutoriales';
+export type CollectionName = 'herramientas' | 'agentes' | 'skills' | 'mcp' | 'guias' | 'tutoriales' | 'comparativas';
 
 export async function loadPublished<C extends CollectionName>(name: C) {
   const items = await getCollection(
@@ -22,6 +22,7 @@ export type SkillEntry = CollectionEntry<'skills'>;
 export type McpEntry = CollectionEntry<'mcp'>;
 export type GuideEntry = CollectionEntry<'guias'>;
 export type TutorialEntry = CollectionEntry<'tutoriales'>;
+export type CompareEntry = CollectionEntry<'comparativas'>;
 
 export interface Badge {
   label: string;
