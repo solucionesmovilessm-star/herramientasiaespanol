@@ -5,6 +5,7 @@ url: /descargas/skills/auditoria-privacidad-movil.zip
 category: otra
 destacado: false
 patrocinado: false
+video: /videos/movil-espia-v2.mp4
 lang: es
 updated: 2026-10-28
 tags:

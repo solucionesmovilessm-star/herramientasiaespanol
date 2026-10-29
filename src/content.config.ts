@@ -75,6 +75,9 @@ export const collections = {
       // Las skills propias se descargan desde el sitio con una ruta relativa (/descargas/...).
       url: z.union([z.string().url(), z.string().regex(/^\/\S*$/)]),
       category: z.enum(['claude', 'cursor', 'estandar', 'otra']),
+      // Vídeo de demostración opcional que se reproduce en la propia ficha (/videos/x.mp4).
+      video: z.string().regex(/^\/\S*\.(mp4|webm)$/).optional(),
+      videoPoster: z.string().optional(),
     }),
   }),
   mcp: defineCollection({
