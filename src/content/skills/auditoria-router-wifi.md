@@ -13,6 +13,7 @@ tags:
   - seguridad
   - privacidad
   - nmap
+video: /videos/auditoria-wifi.mp4
 ---
 
 Skill para Claude Code que te ayuda a revisar si tu **router** (el aparato que te da internet en casa) y tu **WiFi** están bien protegidos. También sirve para buscar **posibles cámaras ocultas** en un piso de alquiler o un hotel cuya WiFi te dejan usar.
