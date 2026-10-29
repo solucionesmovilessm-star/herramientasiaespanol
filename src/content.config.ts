@@ -65,7 +65,7 @@ export const collections = {
     schema: z.object({
       ...listing,
       category: z.enum(['programacion', 'multiagente', 'automatizacion']),
-      pricing: z.enum(['gratis', 'freemium', 'de-pago']),
+      pricing: z.enum(['gratis', 'freemium', 'de-pago']).optional(),
     }),
   }),
   skills: defineCollection({

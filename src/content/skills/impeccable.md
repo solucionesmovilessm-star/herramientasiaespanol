@@ -27,4 +27,4 @@ Es gratuito y de código abierto, con licencia Apache 2.0. Tiene web propia: [im
 
 ## Ten en cuenta
 
-Las órdenes están en inglés, pero puedes hablar con tu agente en español y usar esas palabras clave. Tenía unas 93.500 estrellas en GitHub a 29 de octubre de 2026.
+Las órdenes están en inglés, pero puedes hablar con tu agente en español y usar esas palabras clave. A 29 de octubre de 2026, hacia las 07:52 (hora de Madrid), tenía unas 93.500 estrellas según la API de GitHub. Ese mismo día, el listado diario de GitHub le marcaba unas 1.472 estrellas más.

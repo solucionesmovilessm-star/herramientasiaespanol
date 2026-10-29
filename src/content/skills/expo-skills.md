@@ -28,3 +28,5 @@ Es gratuita y de código abierto, con licencia MIT. Algunos servicios de EAS pue
 ## Ten en cuenta
 
 Solo te sirve si creas apps con Expo. Las instrucciones de instalación están en el repositorio. Si es tu primera skill, mira el tutorial [cómo añadir skills a Claude](/tutoriales/como-anadir-skills-a-claude).
+
+A 29 de octubre de 2026, hacia las 07:52 (hora de Madrid), el repositorio tenía unas 3.700 estrellas según la API de GitHub y aparecía en el listado diario de GitHub. Ese listado no publicó cuántas estrellas sumó ese día.

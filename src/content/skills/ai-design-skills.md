@@ -38,4 +38,4 @@ Es gratuita y de código abierto, con licencia MIT.
 
 ## Ten en cuenta
 
-El repositorio se creó en julio de 2026 y tenía unas 11.400 estrellas a 29 de octubre de 2026. Para entender qué es una skill, mira el tutorial [cómo añadir skills a Claude](/tutoriales/como-anadir-skills-a-claude).
+El repositorio se creó en julio de 2026. A 29 de octubre de 2026, hacia las 07:52 (hora de Madrid), tenía unas 11.400 estrellas según la API de GitHub. Ese mismo día fue el que más subía en el listado diario de GitHub, con unas 2.139 estrellas más. Para entender qué es una skill, mira el tutorial [cómo añadir skills a Claude](/tutoriales/como-anadir-skills-a-claude).

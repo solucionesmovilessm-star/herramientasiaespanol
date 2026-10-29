@@ -27,4 +27,4 @@ Es gratuito y de código abierto, con licencia MIT. El agente que uses puede ten
 
 ## Ten en cuenta
 
-Es uno de los repositorios de skills más populares de GitHub: unas 307.700 estrellas a 29 de octubre de 2026. Si es tu primera skill, mira antes el tutorial [cómo añadir skills a Claude](/tutoriales/como-anadir-skills-a-claude).
+A 29 de octubre de 2026, hacia las 07:52 (hora de Madrid), el repositorio tenía unas 307.700 estrellas según la API de GitHub. Ese mismo día, el listado diario de GitHub le marcaba unas 1.095 estrellas más. Si es tu primera skill, mira antes el tutorial [cómo añadir skills a Claude](/tutoriales/como-anadir-skills-a-claude).
