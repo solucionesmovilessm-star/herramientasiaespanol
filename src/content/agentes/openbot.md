@@ -15,6 +15,8 @@ tags:
 
 OpenBot es una app de escritorio para trabajar con varios agentes de IA a la vez. «Local primero» significa que funciona en tu ordenador. Cada agente tiene su propio espacio de trabajo, como si fuera un compañero que sigue ahí.
 
+No es [OpenBot de CopilotKit](/agentes/openbot-copilotkit), que es una plantilla para empresas, ni [OpenMausBot](/agentes/openmausbot).
+
 ## Qué puedes hacer
 
 - Ejecutar Codex, Claude y Grok, cada uno con su espacio de trabajo.

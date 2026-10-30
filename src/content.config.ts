@@ -57,7 +57,7 @@ export const collections = {
         'investigacion',
         'local',
       ]),
-      pricing: z.enum(['gratis', 'freemium', 'de-pago']),
+      pricing: z.enum(['gratis', 'freemium', 'de-pago']).optional(),
     }),
   }),
   agentes: defineCollection({
