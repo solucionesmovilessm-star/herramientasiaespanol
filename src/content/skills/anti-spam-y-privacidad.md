@@ -5,6 +5,7 @@ url: /descargas/skills/anti-spam-y-privacidad/SKILL.md
 category: otra
 destacado: false
 patrocinado: false
+video: /videos/anti-spam-y-privacidad.mp4
 lang: es
 updated: 2026-10-30
 tags:
@@ -16,7 +17,6 @@ tags:
 
 Skill gratis para dejar de recibir llamadas de publicidad y pedir que borren tus datos personales. Está inspirada en los bots [Call List Remover](https://x.ai/bot/eGVcE2autG0u6UcAwE3py) y [Privacy Scrubber](https://x.ai/bot/ZSQK72Iear_ykfnpTIOHQ) de [@alx](https://x.com/alx/status/2114935735430119764), que están pensados para Estados Unidos. Esta versión usa los registros oficiales de **España, Argentina y México**.
 
-<!-- Vídeo: cuando esté listo, añadir `video: /videos/anti-spam-y-privacidad.mp4` al frontmatter. -->
 
 ## Qué hace
 
