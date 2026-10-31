@@ -172,7 +172,7 @@ Para uso personal, 2 de 3 es el equilibrio más habitual entre seguridad y comod
 No, pero es recomendable para tener más privacidad en Bitcoin.
 
 ### ¿Cuánto cuesta montar un nodo?
-Básicamente el hardware: mini PC o Raspberry Pi y un SSD de 2 TB. umbrelOS (para instalar en tu propio equipo), StartOS (StartOS), Bitcoin Core, Electrs y Fulcrum son gratuitos.
+Básicamente el hardware: mini PC o Raspberry Pi y un SSD de 2 TB. umbrelOS (para instalar en tu propio equipo), StartOS, Bitcoin Core, Electrs y Fulcrum son gratuitos.
 
 ---
 
