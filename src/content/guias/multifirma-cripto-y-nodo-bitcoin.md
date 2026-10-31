@@ -13,7 +13,7 @@ faq:
   - q: "¿Tangem sirve para multifirma?"
     a: "Como firmante de un Safe en redes EVM, sí, mediante WalletConnect. En Bitcoin, no."
   - q: "¿SafePal sirve para multifirma de Bitcoin con Sparrow?"
-    a: "No está confirmado oficialmente. Probalo con muy poco dinero o usá otro firmante."
+    a: "No está confirmado oficialmente. Pruébalo con muy poco dinero o usa otro firmante."
   - q: "¿Necesito un nodo para usar una multifirma?"
     a: "No, pero da más privacidad en Bitcoin."
 ---
@@ -63,7 +63,6 @@ Envía una cantidad pequeña a la dirección de tu Safe, crea una transacción d
 - La dirección de un Safe **solo existe en la red donde lo creaste**. No envíes fondos a esa dirección en otra red sin haber desplegado allí el Safe.
 - Hay una app móvil, **Safe{Mobile}**, para revisar y firmar transacciones desde el teléfono.
 - Revisa siempre en la pantalla de tu cartera física lo que estás firmando. El umbral te protege si roban un firmante, pero no si apruebas tú mismo una transacción maliciosa.
-- Se han reportado problemas al **firmar mensajes** (no transacciones) con un Safe a través de WalletConnect en algunas dApps. Las transacciones normales funcionan.
 
 ## Multifirma en Bitcoin con Sparrow Wallet
 
@@ -73,7 +72,7 @@ En Bitcoin la multifirma es nativa del protocolo y no requiere *smart contracts*
 
 - **Ledger:** compatible con Sparrow por USB. Necesitas la app de Bitcoin instalada en el dispositivo.
 - **SafePal:** la SafePal S1 firma sin cables mediante códigos QR, pero **no hemos encontrado confirmación oficial de SafePal ni de Sparrow** de que sus modelos (S1, S1 Pro, X1) firmen PSBT multifirma de Bitcoin con Sparrow. Antes de usarla como firmante, haz la prueba completa con muy poco dinero, o elige otro firmante.
-- **Tangem:** **no sirve para multifirma de Bitcoin**, porque no permite exportar la clave pública extendida (xpub) ni firmar PSBT.
+- **Tangem:** **no sirve para multifirma de Bitcoin**. Solo admite direcciones Bitcoin normales (BIP44 y BIP84) y el propio fabricante recomienda usar soluciones *on-chain* como Safe si quieres multifirma.
 
 ### Alternativas para el segundo y tercer firmante
 
@@ -99,7 +98,7 @@ Para gastar, Sparrow crea un PSBT, lo firmas con un dispositivo, luego con el se
 
 Este es el punto en el que más gente se equivoca. En una multifirma de Bitcoin **no basta con las frases de recuperación**. Para reconstruir la cartera necesitas también las claves públicas (xpub) de **todos** los firmantes, o lo que es lo mismo, el **descriptor de la cartera**.
 
-- En Sparrow, ve a **Settings → Export** y guarda el descriptor (en texto y/o PDF con QR).
+- En Sparrow, usa la opción de **exportar** la cartera y guarda el descriptor (en texto y/o PDF con QR).
 - Guarda una copia del descriptor **junto a cada frase de recuperación**.
 - El descriptor no permite gastar, pero sí ver todo tu saldo y movimientos, así que guárdalo con discreción.
 
@@ -133,8 +132,8 @@ En Safe (Ethereum) esto no hace falta: la configuración está en la blockchain.
 
 ### Hardware necesario
 
-- Un mini PC o una Raspberry Pi 5 (con 8 GB de RAM recomendado).
-- Un **SSD de 2 TB**. La blockchain de Bitcoin ocupa ya bastante más de 600 GB y sigue creciendo.
+- Un mini PC o una Raspberry Pi 5 (es la que recomienda Umbrel).
+- Un **SSD de 2 TB**. La blockchain de Bitcoin ocupa unos 780 GB (octubre de 2026), crece unos 80 GB al año y Bitcoin Core pide al menos 870 GB libres.
 - Conexión a internet estable, mejor por cable.
 
 ### Opciones de software
@@ -151,7 +150,7 @@ El nodo descarga y verifica toda la historia de Bitcoin desde 2009. Según tu ha
 
 Sparrow funciona mejor a través de un **servidor Electrum**, que indexa la blockchain y hace que la cartera cargue al instante.
 
-1. En Umbrel o Start9, instala **Electrs** o **Fulcrum** desde la tienda de apps y espera a que termine de indexar.
+1. En Umbrel, instala **Electrs** o **Fulcrum** desde la tienda de apps (en Start9, busca un servidor Electrum en su tienda) y espera a que termine de indexar.
 2. Copia la dirección y el puerto que te muestra la app (también suele haber una dirección Tor).
 3. En Sparrow, ve a **Settings → Server → Private Electrum** y pega los datos.
 4. Pulsa **Test Connection**. Si sale en verde, ya estás usando tu propio nodo.
@@ -173,7 +172,7 @@ Para uso personal, 2 de 3 es el equilibrio más habitual entre seguridad y comod
 No, pero es recomendable para tener más privacidad en Bitcoin.
 
 ### ¿Cuánto cuesta montar un nodo?
-Básicamente el hardware: mini PC o Raspberry Pi y un SSD de 2 TB. Umbrel (versión para instalar), Start9 (StartOS), Bitcoin Core, Electrs y Fulcrum son gratuitos.
+Básicamente el hardware: mini PC o Raspberry Pi y un SSD de 2 TB. umbrelOS (para instalar en tu propio equipo), StartOS (StartOS), Bitcoin Core, Electrs y Fulcrum son gratuitos.
 
 ---
 
