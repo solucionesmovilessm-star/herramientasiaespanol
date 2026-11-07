@@ -26,7 +26,7 @@ faq:
     a: "No. En Bitcoin, un nodo propio suma privacidad y verificación. No guarda las claves ni protege un Safe."
 ---
 
-Si guardás cripto con una sola clave, quien la robe o quien la pierda controla esos fondos. Una **multifirma** pide varias firmas. Esta página explica dos sistemas distintos: un **Safe 2 de 3**, que es una cuenta de contrato en Ethereum y otras redes EVM, y la **multifirma nativa de Bitcoin**, más un nodo propio.
+Si guardás cripto con una sola clave, el robo de esa clave compromete el control: quien la tiene puede mover los fondos. Perderla para siempre, sin una recuperación válida, no se la entrega a otra persona: te deja sin acceso. Perder el aparato es distinto si conservás un respaldo y podés restaurar la clave. Una **multifirma** pide varias firmas. Esta página explica dos sistemas distintos: un **Safe 2 de 3**, que es una cuenta de contrato en Ethereum y otras redes EVM, y la **multifirma nativa de Bitcoin**, más un nodo propio.
 
 > **Aviso:** esto es divulgación sobre custodia. No es asesoramiento financiero ni de inversión, y no dice qué comprar. Para escribirla no conectamos ninguna cartera, no firmamos transacciones y no movimos fondos. No hay un video de esta guía. Si una pantalla te pide la semilla, cerrá esa pantalla: Safe no la necesita.
 
@@ -46,7 +46,7 @@ El nodo de Bitcoin está al final, en su propia sección. No custodia el Safe ni
 
 - **Propietario o firmante:** una dirección con permiso para confirmar. En la documentación de Safe se llaman *owners*.
 - **Umbral:** cuántas de esas confirmaciones hacen falta. En un 2 de 3, hacen falta dos de tres.
-- **Semilla o frase de recuperación:** las palabras que reconstruyen una clave. Quien las tiene, tiene la clave. No se dictan, no se fotografían y no se pegan en una web.
+- **Semilla o frase de recuperación:** las palabras de las que se derivan las claves de esa cartera. Esas claves pueden ser distintas entre sí, pero quien tiene la semilla puede reconstruirlas. No se dictan, no se fotografían y no se pegan en una web.
 - **Red:** la cadena donde vive la cuenta. Ethereum, Base y Arbitrum son redes distintas aunque las tres sean EVM.
 - **Gas:** la comisión de la red por escribir algo en la cadena (desplegar, ejecutar o cambiar la configuración).
 - **Firma fuera de cadena:** una confirmación guardada todavía fuera del bloque. No mueve fondos.
@@ -99,7 +99,7 @@ No es una auditoría cerrada. Tampoco es un fallo matemático del 2 de 3. Sirve 
 
 ## Claves que de verdad son independientes
 
-Tres direcciones no suman tres claves si salen de la misma semilla. Roban la frase y se llevan las tres.
+Tres direcciones sacadas de la misma semilla pueden ser claves distintas. No son independientes: si esa semilla se compromete, quedan comprometidas las tres.
 
 Tres semillas guardadas en el mismo teléfono, el mismo ordenador o la misma nube comparten ese riesgo. No hace falta comprar tres aparatos. Una cartera de software puede ser un firmante. Lo que no conviene es vender como independencia total un esquema en el que las tres claves viven juntas.
 
@@ -224,7 +224,7 @@ En Safe el registro es otro: propietarios y umbral están en el contrato, en la 
 
 ## Errores comunes
 
-- Usar la **misma semilla** para dos o tres direcciones y creer que son independientes.
+- Usar la **misma semilla** para dos o tres direcciones y creer que esas claves, aunque sean distintas, son independientes frente al robo de esa semilla.
 - Guardar las tres semillas en el **mismo aparato o la misma nube**.
 - Escribir la semilla en Safe, o pasarla al teléfono para «hacer compatible» una cartera hardware.
 - Creer que el Safe protege las monedas que **siguen en la cartera firmante**.
@@ -260,7 +260,7 @@ Esta parte no arma el Safe ni lo protege. Un nodo es tu propia copia de la caden
 ### Hardware
 
 - Un mini PC o una placa pequeña. Umbrel ha orientado a equipos como la Raspberry Pi; el modelo vigente está en [umbrel.com](https://umbrel.com), no lo fijes solo por esta página.
-- Un **SSD con margen**. En octubre de 2026 esta guía citaba unos **780 GB** de cadena, un crecimiento de unos **80 GB al año** y un pedido de Bitcoin Core de al menos unos **870 GB** libres. El número se mueve: antes de comprar, leé el requisito actual en [bitcoincore.org](https://bitcoincore.org).
+- Un **SSD con margen**. La cadena ocupa mucho y sigue creciendo. El requisito de disco vigente lo publica Bitcoin Core en su [página de descarga](https://bitcoincore.org/en/download/): leelo antes de comprar y dejá espacio de sobra. Un nodo podado, que esa página documenta para usar menos disco, no es el mismo esquema que el nodo completo con servidor Electrum de más abajo.
 - Internet estable. Mejor por cable.
 
 ### Software
@@ -301,7 +301,7 @@ Consultadas el 7 de noviembre de 2026. Las interfaces cambian; si una pantalla n
 - [Comunicado de la Safe Ecosystem Foundation, 28 de febrero de 2025](https://safefoundation.org/blog/safe-ecosystem-foundation-statement)
 - [Redes de Ethereum, incluida Sepolia](https://ethereum.org/developers/docs/networks/)
 - [Sparrow Wallet](https://sparrowwallet.com) y su [guía de cartera por USB](https://sparrowwallet.com/docs/connected-wallet.html)
-- [Bitcoin Core](https://bitcoincore.org), [Umbrel](https://umbrel.com) y [Start9](https://start9.com)
+- [Bitcoin Core](https://bitcoincore.org) y el requisito de disco en su [página de descarga](https://bitcoincore.org/en/download/), [Umbrel](https://umbrel.com) y [Start9](https://start9.com)
 
 ---
 
