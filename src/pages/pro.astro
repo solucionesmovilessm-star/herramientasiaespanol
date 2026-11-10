@@ -3,7 +3,6 @@ import StaticForm from '../components/StaticForm.astro';
 import Base from '../layouts/Base.astro';
 import { getPro } from '../lib/sponsors';
 import { breadcrumbLd, canonicalUrl } from '../lib/seo';
-import { SITE_URL } from '../lib/site';
 
 const pro = getPro();
 const description =
@@ -15,7 +14,7 @@ const pageUrl = canonicalUrl('/pro');
   title="Pro"
   description={description}
   jsonLd={breadcrumbLd([
-    { name: 'Inicio', url: SITE_URL },
+    { name: 'Inicio', url: canonicalUrl('/') },
     { name: 'Pro', url: pageUrl },
   ])}
 >

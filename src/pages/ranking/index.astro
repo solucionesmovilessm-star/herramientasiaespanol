@@ -3,7 +3,6 @@ import RankingTable from '../../components/RankingTable.astro';
 import rankingFile from '../../data/ranking.json';
 import Base from '../../layouts/Base.astro';
 import { breadcrumbLd, canonicalUrl, formatDate, itemListLd } from '../../lib/seo';
-import { SITE_URL } from '../../lib/site';
 
 const generated = rankingFile.generatedAt ? new Date(rankingFile.generatedAt) : null;
 const pageUrl = canonicalUrl('/ranking');
@@ -16,7 +15,7 @@ const description =
   description={description}
   jsonLd={[
     breadcrumbLd([
-      { name: 'Inicio', url: SITE_URL },
+      { name: 'Inicio', url: canonicalUrl('/') },
       { name: 'Ranking', url: pageUrl },
     ]),
     itemListLd(

@@ -4,8 +4,8 @@ import EntryPage from '../../components/EntryPage.astro';
 import MoneyNotes from '../../components/MoneyNotes.astro';
 import OfficialLinks from '../../components/OfficialLinks.astro';
 import { loadPublished, moneyBadges, type McpEntry } from '../../lib/content';
-import { breadcrumbLd, canonicalUrl, isoDate } from '../../lib/seo';
-import { SITE_URL, mcpTipos } from '../../lib/site';
+import { breadcrumbLd, canonicalUrl, isoDate, pagePath } from '../../lib/seo';
+import { mcpTipos } from '../../lib/site';
 
 export async function getStaticPaths() {
   const items = await loadPublished('mcp');
@@ -29,7 +29,7 @@ const related = (await loadPublished('mcp')).filter((item) => item.id !== entry.
   eyebrow={mcpTipos[entry.data.tipo]}
   crumbs={[
     { label: 'Inicio', href: '/' },
-    { label: 'Servidores MCP', href: '/mcp' },
+    { label: 'Servidores MCP', href: '/mcp/' },
     { label: entry.data.title },
   ]}
   badges={moneyBadges(entry.data)}
@@ -46,12 +46,12 @@ const related = (await loadPublished('mcp')).filter((item) => item.id !== entry.
       codeRepository: entry.data.url,
     },
     breadcrumbLd([
-      { name: 'Inicio', url: SITE_URL },
-      { name: 'Servidores MCP', url: `${SITE_URL}/mcp` },
+      { name: 'Inicio', url: canonicalUrl('/') },
+      { name: 'Servidores MCP', url: canonicalUrl('/mcp') },
       { name: entry.data.title, url: canonical },
     ]),
   ]}
-  related={related.map((item) => ({ href: `/mcp/${item.id}`, title: item.data.title }))}
+  related={related.map((item) => ({ href: pagePath(`/mcp/${item.id}`), title: item.data.title }))}
 >
   <OfficialLinks slot="actions" url={entry.data.url} affiliateUrl={entry.data.affiliateUrl} label="Abrir la documentación o el repositorio" />
   <MoneyNotes slot="notes" affiliateUrl={entry.data.affiliateUrl} patrocinado={entry.data.patrocinado} />

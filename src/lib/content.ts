@@ -1,4 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { pagePath } from './page-path';
 
 export type CollectionName = 'herramientas' | 'agentes' | 'skills' | 'mcp' | 'guias' | 'tutoriales';
 
@@ -62,7 +63,7 @@ export async function resolveFicha(slug?: string) {
   if (!slug) return undefined;
   for (const section of fichaSections) {
     const items = await loadPublished(section);
-    if (items.some((entry) => entry.id === slug)) return `/${section}/${slug}`;
+    if (items.some((entry) => entry.id === slug)) return pagePath(`/${section}/${slug}`);
   }
   return undefined;
 }

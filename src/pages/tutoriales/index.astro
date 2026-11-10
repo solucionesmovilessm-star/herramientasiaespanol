@@ -1,8 +1,7 @@
 ---
 import Directory from '../../components/Directory.astro';
 import { loadPublished, matchesQuery } from '../../lib/content';
-import { breadcrumbLd, canonicalUrl, itemListLd } from '../../lib/seo';
-import { SITE_URL } from '../../lib/site';
+import { breadcrumbLd, canonicalUrl, itemListLd, pagePath } from '../../lib/seo';
 
 const all = await loadPublished('tutoriales');
 const q = Astro.url.searchParams.get('q')?.trim() ?? '';
@@ -17,24 +16,24 @@ const pageUrl = canonicalUrl('/tutoriales');
   lede="Guías cortas para quien empieza: añadir una skill a Claude, instalar un servidor MCP y moverse por un repositorio de GitHub. Cada paso dice qué hacer y qué no tocar."
   metaDescription="Tutoriales para novatos: cómo añadir skills a Claude, cómo instalar un servidor MCP y cómo usar un repositorio de GitHub."
   items={filtered.map((entry) => ({
-    href: `/tutoriales/${entry.id}`,
+    href: pagePath(`/tutoriales/${entry.id}`),
     title: entry.data.title,
     description: entry.data.description,
     meta: `${entry.data.minutes} min · nivel novato`,
   }))}
   countLabel="tutoriales"
   query={q}
-  searchAction="/tutoriales"
+  searchAction={pagePath('/tutoriales')}
   jsonLd={q
     ? undefined
     : [
         breadcrumbLd([
-          { name: 'Inicio', url: SITE_URL },
+          { name: 'Inicio', url: canonicalUrl('/') },
           { name: title, url: pageUrl },
         ]),
         itemListLd(
           title,
-          all.map((entry) => ({ name: entry.data.title, url: `${SITE_URL}/tutoriales/${entry.id}` })),
+          all.map((entry) => ({ name: entry.data.title, url: canonicalUrl(`/tutoriales/${entry.id}`) })),
         ),
       ]}
 />

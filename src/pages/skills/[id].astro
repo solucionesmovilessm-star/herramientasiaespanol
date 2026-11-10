@@ -4,7 +4,7 @@ import EntryPage from '../../components/EntryPage.astro';
 import MoneyNotes from '../../components/MoneyNotes.astro';
 import OfficialLinks from '../../components/OfficialLinks.astro';
 import { loadPublished, moneyBadges, type SkillEntry } from '../../lib/content';
-import { breadcrumbLd, canonicalUrl, isoDate } from '../../lib/seo';
+import { breadcrumbLd, canonicalUrl, isoDate, pagePath } from '../../lib/seo';
 import { SITE_URL, skillCategories } from '../../lib/site';
 
 export async function getStaticPaths() {
@@ -25,8 +25,8 @@ const siblings = (await loadPublished('skills')).filter(
 );
 const parent =
   entry.data.category === 'claude'
-    ? { label: 'Skills para Claude', href: '/skills/claude', url: `${SITE_URL}/skills/claude` }
-    : { label: 'Skills', href: '/skills', url: `${SITE_URL}/skills` };
+    ? { label: 'Skills para Claude', href: pagePath('/skills/claude'), url: canonicalUrl('/skills/claude') }
+    : { label: 'Skills', href: pagePath('/skills'), url: canonicalUrl('/skills') };
 ---
 
 <EntryPage
@@ -35,8 +35,8 @@ const parent =
   eyebrow={skillCategories[entry.data.category]}
   crumbs={[
     { label: 'Inicio', href: '/' },
-    { label: 'Skills', href: '/skills' },
-    ...(entry.data.category === 'claude' ? [{ label: 'Skills para Claude', href: '/skills/claude' }] : []),
+    { label: 'Skills', href: '/skills/' },
+    ...(entry.data.category === 'claude' ? [{ label: 'Skills para Claude', href: '/skills/claude/' }] : []),
     { label: entry.data.title },
   ]}
   badges={moneyBadges(entry.data)}
@@ -54,13 +54,13 @@ const parent =
       inLanguage: 'es',
     },
     breadcrumbLd([
-      { name: 'Inicio', url: SITE_URL },
-      { name: 'Skills', url: `${SITE_URL}/skills` },
+      { name: 'Inicio', url: canonicalUrl('/') },
+      { name: 'Skills', url: canonicalUrl('/skills') },
       ...(entry.data.category === 'claude' ? [{ name: parent.label, url: parent.url }] : []),
       { name: entry.data.title, url: canonical },
     ]),
   ]}
-  related={siblings.slice(0, 4).map((item) => ({ href: `/skills/${item.id}`, title: item.data.title }))}
+  related={siblings.slice(0, 4).map((item) => ({ href: pagePath(`/skills/${item.id}`), title: item.data.title }))}
   relatedTitle="Otras skills"
 >
   <OfficialLinks slot="actions" url={entry.data.url} affiliateUrl={entry.data.affiliateUrl} label="Abrir el repositorio o la documentación" />
