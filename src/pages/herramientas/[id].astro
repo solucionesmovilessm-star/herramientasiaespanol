@@ -4,8 +4,8 @@ import EntryPage from '../../components/EntryPage.astro';
 import MoneyNotes from '../../components/MoneyNotes.astro';
 import OfficialLinks from '../../components/OfficialLinks.astro';
 import { loadPublished, moneyBadges, type ToolEntry } from '../../lib/content';
-import { breadcrumbLd, canonicalUrl, isoDate } from '../../lib/seo';
-import { appCategoryByTool, categories, pricingLabel, SITE_URL } from '../../lib/site';
+import { breadcrumbLd, canonicalUrl, isoDate, pagePath } from '../../lib/seo';
+import { appCategoryByTool, categories, pricingLabel } from '../../lib/site';
 
 export async function getStaticPaths() {
   const items = await loadPublished('herramientas');
@@ -47,8 +47,8 @@ if (entry.data.pricing === 'gratis' || entry.data.pricing === 'freemium') {
 const jsonLd = [
   softwareLd,
   breadcrumbLd([
-    { name: 'Inicio', url: SITE_URL },
-    { name: 'Herramientas', url: `${SITE_URL}/herramientas` },
+    { name: 'Inicio', url: canonicalUrl('/') },
+    { name: 'Herramientas', url: canonicalUrl('/herramientas') },
     { name: entry.data.title, url: canonical },
   ]),
 ];
@@ -60,7 +60,7 @@ const jsonLd = [
   eyebrow={categories[entry.data.category]}
   crumbs={[
     { label: 'Inicio', href: '/' },
-    { label: 'Herramientas', href: '/herramientas' },
+    { label: 'Herramientas', href: '/herramientas/' },
     { label: entry.data.title },
   ]}
   badges={moneyBadges({ ...entry.data, pricingLabels: pricingLabel })}
@@ -68,7 +68,7 @@ const jsonLd = [
   jsonLd={jsonLd}
   published={published}
   modified={published}
-  related={related.map((item) => ({ href: `/herramientas/${item.id}`, title: item.data.title }))}
+  related={related.map((item) => ({ href: pagePath(`/herramientas/${item.id}`), title: item.data.title }))}
   relatedTitle="Otras de la misma tarea"
 >
   <OfficialLinks slot="actions" url={entry.data.url} affiliateUrl={entry.data.affiliateUrl} />

@@ -173,7 +173,7 @@ Importante: esto quita el resultado de **Google**, pero no borra la página orig
 Copiá esto y pegalo en Grok Bot, ChatGPT, Claude o la IA que uses. Si tu IA permite tareas programadas, pedile que lo repita el primer día de cada mes.
 
 ```text
-Ayudame a frenar las llamadas de publicidad y a borrar mis datos personales. Seguí la guía de https://herramientasiaespanol.com/skills/anti-spam-y-privacidad y usá solo fuentes oficiales: no inventes leyes, plazos ni direcciones.
+Ayudame a frenar las llamadas de publicidad y a borrar mis datos personales. Seguí la guía de https://herramientasiaespanol.com/skills/anti-spam-y-privacidad/ y usá solo fuentes oficiales: no inventes leyes, plazos ni direcciones.
 
 Mi país: [España / Argentina / México]
 Mis teléfonos: [NÚMEROS]

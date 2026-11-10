@@ -4,7 +4,7 @@ import StaticForm from '../components/StaticForm.astro';
 import Base from '../layouts/Base.astro';
 import { getAdOptions } from '../lib/sponsors';
 import { breadcrumbLd, canonicalUrl } from '../lib/seo';
-import { SITE_URL, contactEmail, contactHref } from '../lib/site';
+import { contactEmail, contactHref } from '../lib/site';
 
 const description =
   'Anúnciate en Herramientas IA: ficha patrocinada, enlace de afiliado, hueco en la newsletter o mención en shorts. Sin pasarela de pago todavía.';
@@ -16,7 +16,7 @@ const options = getAdOptions();
   title="Anúnciate"
   description={description}
   jsonLd={breadcrumbLd([
-    { name: 'Inicio', url: SITE_URL },
+    { name: 'Inicio', url: canonicalUrl('/') },
     { name: 'Anúnciate', url: pageUrl },
   ])}
 >

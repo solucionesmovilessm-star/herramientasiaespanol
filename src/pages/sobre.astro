@@ -2,7 +2,7 @@
 import ChannelBoard from '../components/ChannelBoard.astro';
 import Base from '../layouts/Base.astro';
 import { breadcrumbLd, canonicalUrl } from '../lib/seo';
-import { SITE_URL, contactEmail, contactHref } from '../lib/site';
+import { contactEmail, contactHref } from '../lib/site';
 
 const description =
   'Herramientas IA en español lo publica Gonzalo, de TodoSobreTecno, Soluciones para todos y El Buen Globo. Aquí está el contacto y qué hace este sitio.';
@@ -13,7 +13,7 @@ const pageUrl = canonicalUrl('/sobre');
   title="Sobre y contacto"
   description={description}
   jsonLd={breadcrumbLd([
-    { name: 'Inicio', url: SITE_URL },
+    { name: 'Inicio', url: canonicalUrl('/') },
     { name: 'Sobre', url: pageUrl },
   ])}
 >
@@ -40,7 +40,7 @@ const pageUrl = canonicalUrl('/sobre');
       </p>
       <p>
         Para una ficha patrocinada, un enlace de afiliado o un hueco en la newsletter y en los shorts, usa la página
-        <a href="/anunciate">Anúnciate</a>. El plan opcional de unos 5 USD al mes está explicado en <a href="/pro">Pro</a>.
+        <a href="/anunciate/">Anúnciate</a>. El plan opcional de unos 5 USD al mes está explicado en <a href="/pro/">Pro</a>.
         Hoy no hay pasarela de pago.
       </p>
       <h2>Qué no vas a encontrar</h2>

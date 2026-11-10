@@ -1,8 +1,11 @@
+import { pagePath } from './page-path';
 import { SITE_NAME, SITE_URL } from './site';
 
+export { pagePath };
+
 export function canonicalUrl(pathname: string) {
-  const path = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
-  return new URL(path, SITE_URL).href;
+  const path = pathname.startsWith('/') ? pathname : `/${pathname}`;
+  return new URL(pagePath(path), SITE_URL).href;
 }
 
 export function isoDate(date?: Date) {
@@ -75,7 +78,7 @@ export function articleLd(input: {
     publisher: {
       '@type': 'Organization',
       name: SITE_NAME,
-      url: SITE_URL,
+      url: canonicalUrl('/'),
     },
   };
 }
@@ -102,21 +105,21 @@ export function websiteLd(description: string) {
     '@graph': [
       {
         '@type': 'WebSite',
-        '@id': `${SITE_URL}/#website`,
+        '@id': `${canonicalUrl('/')}#website`,
         name: SITE_NAME,
-        url: SITE_URL,
+        url: canonicalUrl('/'),
         inLanguage: 'es',
         description,
         potentialAction: {
           '@type': 'SearchAction',
-          target: `${SITE_URL}/herramientas?q={search_term_string}`,
+          target: `${canonicalUrl('/herramientas')}?q={search_term_string}`,
           'query-input': 'required name=search_term_string',
         },
       },
       {
         '@type': 'Organization',
         name: SITE_NAME,
-        url: SITE_URL,
+        url: canonicalUrl('/'),
       },
     ],
   };

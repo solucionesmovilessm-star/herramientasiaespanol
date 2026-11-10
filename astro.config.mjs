@@ -1,11 +1,17 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { satteri } from '@astrojs/markdown-satteri';
+import { trailingSlashPlugin } from './src/lib/trailing-slash-plugin.ts';
 
 const site = 'https://herramientasiaespanol.com';
 
 export default defineConfig({
   site,
-  trailingSlash: 'never',
+  // Pages sirve cada `ruta/index.html` en `/ruta/` y responde 308 si falta la barra.
+  trailingSlash: 'always',
+  build: {
+    format: 'directory',
+  },
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
@@ -14,6 +20,9 @@ export default defineConfig({
     },
   },
   markdown: {
+    processor: satteri({
+      mdastPlugins: [trailingSlashPlugin],
+    }),
     shikiConfig: {
       themes: {
         light: 'github-light',
@@ -23,7 +32,10 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/en') && !page.endsWith('indice.json'),
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        return path !== '/en' && path !== '/en/' && !path.startsWith('/en/') && !path.endsWith('indice.json');
+      },
     }),
   ],
 });

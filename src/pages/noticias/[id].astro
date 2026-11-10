@@ -2,8 +2,7 @@
 import { render } from 'astro:content';
 import EntryPage from '../../components/EntryPage.astro';
 import { loadNews, resolveFicha, type NewsEntry } from '../../lib/content';
-import { articleLd, breadcrumbLd, canonicalUrl, formatDate, isoDate } from '../../lib/seo';
-import { SITE_URL } from '../../lib/site';
+import { articleLd, breadcrumbLd, canonicalUrl, formatDate, isoDate, pagePath } from '../../lib/seo';
 
 export async function getStaticPaths() {
   const items = await loadNews();
@@ -22,7 +21,7 @@ const fichaHref = await resolveFicha(entry.data.ficha);
 const related = (await loadNews())
   .filter((item) => item.id !== entry.id)
   .slice(0, 5)
-  .map((item) => ({ href: `/noticias/${item.id}`, title: item.data.title }));
+  .map((item) => ({ href: pagePath(`/noticias/${item.id}`), title: item.data.title }));
 const hostOf = (url: string) => {
   try {
     return new URL(url).hostname.replace(/^www\./, '');
@@ -39,8 +38,8 @@ const jsonLd = [
     modified: published,
   }),
   breadcrumbLd([
-    { name: 'Inicio', url: SITE_URL },
-    { name: 'Noticias', url: `${SITE_URL}/noticias` },
+    { name: 'Inicio', url: canonicalUrl('/') },
+    { name: 'Noticias', url: canonicalUrl('/noticias') },
     { name: entry.data.title, url: canonical },
   ]),
 ];
@@ -53,7 +52,7 @@ const jsonLd = [
   meta={formatDate(entry.data.date)}
   crumbs={[
     { label: 'Inicio', href: '/' },
-    { label: 'Noticias', href: '/noticias' },
+    { label: 'Noticias', href: '/noticias/' },
     { label: entry.data.title },
   ]}
   ogType="article"

@@ -8,7 +8,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const path = Astro.url.pathname;
 ---
 
 <header class="site-header">
@@ -47,7 +47,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
         <kbd>Ctrl</kbd>
         <kbd>K</kbd>
       </button>
-      <a class="button small" href="/pro">{t('nav.pro')}</a>
+      <a class="button small" href="/pro/">{t('nav.pro')}</a>
       <button
         id="theme-toggle"
         class="icon-btn"
@@ -68,9 +68,9 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
               </a>
             ))
           }
-          <a href="/anunciate">{t('nav.advertise')}</a>
-          <a href="/sobre">{t('nav.about')}</a>
-          <a href="/pro">{t('nav.pro')}</a>
+          <a href="/anunciate/">{t('nav.advertise')}</a>
+          <a href="/sobre/">{t('nav.about')}</a>
+          <a href="/pro/">{t('nav.pro')}</a>
         </nav>
       </details>
     </div>

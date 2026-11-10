@@ -4,8 +4,8 @@ import EntryPage from '../../components/EntryPage.astro';
 import MoneyNotes from '../../components/MoneyNotes.astro';
 import OfficialLinks from '../../components/OfficialLinks.astro';
 import { loadPublished, moneyBadges, type AgentEntry } from '../../lib/content';
-import { breadcrumbLd, canonicalUrl, isoDate } from '../../lib/seo';
-import { agentCategories, pricingLabel, SITE_URL } from '../../lib/site';
+import { breadcrumbLd, canonicalUrl, isoDate, pagePath } from '../../lib/seo';
+import { agentCategories, pricingLabel } from '../../lib/site';
 
 export async function getStaticPaths() {
   const items = await loadPublished('agentes');
@@ -48,7 +48,7 @@ if (entry.data.pricing === 'gratis' || entry.data.pricing === 'freemium') {
   eyebrow={agentCategories[entry.data.category]}
   crumbs={[
     { label: 'Inicio', href: '/' },
-    { label: 'Agentes', href: '/agentes' },
+    { label: 'Agentes', href: '/agentes/' },
     { label: entry.data.title },
   ]}
   badges={moneyBadges({ ...entry.data, pricingLabels: pricingLabel })}
@@ -58,12 +58,12 @@ if (entry.data.pricing === 'gratis' || entry.data.pricing === 'freemium') {
   jsonLd={[
     softwareLd,
     breadcrumbLd([
-      { name: 'Inicio', url: SITE_URL },
-      { name: 'Agentes', url: `${SITE_URL}/agentes` },
+      { name: 'Inicio', url: canonicalUrl('/') },
+      { name: 'Agentes', url: canonicalUrl('/agentes') },
       { name: entry.data.title, url: canonical },
     ]),
   ]}
-  related={related.map((item) => ({ href: `/agentes/${item.id}`, title: item.data.title }))}
+  related={related.map((item) => ({ href: pagePath(`/agentes/${item.id}`), title: item.data.title }))}
 >
   <OfficialLinks slot="actions" url={entry.data.url} affiliateUrl={entry.data.affiliateUrl} />
   <MoneyNotes slot="notes" affiliateUrl={entry.data.affiliateUrl} patrocinado={entry.data.patrocinado} />
