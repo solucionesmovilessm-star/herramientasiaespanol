@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-11-09T07:43:22.533Z",
+  "generatedAt": "2026-11-16T09:01:15.897Z",
   "windowDays": 14,
-  "windowStart": "2026-10-26",
+  "windowStart": "2026-11-02",
   "note": "GitHub no ofrece una API del listado Trending de su web. «En movimiento» reúne repositorios públicos (no forks) con temas de IA actualizados en los últimos 14 días, ordenados por estrellas. «Más estrellados» ordena por estrellas sin filtro de fecha. Las cifras salen de la API de búsqueda y cambian.",
   "queries": {
     "enMovimiento": [
-      "topic:llm fork:false pushed:>=2026-10-26",
-      "topic:generative-ai fork:false pushed:>=2026-10-26",
-      "topic:ai-agents fork:false pushed:>=2026-10-26",
-      "topic:mcp fork:false pushed:>=2026-10-26"
+      "topic:llm fork:false pushed:>=2026-11-02",
+      "topic:generative-ai fork:false pushed:>=2026-11-02",
+      "topic:ai-agents fork:false pushed:>=2026-11-02",
+      "topic:mcp fork:false pushed:>=2026-11-02"
     ],
     "masEstrellados": [
       "topic:llm fork:false",
@@ -22,8 +22,8 @@
       "fullName": "morluto/rea",
       "url": "https://github.com/morluto/rea",
       "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
-      "stars": 444761,
-      "forks": 109827,
+      "stars": 462752,
+      "forks": 113300,
       "language": "TypeScript",
       "topics": [
         "agent-skills",
@@ -35,7 +35,7 @@
         "dsh-plugin",
         "html"
       ],
-      "pushedAt": "2026-11-09T07:03:35Z",
+      "pushedAt": "2026-11-16T08:49:01Z",
       "license": "MIT"
     },
     {
@@ -43,8 +43,8 @@
       "fullName": "affaan-m/ECC",
       "url": "https://github.com/affaan-m/ECC",
       "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-      "stars": 299824,
-      "forks": 44288,
+      "stars": 304041,
+      "forks": 44803,
       "language": "JavaScript",
       "topics": [
         "ai-agents",
@@ -56,7 +56,7 @@
         "mcp",
         "productivity"
       ],
-      "pushedAt": "2026-11-09T04:56:24Z",
+      "pushedAt": "2026-11-16T04:55:46Z",
       "license": "MIT"
     },
     {
@@ -64,8 +64,8 @@
       "fullName": "deepseek-ai/deepseek-harness",
       "url": "https://github.com/deepseek-ai/deepseek-harness",
       "description": "DeepSeek Harness: Everything is a Plugin.",
-      "stars": 276867,
-      "forks": 33925,
+      "stars": 282004,
+      "forks": 34899,
       "language": "TypeScript",
       "topics": [
         "ai-agents",
@@ -73,7 +73,7 @@
         "dsh",
         "dsh-plugin"
       ],
-      "pushedAt": "2026-11-04T13:06:39Z",
+      "pushedAt": "2026-11-13T07:56:25Z",
       "license": "MIT"
     },
     {
@@ -81,8 +81,8 @@
       "fullName": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
       "description": "The agent that grows with you",
-      "stars": 261857,
-      "forks": 58267,
+      "stars": 263744,
+      "forks": 59466,
       "language": "Python",
       "topics": [
         "ai",
@@ -94,7 +94,7 @@
         "claude-code",
         "codex"
       ],
-      "pushedAt": "2026-11-09T07:40:08Z",
+      "pushedAt": "2026-11-16T08:53:57Z",
       "license": "MIT"
     },
     {
@@ -102,8 +102,8 @@
       "fullName": "n8n-io/n8n",
       "url": "https://github.com/n8n-io/n8n",
       "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
-      "stars": 209882,
-      "forks": 61414,
+      "stars": 210617,
+      "forks": 61536,
       "language": "TypeScript",
       "topics": [
         "ai",
@@ -115,7 +115,7 @@
         "integration-framework",
         "integrations"
       ],
-      "pushedAt": "2026-11-09T07:34:41Z",
+      "pushedAt": "2026-11-16T09:00:25Z",
       "license": "NOASSERTION"
     },
     {
@@ -123,8 +123,8 @@
       "fullName": "firecrawl/firecrawl",
       "url": "https://github.com/firecrawl/firecrawl",
       "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-      "stars": 199902,
-      "forks": 10518,
+      "stars": 202173,
+      "forks": 10599,
       "language": "TypeScript",
       "topics": [
         "ai",
@@ -136,7 +136,7 @@
         "data-extraction",
         "html-to-markdown"
       ],
-      "pushedAt": "2026-11-09T07:08:31Z",
+      "pushedAt": "2026-11-16T00:15:37Z",
       "license": "AGPL-3.0"
     },
     {
@@ -144,8 +144,8 @@
       "fullName": "Significant-Gravitas/AutoGPT",
       "url": "https://github.com/Significant-Gravitas/AutoGPT",
       "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-      "stars": 187956,
-      "forks": 45891,
+      "stars": 188048,
+      "forks": 45856,
       "language": "Python",
       "topics": [
         "agentic-ai",
@@ -157,37 +157,16 @@
         "gpt",
         "llama-api"
       ],
-      "pushedAt": "2026-11-09T06:53:22Z",
+      "pushedAt": "2026-11-16T08:57:31Z",
       "license": "NOASSERTION"
     },
     {
       "rank": 8,
-      "fullName": "DietrichGebert/ponytail",
-      "url": "https://github.com/DietrichGebert/ponytail",
-      "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-      "stars": 187093,
-      "forks": 10364,
-      "language": "JavaScript",
-      "topics": [
-        "agent-skills",
-        "ai-agents",
-        "claude",
-        "claude-code",
-        "claude-code-plugin",
-        "cursor-rules",
-        "developer-tools",
-        "llm"
-      ],
-      "pushedAt": "2026-10-29T11:59:31Z",
-      "license": "MIT"
-    },
-    {
-      "rank": 9,
       "fullName": "ollama/ollama",
       "url": "https://github.com/ollama/ollama",
       "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-      "stars": 186411,
-      "forks": 18974,
+      "stars": 187170,
+      "forks": 19113,
       "language": "Go",
       "topics": [
         "deepseek",
@@ -199,16 +178,16 @@
         "llama",
         "llm"
       ],
-      "pushedAt": "2026-11-08T00:36:55Z",
+      "pushedAt": "2026-11-15T18:46:15Z",
       "license": "MIT"
     },
     {
-      "rank": 10,
+      "rank": 9,
       "fullName": "f/prompts.chat",
       "url": "https://github.com/f/prompts.chat",
       "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-      "stars": 176626,
-      "forks": 22528,
+      "stars": 177610,
+      "forks": 22649,
       "language": "MDX",
       "topics": [
         "ai",
@@ -220,16 +199,16 @@
         "gemini",
         "gpt"
       ],
-      "pushedAt": "2026-11-09T07:33:14Z",
+      "pushedAt": "2026-11-16T03:14:07Z",
       "license": "NOASSERTION"
     },
     {
-      "rank": 11,
+      "rank": 10,
       "fullName": "huggingface/transformers",
       "url": "https://github.com/huggingface/transformers",
       "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-      "stars": 168679,
-      "forks": 35145,
+      "stars": 169046,
+      "forks": 35210,
       "language": "Python",
       "topics": [
         "audio",
@@ -241,249 +220,37 @@
         "llm",
         "machine-learning"
       ],
-      "pushedAt": "2026-11-09T07:37:01Z",
+      "pushedAt": "2026-11-16T08:44:24Z",
       "license": "Apache-2.0"
+    },
+    {
+      "rank": 11,
+      "fullName": "langgenius/dify",
+      "url": "https://github.com/langgenius/dify",
+      "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+      "stars": 161251,
+      "forks": 25512,
+      "language": "Python",
+      "topics": [
+        "agent",
+        "agentic-ai",
+        "agentic-framework",
+        "agentic-workflow",
+        "ai",
+        "automation",
+        "claude",
+        "deepseek"
+      ],
+      "pushedAt": "2026-11-16T08:56:15Z",
+      "license": "NOASSERTION"
     },
     {
       "rank": 12,
-      "fullName": "langgenius/dify",
-      "url": "https://github.com/langgenius/dify",
-      "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-      "stars": 160723,
-      "forks": 25425,
-      "language": "Python",
-      "topics": [
-        "agent",
-        "agentic-ai",
-        "agentic-framework",
-        "agentic-workflow",
-        "ai",
-        "automation",
-        "claude",
-        "deepseek"
-      ],
-      "pushedAt": "2026-11-09T07:42:49Z",
-      "license": "NOASSERTION"
-    }
-  ],
-  "masEstrellados": [
-    {
-      "rank": 1,
-      "fullName": "affaan-m/ECC",
-      "url": "https://github.com/affaan-m/ECC",
-      "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-      "stars": 299824,
-      "forks": 44288,
-      "language": "JavaScript",
-      "topics": [
-        "ai-agents",
-        "anthropic",
-        "claude",
-        "claude-code",
-        "developer-tools",
-        "llm",
-        "mcp",
-        "productivity"
-      ],
-      "pushedAt": "2026-11-09T04:56:24Z",
-      "license": "MIT"
-    },
-    {
-      "rank": 2,
-      "fullName": "NousResearch/hermes-agent",
-      "url": "https://github.com/NousResearch/hermes-agent",
-      "description": "The agent that grows with you",
-      "stars": 261857,
-      "forks": 58267,
-      "language": "Python",
-      "topics": [
-        "ai",
-        "ai-agent",
-        "ai-agents",
-        "anthropic",
-        "chatgpt",
-        "claude",
-        "claude-code",
-        "codex"
-      ],
-      "pushedAt": "2026-11-09T07:40:08Z",
-      "license": "MIT"
-    },
-    {
-      "rank": 3,
-      "fullName": "tensorflow/tensorflow",
-      "url": "https://github.com/tensorflow/tensorflow",
-      "description": "An Open Source Machine Learning Framework for Everyone",
-      "stars": 201405,
-      "forks": 78180,
-      "language": "C++",
-      "topics": [
-        "deep-learning",
-        "deep-neural-networks",
-        "distributed",
-        "machine-learning",
-        "ml",
-        "neural-network",
-        "python",
-        "tensorflow"
-      ],
-      "pushedAt": "2026-11-09T07:41:00Z",
-      "license": "Apache-2.0"
-    },
-    {
-      "rank": 4,
-      "fullName": "firecrawl/firecrawl",
-      "url": "https://github.com/firecrawl/firecrawl",
-      "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-      "stars": 199902,
-      "forks": 10518,
-      "language": "TypeScript",
-      "topics": [
-        "ai",
-        "ai-agents",
-        "ai-crawler",
-        "ai-scraping",
-        "ai-search",
-        "crawler",
-        "data-extraction",
-        "html-to-markdown"
-      ],
-      "pushedAt": "2026-11-09T07:08:31Z",
-      "license": "AGPL-3.0"
-    },
-    {
-      "rank": 5,
-      "fullName": "Significant-Gravitas/AutoGPT",
-      "url": "https://github.com/Significant-Gravitas/AutoGPT",
-      "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-      "stars": 187956,
-      "forks": 45891,
-      "language": "Python",
-      "topics": [
-        "agentic-ai",
-        "agents",
-        "ai",
-        "artificial-intelligence",
-        "autonomous-agents",
-        "claude",
-        "gpt",
-        "llama-api"
-      ],
-      "pushedAt": "2026-11-09T06:53:22Z",
-      "license": "NOASSERTION"
-    },
-    {
-      "rank": 6,
-      "fullName": "DietrichGebert/ponytail",
-      "url": "https://github.com/DietrichGebert/ponytail",
-      "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-      "stars": 187093,
-      "forks": 10364,
-      "language": "JavaScript",
-      "topics": [
-        "agent-skills",
-        "ai-agents",
-        "claude",
-        "claude-code",
-        "claude-code-plugin",
-        "cursor-rules",
-        "developer-tools",
-        "llm"
-      ],
-      "pushedAt": "2026-10-29T11:59:31Z",
-      "license": "MIT"
-    },
-    {
-      "rank": 7,
-      "fullName": "ollama/ollama",
-      "url": "https://github.com/ollama/ollama",
-      "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-      "stars": 186411,
-      "forks": 18974,
-      "language": "Go",
-      "topics": [
-        "deepseek",
-        "gemma",
-        "glm",
-        "go",
-        "golang",
-        "gpt-oss",
-        "llama",
-        "llm"
-      ],
-      "pushedAt": "2026-11-08T00:36:55Z",
-      "license": "MIT"
-    },
-    {
-      "rank": 8,
-      "fullName": "f/prompts.chat",
-      "url": "https://github.com/f/prompts.chat",
-      "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-      "stars": 176626,
-      "forks": 22528,
-      "language": "MDX",
-      "topics": [
-        "ai",
-        "artificial-intelligence",
-        "awesome-list",
-        "chatgpt",
-        "chatgpt-prompts",
-        "claude",
-        "gemini",
-        "gpt"
-      ],
-      "pushedAt": "2026-11-09T07:33:14Z",
-      "license": "NOASSERTION"
-    },
-    {
-      "rank": 9,
-      "fullName": "huggingface/transformers",
-      "url": "https://github.com/huggingface/transformers",
-      "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-      "stars": 168679,
-      "forks": 35145,
-      "language": "Python",
-      "topics": [
-        "audio",
-        "deep-learning",
-        "deepseek",
-        "gemma",
-        "glm",
-        "hacktoberfest",
-        "llm",
-        "machine-learning"
-      ],
-      "pushedAt": "2026-11-09T07:37:01Z",
-      "license": "Apache-2.0"
-    },
-    {
-      "rank": 10,
-      "fullName": "langgenius/dify",
-      "url": "https://github.com/langgenius/dify",
-      "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-      "stars": 160723,
-      "forks": 25424,
-      "language": "Python",
-      "topics": [
-        "agent",
-        "agentic-ai",
-        "agentic-framework",
-        "agentic-workflow",
-        "ai",
-        "automation",
-        "claude",
-        "deepseek"
-      ],
-      "pushedAt": "2026-11-09T07:42:49Z",
-      "license": "NOASSERTION"
-    },
-    {
-      "rank": 11,
       "fullName": "open-webui/open-webui",
       "url": "https://github.com/open-webui/open-webui",
       "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-      "stars": 158172,
-      "forks": 22992,
+      "stars": 158797,
+      "forks": 23090,
       "language": "Svelte",
       "topics": [
         "ai",
@@ -495,7 +262,240 @@
         "ollama",
         "ollama-webui"
       ],
-      "pushedAt": "2026-11-09T07:04:14Z",
+      "pushedAt": "2026-11-16T08:52:08Z",
+      "license": "NOASSERTION"
+    }
+  ],
+  "masEstrellados": [
+    {
+      "rank": 1,
+      "fullName": "affaan-m/ECC",
+      "url": "https://github.com/affaan-m/ECC",
+      "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+      "stars": 304041,
+      "forks": 44803,
+      "language": "JavaScript",
+      "topics": [
+        "ai-agents",
+        "anthropic",
+        "claude",
+        "claude-code",
+        "developer-tools",
+        "llm",
+        "mcp",
+        "productivity"
+      ],
+      "pushedAt": "2026-11-16T04:55:46Z",
+      "license": "MIT"
+    },
+    {
+      "rank": 2,
+      "fullName": "NousResearch/hermes-agent",
+      "url": "https://github.com/NousResearch/hermes-agent",
+      "description": "The agent that grows with you",
+      "stars": 263744,
+      "forks": 59466,
+      "language": "Python",
+      "topics": [
+        "ai",
+        "ai-agent",
+        "ai-agents",
+        "anthropic",
+        "chatgpt",
+        "claude",
+        "claude-code",
+        "codex"
+      ],
+      "pushedAt": "2026-11-16T08:53:57Z",
+      "license": "MIT"
+    },
+    {
+      "rank": 3,
+      "fullName": "firecrawl/firecrawl",
+      "url": "https://github.com/firecrawl/firecrawl",
+      "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
+      "stars": 202173,
+      "forks": 10599,
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "ai-agents",
+        "ai-crawler",
+        "ai-scraping",
+        "ai-search",
+        "crawler",
+        "data-extraction",
+        "html-to-markdown"
+      ],
+      "pushedAt": "2026-11-16T00:15:37Z",
+      "license": "AGPL-3.0"
+    },
+    {
+      "rank": 4,
+      "fullName": "tensorflow/tensorflow",
+      "url": "https://github.com/tensorflow/tensorflow",
+      "description": "An Open Source Machine Learning Framework for Everyone",
+      "stars": 201618,
+      "forks": 77971,
+      "language": "C++",
+      "topics": [
+        "deep-learning",
+        "deep-neural-networks",
+        "distributed",
+        "machine-learning",
+        "ml",
+        "neural-network",
+        "python",
+        "tensorflow"
+      ],
+      "pushedAt": "2026-11-16T08:59:51Z",
+      "license": "Apache-2.0"
+    },
+    {
+      "rank": 5,
+      "fullName": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
+      "stars": 191686,
+      "forks": 10739,
+      "language": "JavaScript",
+      "topics": [
+        "agent-skills",
+        "ai-agents",
+        "claude",
+        "claude-code",
+        "claude-code-plugin",
+        "cursor-rules",
+        "developer-tools",
+        "llm"
+      ],
+      "pushedAt": "2026-10-29T11:59:31Z",
+      "license": "MIT"
+    },
+    {
+      "rank": 6,
+      "fullName": "Significant-Gravitas/AutoGPT",
+      "url": "https://github.com/Significant-Gravitas/AutoGPT",
+      "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
+      "stars": 188048,
+      "forks": 45856,
+      "language": "Python",
+      "topics": [
+        "agentic-ai",
+        "agents",
+        "ai",
+        "artificial-intelligence",
+        "autonomous-agents",
+        "claude",
+        "gpt",
+        "llama-api"
+      ],
+      "pushedAt": "2026-11-16T08:57:31Z",
+      "license": "NOASSERTION"
+    },
+    {
+      "rank": 7,
+      "fullName": "ollama/ollama",
+      "url": "https://github.com/ollama/ollama",
+      "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
+      "stars": 187170,
+      "forks": 19113,
+      "language": "Go",
+      "topics": [
+        "deepseek",
+        "gemma",
+        "glm",
+        "go",
+        "golang",
+        "gpt-oss",
+        "llama",
+        "llm"
+      ],
+      "pushedAt": "2026-11-15T18:46:15Z",
+      "license": "MIT"
+    },
+    {
+      "rank": 8,
+      "fullName": "f/prompts.chat",
+      "url": "https://github.com/f/prompts.chat",
+      "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
+      "stars": 177610,
+      "forks": 22649,
+      "language": "MDX",
+      "topics": [
+        "ai",
+        "artificial-intelligence",
+        "awesome-list",
+        "chatgpt",
+        "chatgpt-prompts",
+        "claude",
+        "gemini",
+        "gpt"
+      ],
+      "pushedAt": "2026-11-16T03:14:07Z",
+      "license": "NOASSERTION"
+    },
+    {
+      "rank": 9,
+      "fullName": "huggingface/transformers",
+      "url": "https://github.com/huggingface/transformers",
+      "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
+      "stars": 169046,
+      "forks": 35210,
+      "language": "Python",
+      "topics": [
+        "audio",
+        "deep-learning",
+        "deepseek",
+        "gemma",
+        "glm",
+        "hacktoberfest",
+        "llm",
+        "machine-learning"
+      ],
+      "pushedAt": "2026-11-16T08:44:24Z",
+      "license": "Apache-2.0"
+    },
+    {
+      "rank": 10,
+      "fullName": "langgenius/dify",
+      "url": "https://github.com/langgenius/dify",
+      "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+      "stars": 161251,
+      "forks": 25512,
+      "language": "Python",
+      "topics": [
+        "agent",
+        "agentic-ai",
+        "agentic-framework",
+        "agentic-workflow",
+        "ai",
+        "automation",
+        "claude",
+        "deepseek"
+      ],
+      "pushedAt": "2026-11-16T08:56:15Z",
+      "license": "NOASSERTION"
+    },
+    {
+      "rank": 11,
+      "fullName": "open-webui/open-webui",
+      "url": "https://github.com/open-webui/open-webui",
+      "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+      "stars": 158797,
+      "forks": 23090,
+      "language": "Svelte",
+      "topics": [
+        "ai",
+        "llm",
+        "llm-ui",
+        "llm-webui",
+        "llms",
+        "mcp",
+        "ollama",
+        "ollama-webui"
+      ],
+      "pushedAt": "2026-11-16T08:52:08Z",
       "license": "NOASSERTION"
     },
     {
@@ -503,8 +503,8 @@
       "fullName": "langflow-ai/langflow",
       "url": "https://github.com/langflow-ai/langflow",
       "description": "Langflow is a powerful tool for building and deploying AI-powered agents and workflows.",
-      "stars": 156455,
-      "forks": 10362,
+      "stars": 156693,
+      "forks": 10418,
       "language": "Python",
       "topics": [
         "agents",
@@ -514,7 +514,7 @@
         "multiagent",
         "react-flow"
       ],
-      "pushedAt": "2026-11-09T05:04:36Z",
+      "pushedAt": "2026-11-16T05:27:34Z",
       "license": "MIT"
     }
   ]
