@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import EntryPage from '../../components/EntryPage.astro';
 import { loadHackeos, type HackeoEntry } from '../../lib/content';
 import { articleLd, breadcrumbLd, canonicalUrl, formatDate, isoDate, pagePath } from '../../lib/seo';
+import { nivelRiesgo } from '../../lib/site';
 
 export async function getStaticPaths() {
   const items = await loadHackeos();
@@ -53,8 +54,12 @@ const jsonLd = [
   description={entry.data.description}
   eyebrow="El hackeo del día"
   meta={formatDate(entry.data.date)}
-  notice={entry.data.riesgo}
-  noticeLabel="Nivel de riesgo"
+  mark="alerta"
+  risk={{
+    nivel: entry.data.nivel,
+    label: nivelRiesgo[entry.data.nivel],
+    text: entry.data.riesgo,
+  }}
   image={entry.data.image}
   crumbs={[
     { label: 'Inicio', href: '/' },

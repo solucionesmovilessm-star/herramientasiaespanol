@@ -60,6 +60,7 @@ export const collections = {
       title: z.string().min(2),
       description: z.string().min(40).max(220),
       date: z.coerce.date(),
+      nivel: z.enum(['bajo', 'medio', 'alto', 'critico']),
       riesgo: z.string().min(12).max(300),
       sources: z.array(z.string().url()).min(1),
       image: optionalImage,

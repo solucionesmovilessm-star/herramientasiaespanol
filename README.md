@@ -77,16 +77,18 @@ Cada entrada es un archivo en `src/content/hackeos/`. El nombre del archivo es l
 title: "Título concreto, con lo que dicen las fuentes"
 description: "Una o dos frases, entre 40 y 220 caracteres. Sale en Google y en la tarjeta al compartir en X."
 date: 2026-11-17
-riesgo: "Una frase con el riesgo que dicen las fuentes. No inventes una etiqueta (alto, crítico) ni un número si la fuente no lo da."
+nivel: alto
+riesgo: "Una frase con el riesgo que dicen las fuentes. Va aparte de la etiqueta."
 sources:
   - https://fuente-oficial.example/noticia
 draft: false
 ```
 
-5. Debajo de la línea `---` escribe tres apartados, con estos títulos: `Qué pasó`, `A quién afecta` y `Qué hacer`. La página pone sola la fecha, el nivel de riesgo, el botón **Compartir en X** y la lista de **Fuentes**.
-6. `sources` lleva al menos un enlace que empiece por `https://`. No hace falta repetirlos en el texto.
-7. `image` es opcional. Si la entrada tiene una imagen propia, pon una ruta del sitio (`/imagenes/mi-hackeo.png`, archivo dentro de `public/`) o una URL `https://`. Si no pones `image`, se usa la imagen para compartir del sitio (`/og.png`).
-8. En **Commit changes**, escribe “Añade el hackeo de …” y guarda en `main`.
+5. `nivel` solo puede ser `bajo`, `medio`, `alto` o `critico`. Sale como etiqueta de color. `riesgo` es la frase que va debajo, no la etiqueta.
+6. Debajo de la línea `---` escribe tres apartados, con estos títulos: `Qué pasó`, `A quién afecta` y `Qué hacer`. La página pone sola la fecha, el nivel de riesgo, el botón **Compartir en X** y la lista de **Fuentes**.
+7. `sources` lleva al menos un enlace que empiece por `https://`. No hace falta repetirlos en el texto.
+8. `image` es opcional. Si la entrada tiene una imagen propia, pon una ruta del sitio (`/imagenes/mi-hackeo.png`, archivo dentro de `public/`) o una URL `https://`. Si no pones `image`, se usa la imagen para compartir del sitio (`/og.png`).
+9. En **Commit changes**, escribe “Añade el hackeo de …” y guarda en `main`.
 
 La portada enseña la entrada con la fecha más nueva. En el índice, la más reciente va arriba.
 

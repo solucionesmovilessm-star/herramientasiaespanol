@@ -2,7 +2,9 @@
 title: Plantilla de hackeo
 description: "Texto de ejemplo para copiar un hackeo del día. Esta página no se publica mientras draft sea true."
 date: 2026-11-17
-riesgo: "Sustituye esta frase por el riesgo que dicen las fuentes, sin inventar una etiqueta."
+# nivel solo puede ser: bajo, medio, alto o critico
+nivel: alto
+riesgo: "Frase que explica el riesgo, aparte de la etiqueta de arriba."
 # image: /imagenes/mi-hackeo.png
 # Si no pones image, al compartir se usa la imagen OG del sitio (/og.png).
 sources:

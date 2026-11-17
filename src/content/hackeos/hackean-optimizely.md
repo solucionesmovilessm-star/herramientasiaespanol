@@ -2,6 +2,7 @@
 title: "Hackean Optimizely: código malicioso en webs como CNN, Zoom o BBC robaba cripto y tarjetas"
 description: "Atacantes inyectaron JavaScript en scripts de Optimizely. Cambiaba direcciones de wallets, robaba tarjetas en formularios propios e intentaba exploits en iPhone y iPad. Optimizely dice que eliminó el código."
 date: 2026-11-17
+nivel: alto
 riesgo: "Cambiaba direcciones de wallets de cripto por las del atacante, robaba número, caducidad y CVV en formularios propios, e intentaba exploits en iPhone y iPad. Optimizely dice que el 17 de noviembre de 2026 eliminó el código."
 sources:
   - https://www.bleepingcomputer.com/news/security/optimizely-supply-chain-attack-infects-major-brands-sites-with-malware/
@@ -12,7 +13,7 @@ draft: false
 
 ## Qué pasó
 
-Atacantes inyectaron JavaScript malicioso en proyectos de clientes de Optimizely, una plataforma de pruebas A/B. Ese código se servía desde su CDN y cargaba un script externo: `track.js`, desde el dominio `1688360[.]cc`. El dominio va escrito así, con el punto desactivado, para que no sea un enlace.
+Atacantes inyectaron JavaScript malicioso en proyectos de clientes de Optimizely, una plataforma de pruebas A/B. Ese código se servía desde su CDN y cargaba un script externo: `track.js`, desde el dominio `1688360[.]cc`.
 
 El investigador Scott Helme encontró 188 scripts infectados de 178 organizaciones tras analizar 1.611 scripts. Entre los sitios citados están CNN, Zoom, Fox News, BBC, Salesforce y GitLab.
 

@@ -26,7 +26,7 @@ export type TutorialEntry = CollectionEntry<'tutoriales'>;
 
 export interface Badge {
   label: string;
-  tone: 'paid' | 'feature' | 'muted' | 'free' | 'affiliate' | 'lang';
+  tone: 'paid' | 'feature' | 'muted' | 'free' | 'affiliate' | 'lang' | 'bajo' | 'medio' | 'alto' | 'critico';
 }
 
 export function moneyBadges(data: {

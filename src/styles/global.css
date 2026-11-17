@@ -21,6 +21,14 @@
   --affiliate-bg: #facc15;
   --lang: #dbe7ff;
   --rank: #facc15;
+  --risk-bajo: #86efac;
+  --risk-bajo-bg: rgba(34, 197, 94, 0.18);
+  --risk-medio: #fde68a;
+  --risk-medio-bg: rgba(250, 204, 21, 0.18);
+  --risk-alto: #fdba74;
+  --risk-alto-bg: rgba(249, 115, 22, 0.24);
+  --risk-critico: #fca5a5;
+  --risk-critico-bg: rgba(239, 68, 68, 0.24);
   --glass: rgba(16, 22, 40, 0.78);
   --highlight: rgba(255, 255, 255, 0.08);
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
@@ -51,6 +59,14 @@
   --affiliate-bg: #facc15;
   --lang: #1e3a8a;
   --rank: #a16207;
+  --risk-bajo: #166534;
+  --risk-bajo-bg: #dcfce7;
+  --risk-medio: #854d0e;
+  --risk-medio-bg: #fef3c7;
+  --risk-alto: #9a3412;
+  --risk-alto-bg: #ffedd5;
+  --risk-critico: #991b1b;
+  --risk-critico-bg: #fee2e2;
   --glass: rgba(255, 255, 255, 0.82);
   --highlight: rgba(255, 255, 255, 0.95);
   --shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
@@ -79,6 +95,14 @@
     --affiliate-bg: #facc15;
     --lang: #1e3a8a;
     --rank: #a16207;
+    --risk-bajo: #166534;
+    --risk-bajo-bg: #dcfce7;
+    --risk-medio: #854d0e;
+    --risk-medio-bg: #fef3c7;
+    --risk-alto: #9a3412;
+    --risk-alto-bg: #ffedd5;
+    --risk-critico: #991b1b;
+    --risk-critico-bg: #fee2e2;
     --glass: rgba(255, 255, 255, 0.82);
     --highlight: rgba(255, 255, 255, 0.95);
     --shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
@@ -1060,6 +1084,65 @@ html.motion [data-reveal].is-in {
   background: transparent;
   color: var(--lang);
   border: 1px solid var(--line);
+}
+
+.badge.bajo,
+.risk-tag.bajo,
+.entry-alert.bajo { background: var(--risk-bajo-bg); color: var(--risk-bajo); }
+.badge.medio,
+.risk-tag.medio,
+.entry-alert.medio { background: var(--risk-medio-bg); color: var(--risk-medio); }
+.badge.alto,
+.risk-tag.alto,
+.entry-alert.alto { background: var(--risk-alto-bg); color: var(--risk-alto); }
+.badge.critico,
+.risk-tag.critico,
+.entry-alert.critico { background: var(--risk-critico-bg); color: var(--risk-critico); }
+
+.entry-alert {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border-radius: 18px;
+}
+
+.entry-alert svg {
+  width: 34px;
+  height: 34px;
+}
+
+.risk-panel {
+  margin: 4px 0 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg) 42%, transparent);
+}
+
+.risk-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-weight: 650;
+}
+
+.risk-panel p:last-child {
+  margin: 0;
+}
+
+.risk-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-size: 0.95rem;
+  font-weight: 750;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
 }
 
 .stat-xl {

@@ -17,6 +17,13 @@ export const categories = {
   local: 'En tu ordenador',
 } as const;
 
+export const nivelRiesgo = {
+  bajo: 'Bajo',
+  medio: 'Medio',
+  alto: 'Alto',
+  critico: 'Crítico',
+} as const;
+
 export const pricingLabel = {
   gratis: 'Gratis',
   freemium: 'Gratis con límites',
