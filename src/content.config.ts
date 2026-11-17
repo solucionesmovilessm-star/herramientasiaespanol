@@ -13,6 +13,18 @@ const optionalUrl = z
     message: 'El enlace tiene que empezar por https:// y no llevar espacios.',
   });
 
+const optionalImage = z
+  .string()
+  .optional()
+  .transform((value) => {
+    const trimmed = value?.trim() ?? '';
+    return trimmed.length > 0 ? trimmed : undefined;
+  })
+  .refine(
+    (value) => value === undefined || /^https:\/\/\S+$/.test(value) || /^\/(?!\/)\S+$/.test(value),
+    { message: 'La imagen tiene que ser una ruta del sitio (/archivo.png) o una URL https://.' },
+  );
+
 const common = {
   title: z.string().min(2),
   description: z.string().min(40).max(220),
@@ -39,6 +51,19 @@ export const collections = {
       summary: z.string().min(40),
       sources: z.array(z.string().url()).min(1),
       ficha: z.string().optional(),
+      draft: z.boolean().default(false),
+    }),
+  }),
+  hackeos: defineCollection({
+    loader: glob({ base: './src/content/hackeos', pattern: '**/*.md' }),
+    schema: z.object({
+      title: z.string().min(2),
+      description: z.string().min(40).max(220),
+      date: z.coerce.date(),
+      nivel: z.enum(['bajo', 'medio', 'alto', 'critico']),
+      riesgo: z.string().min(12).max(300),
+      sources: z.array(z.string().url()).min(1),
+      image: optionalImage,
       draft: z.boolean().default(false),
     }),
   }),

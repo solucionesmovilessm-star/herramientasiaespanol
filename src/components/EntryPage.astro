@@ -25,6 +25,11 @@ interface Props {
   updated?: Date;
   jsonLd?: unknown;
   ogType?: 'website' | 'article';
+  image?: string;
+  notice?: string;
+  noticeLabel?: string;
+  risk?: { nivel: 'bajo' | 'medio' | 'alto' | 'critico'; label: string; text: string };
+  mark?: 'letters' | 'alerta';
   published?: string;
   modified?: string;
   tutorial?: boolean;
@@ -42,6 +47,11 @@ const {
   updated,
   jsonLd,
   ogType = 'website',
+  image,
+  notice,
+  noticeLabel,
+  risk,
+  mark = 'letters',
   published,
   modified,
   tutorial = false,
@@ -55,6 +65,7 @@ const {
   description={description}
   jsonLd={jsonLd}
   ogType={ogType}
+  image={image}
   published={published}
   modified={modified}
 >
@@ -62,7 +73,19 @@ const {
     <Breadcrumbs items={crumbs} />
     <header class="article-head glass">
       <div class="entry-top">
-        <Mark name={title} large />
+        {
+          mark === 'alerta' ? (
+            <span class:list={['entry-alert', risk?.nivel ?? 'alto']} aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3.2 19.2 6v5.6c0 4.4-3 7.6-7.2 9.2C7.8 19.2 4.8 16 4.8 11.6V6z"></path>
+                <path d="M12 8.2v4.3"></path>
+                <path d="M12 15.4h.01"></path>
+              </svg>
+            </span>
+          ) : (
+            <Mark name={title} large />
+          )
+        }
         <div>
           <p class="eyebrow">{eyebrow}</p>
           <h1>{title}</h1>
@@ -83,6 +106,25 @@ const {
         updated && (
           <p class="meta">
             Actualizado el <time datetime={updated.toISOString().slice(0, 10)}>{formatDate(updated)}</time>
+          </p>
+        )
+      }
+      {
+        risk && (
+          <div class="risk-panel">
+            <p class="risk-heading">
+              <span>Nivel de riesgo</span>
+              <span class:list={['risk-tag', risk.nivel]}>{risk.label}</span>
+            </p>
+            <p>{risk.text}</p>
+          </div>
+        )
+      }
+      {
+        !risk && notice && (
+          <p class="callout warn">
+            {noticeLabel && <strong>{noticeLabel}. </strong>}
+            {notice}
           </p>
         )
       }

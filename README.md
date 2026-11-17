@@ -1,6 +1,6 @@
 # Herramientas IA en español
 
-Sitio de Gonzalo (canales **TodoSobreTecno** y **Soluciones para todos**). Es un directorio en español de herramientas de IA, agentes, skills, servidores MCP, guías y tutoriales para novatos.
+Sitio de Gonzalo (canales **TodoSobreTecno** y **Soluciones para todos**). Es un directorio en español de herramientas de IA, agentes, skills, servidores MCP, guías y tutoriales para novatos. También publica **El hackeo del día**: un incidente de seguridad, con fuentes, pensado para compartir.
 
 - Dirección principal, la que ve Google: `https://herramientasiaespanol.com`
 - Dirección de marca: `hubtecnoia.com` (tiene que redirigir a la principal)
@@ -16,6 +16,7 @@ No hace falta programar. Cada ficha es un archivo de texto. Guardas el cambio en
 | Quiero… | Archivo |
 | --- | --- |
 | Añadir o corregir una herramienta | `src/content/herramientas/` (copia `plantilla-no-publicar.md`) |
+| Añadir un hackeo del día | `src/content/hackeos/` (copia `plantilla-no-publicar.md`) |
 | Añadir un agente | `src/content/agentes/` |
 | Añadir una skill, también de Claude | `src/content/skills/` |
 | Añadir un servidor MCP | `src/content/mcp/` |
@@ -62,6 +63,34 @@ tags:
 `pricing` solo puede ser `gratis`, `freemium` (se puede probar sin pagar) o `de-pago`.
 
 Si el build falla, casi siempre es una de estas: falta una comilla en `description`, la URL no empieza por `https://`, o `draft` sigue en `true` y por eso no la ves (eso no es un fallo: simplemente no se publica).
+
+## Añadir un hackeo del día
+
+Cada entrada es un archivo en `src/content/hackeos/`. El nombre del archivo es la dirección: `mi-incidente.md` se publica en `/hackeo-del-dia/mi-incidente/`. No cambies ese nombre después de compartirla en X. El enlace dejaría de abrir.
+
+1. Entra en `src/content/hackeos/`.
+2. Abre `plantilla-no-publicar.md`, copia el texto y no guardes cambios en la plantilla.
+3. Crea un archivo nuevo, en minúsculas, sin espacios ni acentos. Pega el texto y cámbialo.
+4. Lo mínimo:
+
+```yaml
+title: "Título concreto, con lo que dicen las fuentes"
+description: "Una o dos frases, entre 40 y 220 caracteres. Sale en Google y en la tarjeta al compartir en X."
+date: 2026-11-17
+nivel: alto
+riesgo: "Una frase con el riesgo que dicen las fuentes. Va aparte de la etiqueta."
+sources:
+  - https://fuente-oficial.example/noticia
+draft: false
+```
+
+5. `nivel` solo puede ser `bajo`, `medio`, `alto` o `critico`. Sale como etiqueta de color. `riesgo` es la frase que va debajo, no la etiqueta.
+6. Debajo de la línea `---` escribe tres apartados, con estos títulos: `Qué pasó`, `A quién afecta` y `Qué hacer`. La página pone sola la fecha, el nivel de riesgo, el botón **Compartir en X** y la lista de **Fuentes**.
+7. `sources` lleva al menos un enlace que empiece por `https://`. No hace falta repetirlos en el texto.
+8. `image` es opcional. Si la entrada tiene una imagen propia, pon una ruta del sitio (`/imagenes/mi-hackeo.png`, archivo dentro de `public/`) o una URL `https://`. Si no pones `image`, se usa la imagen para compartir del sitio (`/og.png`).
+9. En **Commit changes**, escribe “Añade el hackeo de …” y guarda en `main`.
+
+La portada enseña la entrada con la fecha más nueva. En el índice, la más reciente va arriba.
 
 ## Patrocinado, afiliado, newsletter y shorts
 

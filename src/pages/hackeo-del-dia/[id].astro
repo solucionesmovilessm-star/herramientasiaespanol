@@ -1,0 +1,90 @@
+---
+import { render } from 'astro:content';
+import EntryPage from '../../components/EntryPage.astro';
+import { loadHackeos, type HackeoEntry } from '../../lib/content';
+import { articleLd, breadcrumbLd, canonicalUrl, formatDate, isoDate, pagePath } from '../../lib/seo';
+import { nivelRiesgo } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const items = await loadHackeos();
+  return items.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+interface Props {
+  entry: HackeoEntry;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const canonical = canonicalUrl(`/hackeo-del-dia/${entry.id}`);
+const published = isoDate(entry.data.date);
+const related = (await loadHackeos())
+  .filter((item) => item.id !== entry.id)
+  .slice(0, 5)
+  .map((item) => ({ href: pagePath(`/hackeo-del-dia/${item.id}`), title: item.data.title }));
+const hostOf = (url: string) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+};
+const shareHref = `https://x.com/intent/tweet?${new URLSearchParams({
+  text: entry.data.title,
+  url: canonical,
+})}`;
+const jsonLd = [
+  articleLd({
+    title: entry.data.title,
+    description: entry.data.description,
+    canonical,
+    published,
+    modified: published,
+  }),
+  breadcrumbLd([
+    { name: 'Inicio', url: canonicalUrl('/') },
+    { name: 'El hackeo del día', url: canonicalUrl('/hackeo-del-dia') },
+    { name: entry.data.title, url: canonical },
+  ]),
+];
+---
+
+<EntryPage
+  title={entry.data.title}
+  description={entry.data.description}
+  eyebrow="El hackeo del día"
+  meta={formatDate(entry.data.date)}
+  mark="alerta"
+  risk={{
+    nivel: entry.data.nivel,
+    label: nivelRiesgo[entry.data.nivel],
+    text: entry.data.riesgo,
+  }}
+  image={entry.data.image}
+  crumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'El hackeo del día', href: '/hackeo-del-dia/' },
+    { label: entry.data.title },
+  ]}
+  ogType="article"
+  published={published}
+  modified={published}
+  jsonLd={jsonLd}
+  related={related}
+  relatedTitle="Otras entradas"
+>
+  <a class="button" slot="actions" href={shareHref} target="_blank" rel="noopener noreferrer">Compartir en X</a>
+  <Content />
+  <section class="sources" aria-labelledby="fuentes">
+    <h2 id="fuentes">Fuentes</h2>
+    <ul>
+      {
+        entry.data.sources.map((url) => (
+          <li>
+            <a href={url} rel="noopener noreferrer" target="_blank">{hostOf(url)}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</EntryPage>

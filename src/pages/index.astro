@@ -6,9 +6,9 @@ import Mark from '../components/Mark.astro';
 import SponsorSlot from '../components/SponsorSlot.astro';
 import StaticForm from '../components/StaticForm.astro';
 import rankingFile from '../data/ranking.json';
-import { moneyBadges, loadNews, loadPublished } from '../lib/content';
-import { canonicalUrl, formatDate, formatNumber, itemListLd, pagePath, websiteLd } from '../lib/seo';
-import { SITE_NAME, categories, pricingLabel } from '../lib/site';
+import { moneyBadges, loadHackeos, loadNews, loadPublished } from '../lib/content';
+import { canonicalUrl, formatDate, formatNumber, isoDate, itemListLd, pagePath, websiteLd } from '../lib/seo';
+import { SITE_NAME, categories, nivelRiesgo, pricingLabel } from '../lib/site';
 import Base from '../layouts/Base.astro';
 
 const tools = await loadPublished('herramientas');
@@ -18,6 +18,7 @@ const servers = await loadPublished('mcp');
 const guides = await loadPublished('guias');
 const tutorials = await loadPublished('tutoriales');
 const latestNews = (await loadNews()).slice(0, 3);
+const latestHackeo = (await loadHackeos())[0];
 const claudeSkills = skills.filter((entry) => entry.data.category === 'claude');
 const featured = tools.filter((entry) => entry.data.destacado && !entry.data.patrocinado);
 const sponsored = tools.filter((entry) => entry.data.patrocinado);
@@ -152,6 +153,37 @@ const jsonLd = [
     </nav>
 
     <div class="bento">
+      {
+        latestHackeo && (
+          <section class="glass bento-hackeo" data-reveal aria-labelledby="hackeo-dia">
+            <div class="section-head">
+              <div>
+                <p class="kicker">Seguridad</p>
+                <h2 id="hackeo-dia">El hackeo del día</h2>
+              </div>
+              <a href="/hackeo-del-dia/">Ver todos</a>
+            </div>
+            <p class="meta">
+              <time datetime={isoDate(latestHackeo.data.date)}>{formatDate(latestHackeo.data.date)}</time>
+            </p>
+            <h3 class="hackeo-home-title">
+              <a href={pagePath(`/hackeo-del-dia/${latestHackeo.id}`)}>{latestHackeo.data.title}</a>
+            </h3>
+            <p class="lede">{latestHackeo.data.description}</p>
+            <div class="risk-panel">
+              <p class="risk-heading">
+                <span>Nivel de riesgo</span>
+                <span class:list={['risk-tag', latestHackeo.data.nivel]}>{nivelRiesgo[latestHackeo.data.nivel]}</span>
+              </p>
+              <p>{latestHackeo.data.riesgo}</p>
+            </div>
+            <p>
+              <a class="text-link" href={pagePath(`/hackeo-del-dia/${latestHackeo.id}`)}>Leer la entrada</a>
+            </p>
+          </section>
+        )
+      }
+
       <section class="glass bento-featured" data-reveal aria-labelledby="destacados">
         <div class="section-head">
           <div>

@@ -26,7 +26,7 @@ export type TutorialEntry = CollectionEntry<'tutoriales'>;
 
 export interface Badge {
   label: string;
-  tone: 'paid' | 'feature' | 'muted' | 'free' | 'affiliate' | 'lang';
+  tone: 'paid' | 'feature' | 'muted' | 'free' | 'affiliate' | 'lang' | 'bajo' | 'medio' | 'alto' | 'critico';
 }
 
 export function moneyBadges(data: {
@@ -54,6 +54,17 @@ export type NewsEntry = CollectionEntry<'noticias'>;
 export async function loadNews() {
   const items = await getCollection('noticias', ({ data }) => data.draft !== true);
   return items.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+}
+
+export type HackeoEntry = CollectionEntry<'hackeos'>;
+
+export async function loadHackeos() {
+  const items = await getCollection('hackeos', ({ data }) => data.draft !== true);
+  return items.sort((a, b) => {
+    const byDate = b.data.date.getTime() - a.data.date.getTime();
+    if (byDate !== 0) return byDate;
+    return a.data.title.localeCompare(b.data.title, 'es');
+  });
 }
 
 const fichaSections = ['herramientas', 'agentes', 'skills', 'mcp'] as const;

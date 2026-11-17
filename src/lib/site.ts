@@ -17,6 +17,13 @@ export const categories = {
   local: 'En tu ordenador',
 } as const;
 
+export const nivelRiesgo = {
+  bajo: 'Bajo',
+  medio: 'Medio',
+  alto: 'Alto',
+  critico: 'Crítico',
+} as const;
+
 export const pricingLabel = {
   gratis: 'Gratis',
   freemium: 'Gratis con límites',
@@ -61,6 +68,7 @@ export const nav: { href: string; key: UiKey }[] = [
   { href: '/mcp/', key: 'nav.mcp' },
   { href: '/ranking/', key: 'nav.ranking' },
   { href: '/noticias/', key: 'nav.news' },
+  { href: '/hackeo-del-dia/', key: 'nav.hack' },
   { href: '/guias/', key: 'nav.guides' },
   { href: '/tutoriales/', key: 'nav.tutorials' },
 ];

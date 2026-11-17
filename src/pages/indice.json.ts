@@ -1,17 +1,19 @@
 import type { APIRoute } from 'astro';
-import { loadPublished } from '../lib/content';
+import { loadHackeos, loadPublished } from '../lib/content';
 import { markOf } from '../lib/mark';
 import { pagePath } from '../lib/page-path';
+import { formatDate } from '../lib/seo';
 import { agentCategories, categories, mcpTipos, skillCategories } from '../lib/site';
 
 export const GET: APIRoute = async () => {
-  const [tools, agents, skills, servers, guides, tutorials] = await Promise.all([
+  const [tools, agents, skills, servers, guides, tutorials, hackeos] = await Promise.all([
     loadPublished('herramientas'),
     loadPublished('agentes'),
     loadPublished('skills'),
     loadPublished('mcp'),
     loadPublished('guias'),
     loadPublished('tutoriales'),
+    loadHackeos(),
   ]);
 
   const items = [
@@ -55,6 +57,13 @@ export const GET: APIRoute = async () => {
       href: pagePath(`/tutoriales/${entry.id}`),
       kind: 'Tutorial',
       hint: `${entry.data.minutes} min`,
+      ...markOf(entry.data.title),
+    })),
+    ...hackeos.map((entry) => ({
+      title: entry.data.title,
+      href: pagePath(`/hackeo-del-dia/${entry.id}`),
+      kind: 'Hackeo',
+      hint: formatDate(entry.data.date),
       ...markOf(entry.data.title),
     })),
   ];
