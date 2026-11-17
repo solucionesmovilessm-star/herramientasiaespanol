@@ -25,6 +25,9 @@ interface Props {
   updated?: Date;
   jsonLd?: unknown;
   ogType?: 'website' | 'article';
+  image?: string;
+  notice?: string;
+  noticeLabel?: string;
   published?: string;
   modified?: string;
   tutorial?: boolean;
@@ -42,6 +45,9 @@ const {
   updated,
   jsonLd,
   ogType = 'website',
+  image,
+  notice,
+  noticeLabel,
   published,
   modified,
   tutorial = false,
@@ -55,6 +61,7 @@ const {
   description={description}
   jsonLd={jsonLd}
   ogType={ogType}
+  image={image}
   published={published}
   modified={modified}
 >
@@ -83,6 +90,14 @@ const {
         updated && (
           <p class="meta">
             Actualizado el <time datetime={updated.toISOString().slice(0, 10)}>{formatDate(updated)}</time>
+          </p>
+        )
+      }
+      {
+        notice && (
+          <p class="callout warn">
+            {noticeLabel && <strong>{noticeLabel}. </strong>}
+            {notice}
           </p>
         )
       }

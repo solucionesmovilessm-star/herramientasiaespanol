@@ -56,6 +56,17 @@ export async function loadNews() {
   return items.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }
 
+export type HackeoEntry = CollectionEntry<'hackeos'>;
+
+export async function loadHackeos() {
+  const items = await getCollection('hackeos', ({ data }) => data.draft !== true);
+  return items.sort((a, b) => {
+    const byDate = b.data.date.getTime() - a.data.date.getTime();
+    if (byDate !== 0) return byDate;
+    return a.data.title.localeCompare(b.data.title, 'es');
+  });
+}
+
 const fichaSections = ['herramientas', 'agentes', 'skills', 'mcp'] as const;
 
 /** Devuelve la URL de la ficha si existe; si no, undefined (nunca un enlace roto). */

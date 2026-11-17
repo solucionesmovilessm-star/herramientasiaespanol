@@ -16,6 +16,7 @@ interface Props {
   title: string;
   description: string;
   ogType?: 'website' | 'article';
+  image?: string;
   jsonLd?: unknown;
   noindex?: boolean;
   canonical?: boolean;
@@ -27,6 +28,7 @@ const {
   title,
   description,
   ogType = 'website',
+  image,
   jsonLd,
   noindex = false,
   canonical: includeCanonical = true,
@@ -38,7 +40,11 @@ const locale = Astro.currentLocale === 'en' ? 'en' : 'es';
 const t = useTranslations(locale);
 const canonical = includeCanonical ? canonicalUrl(Astro.url.pathname) : undefined;
 const fullTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
-const ogImage = new URL('/og.png', SITE_URL).href;
+const ogImage = image
+  ? /^https:\/\/\S+$/.test(image)
+    ? image
+    : new URL(image, SITE_URL).href
+  : new URL('/og.png', SITE_URL).href;
 ---
 
 <!doctype html>
@@ -60,8 +66,14 @@ const ogImage = new URL('/og.png', SITE_URL).href;
     <meta property="og:description" content={description} />
     {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    {
+      !image && (
+        <>
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+        </>
+      )
+    }
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
