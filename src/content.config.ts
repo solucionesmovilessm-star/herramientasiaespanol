@@ -83,6 +83,8 @@ export const collections = {
         'local',
       ]),
       pricing: z.enum(['gratis', 'freemium', 'de-pago']).optional(),
+      // Solo si el sistema no es el de la categoría (web, o Windows/macOS/Linux en «local»).
+      operatingSystem: z.string().min(2).max(80).optional(),
     }),
   }),
   agentes: defineCollection({

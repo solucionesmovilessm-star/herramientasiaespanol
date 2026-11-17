@@ -30,7 +30,9 @@ const softwareLd: Record<string, unknown> = {
   description: entry.data.description,
   url: entry.data.url,
   applicationCategory: appCategoryByTool[entry.data.category],
-  operatingSystem: entry.data.category === 'local' ? 'Windows, macOS, Linux' : 'Web',
+  operatingSystem:
+    entry.data.operatingSystem ??
+    (entry.data.category === 'local' ? 'Windows, macOS, Linux' : 'Web'),
   inLanguage: 'es',
 };
 if (entry.data.pricing === 'gratis' || entry.data.pricing === 'freemium') {
