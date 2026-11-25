@@ -1,23 +1,29 @@
 ---
 import RankingTable from '../../components/RankingTable.astro';
 import rankingFile from '../../data/ranking.json';
+import trendingFile from '../../data/trending-2026-11-25.json';
 import Base from '../../layouts/Base.astro';
-import { breadcrumbLd, canonicalUrl, formatDate, itemListLd } from '../../lib/seo';
+import { breadcrumbLd, canonicalUrl, formatDate, formatNumber, itemListLd } from '../../lib/seo';
 
 const generated = rankingFile.generatedAt ? new Date(rankingFile.generatedAt) : null;
+const trendingTaken = new Date(trendingFile.takenAt);
 const pageUrl = canonicalUrl('/ranking');
 const description =
-  'Ranking semanal de repositorios de IA en GitHub. Dos listas con estrellas reales de la API: actividad reciente y más estrellados. No es el Trending oficial.';
+  'Top 10 de repositorios de IA en GitHub Trending del 25 de noviembre de 2026, con estrellas y estrellas de hoy. Debajo, el ranking semanal de la API, que no es el Trending oficial.';
 ---
 
 <Base
-  title="Ranking semanal de repos"
+  title="Ranking de repos de IA"
   description={description}
   jsonLd={[
     breadcrumbLd([
       { name: 'Inicio', url: canonicalUrl('/') },
       { name: 'Ranking', url: pageUrl },
     ]),
+    itemListLd(
+      'GitHub Trending de IA del 25 de noviembre de 2026',
+      trendingFile.repos.map((repo) => ({ name: repo.fullName, url: repo.url })),
+    ),
     itemListLd(
       'Repos de IA en movimiento',
       rankingFile.enMovimiento.map((repo) => ({ name: repo.fullName, url: repo.url })),
@@ -27,8 +33,50 @@ const description =
   <div class="wrap">
     <header class="page-intro">
       <p class="eyebrow">GitHub</p>
-      <h1>Ranking semanal de repos</h1>
+      <h1>Ranking de repos de IA</h1>
       <p class="lede">{description}</p>
+    </header>
+
+    <section class="section" aria-labelledby="github-trending">
+      <h2 id="github-trending">GitHub Trending del 25 de noviembre de 2026</h2>
+      <p class="fine">{trendingFile.note}</p>
+      <p class="meta">
+        Datos del <time datetime={trendingTaken.toISOString()}>{formatDate(trendingTaken)}</time>.
+      </p>
+      <div class="table-wrap">
+        <table class="rank">
+          <caption class="sr-only">Top 10 de repositorios de IA en GitHub Trending del 25 de noviembre de 2026</caption>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Repositorio</th>
+              <th scope="col">Estrellas</th>
+              <th scope="col">Estrellas hoy</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              trendingFile.repos.map((repo) => (
+                <tr>
+                  <td>{repo.rank}</td>
+                  <td>
+                    <a href={repo.url} rel="noopener noreferrer">
+                      {repo.fullName}
+                    </a>
+                    <div class="meta">{repo.description}</div>
+                  </td>
+                  <td>{formatNumber(repo.stars)}</td>
+                  <td>+{formatNumber(repo.starsToday)}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <header class="page-intro">
+      <h2>Ranking semanal</h2>
       <p class="fine">{rankingFile.note}</p>
       {
         generated && (
@@ -51,8 +99,9 @@ const description =
     </section>
 
     <p class="fine">
-      Las descripciones están en el idioma que puso cada repositorio. Este sitio no las traduce para no cambiar el sentido.
-      El archivo vive en <code>src/data/ranking.json</code> y lo reescribe el workflow cada lunes.
+      En el ranking semanal, si hay una descripción en español se muestra esa; si no, la del repositorio.
+      Ese archivo vive en <code>src/data/ranking.json</code> y lo reescribe el workflow cada lunes.
+      El top de Trending está aparte, en <code>src/data/trending-2026-11-25.json</code>, para que el lunes no lo borre.
     </p>
   </div>
 </Base>

@@ -1,0 +1,88 @@
+{
+  "source": "GitHub Trending",
+  "since": "daily",
+  "takenAt": "2026-11-25T09:05:00.000Z",
+  "note": "Datos tomados el 25 de noviembre de 2026, hacia las 10:05 (hora de Madrid), de GitHub Trending diario y de las vistas por lenguaje Python y TypeScript. El total de estrellas es aproximado y sale de la API pública de GitHub en ese momento; las estrellas de hoy salen de la etiqueta «stars today» de Trending. Ordenados por estrellas ganadas hoy. Se excluyeron repositorios de ese listado que no son de IA.",
+  "repos": [
+    {
+      "rank": 1,
+      "fullName": "elementalsouls/Claude-BugHunter",
+      "url": "https://github.com/elementalsouls/Claude-BugHunter",
+      "stars": 22035,
+      "starsToday": 1826,
+      "description": "Paquete de skills de Claude Code para cazar bugs y trabajo de red team: 84 skills, 15 comandos y cientos de patrones de vulnerabilidades."
+    },
+    {
+      "rank": 2,
+      "fullName": "HKUDS/CLI-Anything",
+      "url": "https://github.com/HKUDS/CLI-Anything",
+      "stars": 65200,
+      "starsToday": 1074,
+      "description": "Proyecto para volver «nativo para agentes» casi cualquier software, con un directorio de interfaces de línea de comandos pensadas para IA."
+    },
+    {
+      "rank": 3,
+      "fullName": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "stars": 326118,
+      "starsToday": 1003,
+      "description": "Marco de skills agénticas y metodología de desarrollo de software para agentes de programación."
+    },
+    {
+      "rank": 4,
+      "fullName": "firecrawl/firecrawl",
+      "url": "https://github.com/firecrawl/firecrawl",
+      "stars": 209331,
+      "starsToday": 991,
+      "description": "Infraestructura de conocimiento para agentes: búsqueda, scraping y acceso a más de 550 fuentes de datos desde una sola API."
+    },
+    {
+      "rank": 5,
+      "fullName": "zhouxiaoka/autoclip",
+      "url": "https://github.com/zhouxiaoka/autoclip",
+      "stars": 15769,
+      "starsToday": 980,
+      "description": "Herramienta de escritorio de recorte de vídeo con IA: convierte vídeos largos en shorts con subtítulos, portada y textos para redes."
+    },
+    {
+      "rank": 6,
+      "fullName": "mjmirza/app-store-compliance",
+      "url": "https://github.com/mjmirza/app-store-compliance",
+      "stars": 6119,
+      "starsToday": 928,
+      "description": "Manual y guardia previa a la publicación en App Store y Google Play, con plazos regulatorios (entre ellos la Ley de IA de la UE) y una skill para agentes de código."
+    },
+    {
+      "rank": 7,
+      "fullName": "cathrynlavery/diagram-design",
+      "url": "https://github.com/cathrynlavery/diagram-design",
+      "stars": 72436,
+      "starsToday": 802,
+      "description": "Librería de 52 tipos de diagramas editoriales en HTML/SVG, pensada para Claude Code, Codex, Copilot, Cursor y otros agentes."
+    },
+    {
+      "rank": 8,
+      "fullName": "jingyaogong/minimind",
+      "url": "https://github.com/jingyaogong/minimind",
+      "stars": 70607,
+      "starsToday": 727,
+      "description": "Tutorial y código para entrenar desde cero un LLM pequeño de 64 millones de parámetros en unas dos horas."
+    },
+    {
+      "rank": 9,
+      "fullName": "mvanhorn/last30days-skill",
+      "url": "https://github.com/mvanhorn/last30days-skill",
+      "stars": 74608,
+      "starsToday": 703,
+      "description": "Skill de agente que investiga un tema en Reddit, X, YouTube, Hacker News, Polymarket y la web, y resume con fuentes."
+    },
+    {
+      "rank": 10,
+      "fullName": "google-labs-code/stitch-skills",
+      "url": "https://github.com/google-labs-code/stitch-skills",
+      "stars": 12792,
+      "starsToday": 403,
+      "description": "Librería de Agent Skills para el servidor MCP de Stitch, compatible con Antigravity, Gemini CLI, Claude Code y Cursor."
+    }
+  ]
+}
